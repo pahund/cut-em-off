@@ -2,19 +2,32 @@
 
 import loadImage from './loadImage';
 import data from './map';
+import {
+    tileHeight,
+    tileWidth,
+    mapHeight as height,
+    mapWidth as width,
+    mapPaddingX,
+    mapPaddingY,
+    startX,
+    startY
+} from './config';
+import addPadding from './addPadding';
+import calculateCameraCoordinates from './calculateCameraCoordinates';
 
 export default async () => {
+    const { sx, sy } = calculateCameraCoordinates(startX, startY);
     const map = kontra.tileEngine({
         // tile size
-        tileWidth: 100,
-        tileHeight: 100,
+        tileWidth,
+        tileHeight,
 
         // map size in tiles
-        width: 28,
-        height: 26,
+        width: width + mapPaddingX * 2,
+        height: height + mapPaddingY * 2,
 
-        sx: 2000,
-        sy: 2000
+        sx,
+        sy
     });
 
     const image = await loadImage('tilesheet.png');
@@ -22,7 +35,7 @@ export default async () => {
     map.addTilesets({ image });
     map.addLayers({
         name: 'main',
-        data
+        data: addPadding(data, width, height, mapPaddingX, mapPaddingY)
     });
 
     return map;
