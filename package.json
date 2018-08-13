@@ -4,7 +4,8 @@
   "description": "Make your users go offline before the evil virus infects them!",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "start": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,8 +22,10 @@
   },
   "homepage": "https://github.com/pahund/cut-em-off#readme",
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4"
   }
 }

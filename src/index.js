@@ -1,1 +1,3 @@
-console.log('hiya');
+kontra.init();
+
+console.log('hiya!');
