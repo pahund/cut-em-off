@@ -1,31 +1,47 @@
 {
-  "name": "cut-em-off",
-  "version": "0.0.1",
-  "description": "Make your users go offline before the evil virus infects them!",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pahund/cut-em-off.git"
-  },
-  "keywords": [
-    "js13kGames"
-  ],
-  "author": "Patrick Hund <pahund@team.mobile.de> (https://ebaytech.berlin/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pahund/cut-em-off/issues"
-  },
-  "homepage": "https://github.com/pahund/cut-em-off#readme",
-  "devDependencies": {
-    "clean-webpack-plugin": "^0.1.19",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
-    "webpack-merge": "^4.1.4"
-  }
+    "name": "cut-em-off",
+    "version": "0.0.1",
+    "description": "Make your users go offline before the evil virus infects them!",
+    "main": "index.js",
+    "scripts": {
+        "start": "webpack-dev-server --config webpack.config.dev.js",
+        "build": "webpack --config webpack.config.prod.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint --fix '**/*.js'",
+        "format": "prettier --write '**/*.js'"
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pahund/cut-em-off.git"
+    },
+    "keywords": [
+        "js13kGames"
+    ],
+    "author": "Patrick Hund <pahund@team.mobile.de> (https://ebaytech.berlin/)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pahund/cut-em-off/issues"
+    },
+    "homepage": "https://github.com/pahund/cut-em-off#readme",
+    "devDependencies": {
+        "clean-webpack-plugin": "^0.1.19",
+        "eslint": "^5.3.0",
+        "eslint-config-motor-talk": "^5.0.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-prettier": "^2.6.2",
+        "eslint-plugin-react": "^7.10.0",
+        "husky": "^0.14.3",
+        "lint-staged": "^7.2.2",
+        "prettier": "^1.14.2",
+        "webpack": "^4.16.5",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.5",
+        "webpack-merge": "^4.1.4"
+    }
 }

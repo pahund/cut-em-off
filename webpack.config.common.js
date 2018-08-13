@@ -10,7 +10,5 @@ module.exports = {
     externals: {
         kontra: 'kontra'
     },
-    plugins: [
-        new CleanWebpackPlugin(['dist'])
-    ]
+    plugins: [new CleanWebpackPlugin(['dist'])]
 };

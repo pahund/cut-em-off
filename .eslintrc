@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "motor-talk",
+    "prettier",
+    "prettier/standard"
+  ],
+  "rules": {
+    "max-len": ["error", {"code": 120, "ignoreUrls": true}],
+    "prettier/prettier": "error"
+  },
+  "plugins": ["prettier"]
+}
