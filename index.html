@@ -9,11 +9,22 @@
         body {
             background-color: #2b3653;
             padding: 0;
+            overflow: hidden;
+        }
+        #wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+        }
+        canvas {
+            border: 1px solid #52638a;
         }
     </style>
 </head>
 <body>
-<canvas width="600" height="600"></canvas>
+<div id="wrapper"><canvas width="800" height="600"></canvas></div>
 <script src="./vendor/kontra.dev.js"></script>
 <script src="./game.js"></script>
 </body>
