@@ -10,8 +10,11 @@ export default async () => {
         tileHeight: 100,
 
         // map size in tiles
-        width: 20,
-        height: 7
+        width: 40,
+        height: 40,
+
+        sx: 2000,
+        sy: 2000
     });
 
     const image = await loadImage('tilesheet.png');
