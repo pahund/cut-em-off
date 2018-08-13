@@ -4,6 +4,11 @@ import createMap from './createMap';
 import createPlayer from './createPlayer';
 
 const sprites = [];
+const devbox = document.getElementById('devbox');
+
+function calculateGridCoordinates(x, y) {
+
+}
 
 (async () => {
     kontra.init();
@@ -31,6 +36,7 @@ const sprites = [];
         render() {
             map.render();
             sprites.map(sprite => sprite.render());
+            devbox.innerHTML = `sx = ${map.sx}; sy: ${map.sy}`;
         }
     });
 

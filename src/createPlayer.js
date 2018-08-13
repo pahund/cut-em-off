@@ -11,9 +11,9 @@ export default () =>
             this.context.fillStyle = '#365b1d';
             this.context.beginPath();
             // draw a triangle
-            this.context.moveTo(this.x - 15, this.y + 9);
-            this.context.lineTo(this.x, this.y - 36);
-            this.context.lineTo(this.x + 15, this.y + 9);
+            this.context.moveTo(this.x - 15, this.y + 25);
+            this.context.lineTo(this.x, this.y - 25);
+            this.context.lineTo(this.x + 15, this.y + 25);
 
             this.context.closePath();
             this.context.fill();

@@ -10,8 +10,8 @@ export default async () => {
         tileHeight: 100,
 
         // map size in tiles
-        width: 40,
-        height: 40,
+        width: 28,
+        height: 26,
 
         sx: 2000,
         sy: 2000
