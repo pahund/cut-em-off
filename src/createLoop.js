@@ -6,13 +6,14 @@ import data from './map';
 import isInTheMiddle from './isInTheMiddle';
 import directions from './directions';
 import switchDirection from './switchDirection';
+import { startDirection } from './config';
 
-const sx = 10;
-const sy = 10;
+const sx = 5;
+const sy = 5;
 
-let direction = directions.N;
+let direction = startDirection;
 
-export default ({ map, sprites, devbox }) =>
+export default ({ map, player, devbox }) =>
     kontra.gameLoop({
         update() {
             /*
@@ -36,6 +37,7 @@ export default ({ map, sprites, devbox }) =>
             if (isInTheMiddle(map.sx, map.sy)) {
                 const tile = calculateTile(map.sx, map.sy);
                 direction = switchDirection(tile, direction);
+                player.direction = direction;
             }
             switch (direction) {
                 case directions.N:
@@ -59,7 +61,7 @@ export default ({ map, sprites, devbox }) =>
         },
         render() {
             map.render();
-            sprites.map(sprite => sprite.render());
+            player.render();
             const { x, y } = calculateGridCoordinates(map.sx, map.sy);
             const idx = calculateGridIndex(x, y);
             // eslint-disable-next-line no-param-reassign

@@ -1,3 +1,5 @@
+import directions from './directions';
+
 export const canvasWidth = 800;
 export const canvasHeight = 600;
 export const tileWidth = 100;
@@ -14,3 +16,4 @@ export const mapPaddingX = 4;
 export const mapPaddingY = 3;
 export const startX = 4;
 export const startY = 5;
+export const startDirection = directions.N;
