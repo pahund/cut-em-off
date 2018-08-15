@@ -1,6 +1,5 @@
-export default {
-    N: 'N',
-    E: 'E',
-    S: 'S',
-    W: 'W'
-};
+export const N = 'N';
+export const E = 'E';
+export const S = 'S';
+export const W = 'W';
+export default { N, E, S, W };

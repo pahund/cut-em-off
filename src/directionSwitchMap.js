@@ -1,116 +1,112 @@
-import directions from './directions';
+import { N, E, S, W } from './directions';
 
 export default {
     // curve from S to E
     1: {
-        [directions.N]: directions.E,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: directions.S
+        allowed: [S, E],
+        change: {
+            [N]: E,
+            [W]: S
+        }
     },
     // curve from W to S
     2: {
-        [directions.N]: directions.W,
-        [directions.E]: directions.S,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [W, S],
+        change: {
+            [N]: W,
+            [E]: S
+        }
     },
     // straight from N to S
     3: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [N, S],
+        change: {}
     },
     // T section W, N, E
     4: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: directions.N,
-        [directions.W]: null
+        allowed: [W, N, E],
+        change: {
+            [S]: N
+        }
     },
     // T section N, E, S
     5: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: directions.E
+        allowed: [N, E, S],
+        change: {
+            [W]: E
+        }
     },
     // T section W, E, S
     6: {
-        [directions.N]: directions.S,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [W, E, S],
+        change: {
+            [N]: S
+        }
     },
     // curve from N to E
     9: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: directions.E,
-        [directions.W]: directions.N
+        allowed: [N, E],
+        change: {
+            [S]: E,
+            [W]: N
+        }
     },
     // curve from W to N
     10: {
-        [directions.N]: null,
-        [directions.E]: directions.N,
-        [directions.S]: directions.W,
-        [directions.W]: null
+        allowed: [W, N],
+        change: {
+            [E]: N,
+            [S]: W
+        }
     },
     // straight from W to E
     11: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [W, E],
+        change: {}
     },
     // crossing
     12: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [N, E, S, W],
+        change: {}
     },
     // T section N, S, W
     13: {
-        [directions.N]: null,
-        [directions.E]: directions.W,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [N, S, W],
+        change: {
+            [E]: W
+        }
     },
     // player start
     14: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [N, E, S, W],
+        change: {}
     },
     // terminus S
     17: {
-        [directions.N]: directions.S,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [S],
+        change: {
+            [N]: S
+        }
     },
     // terminus W
     18: {
-        [directions.N]: null,
-        [directions.E]: directions.W,
-        [directions.S]: null,
-        [directions.W]: null
+        allowed: [W],
+        change: {
+            [E]: W
+        }
     },
     // terminus N
     19: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: directions.N,
-        [directions.W]: null
+        allowed: [N],
+        change: {
+            [S]: N
+        }
     },
     // terminus E
     20: {
-        [directions.N]: null,
-        [directions.E]: null,
-        [directions.S]: null,
-        [directions.W]: directions.E
+        allowed: [E],
+        change: {
+            [W]: E
+        }
     }
 };

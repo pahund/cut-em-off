@@ -17,3 +17,4 @@ export const mapPaddingY = 3;
 export const startX = 4;
 export const startY = 5;
 export const startDirection = directions.N;
+export const speed = 5;
