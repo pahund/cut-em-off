@@ -1,7 +1,7 @@
 /* global kontra */
 
-import loadImage from './loadImage';
-import data from './map';
+import addPadding from './addPadding';
+import calculateCameraCoordinates from './calculateCameraCoordinates';
 import {
     tileHeight,
     tileWidth,
@@ -12,8 +12,8 @@ import {
     startX,
     startY
 } from './config';
-import addPadding from './addPadding';
-import calculateCameraCoordinates from './calculateCameraCoordinates';
+import loadImage from './loadImage';
+import data from './map';
 
 export default async () => {
     const { sx, sy } = calculateCameraCoordinates(startX, startY);
@@ -32,11 +32,11 @@ export default async () => {
 
     const image = await loadImage('tilesheet.png');
 
+    const paddedMap = addPadding(data, width, height, mapPaddingX, mapPaddingY);
     map.addTilesets({ image });
     map.addLayers({
         name: 'main',
-        data: addPadding(data, width, height, mapPaddingX, mapPaddingY)
+        data: paddedMap
     });
-
     return map;
 };

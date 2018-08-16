@@ -1,75 +1,39 @@
+import calculateGridCoordinates from './calculateGridCoordinates';
 /* global kontra */
 import calculateGridIndex from './calculateGridIndex';
-import calculateGridCoordinates from './calculateGridCoordinates';
 import calculateTile from './calculateTile';
+import { startDirection } from './config';
 import directionIsAllowed from './directionIsAllowed';
-import data from './map';
+import getNewDirectionFromKeyboard from './getNewDirectionFromKeyboard';
 import isInTheMiddle from './isInTheMiddle';
-import directions from './directions';
+import data from './map';
+import moveCamera from './moveCamera';
 import switchDirection from './switchDirection';
-import { startDirection, speed } from './config';
-import { N, E, S, W } from './directions';
 
 let direction = startDirection;
 let nextDirection = null;
 
-export default ({ map, player, devbox }) =>
+export default ({ map, player, virus, devbox }) =>
     kontra.gameLoop({
         update() {
-            if (kontra.keys.pressed('right')) {
-                // eslint-disable-next-line no-param-reassign
-                nextDirection = E;
-            }
-            if (kontra.keys.pressed('left')) {
-                // eslint-disable-next-line no-param-reassign
-                nextDirection = W;
-            }
-            if (kontra.keys.pressed('up')) {
-                // eslint-disable-next-line no-param-reassign
-                nextDirection = N;
-            }
-            if (kontra.keys.pressed('down')) {
-                // eslint-disable-next-line no-param-reassign
-                nextDirection = S;
-            }
-            if (isInTheMiddle(map.sx, map.sy)) {
+            nextDirection = getNewDirectionFromKeyboard();
+            if (isInTheMiddle(map)) {
                 const tile = calculateTile(map.sx, map.sy);
-                if (nextDirection) {
-                    if (directionIsAllowed(tile, nextDirection)) {
-                        direction = nextDirection;
-                    } else {
-                        direction = switchDirection(tile, direction);
-                    }
-                    nextDirection = null;
+                if (nextDirection && directionIsAllowed(tile, nextDirection)) {
+                    direction = nextDirection;
                 } else {
                     direction = switchDirection(tile, direction);
                 }
+                nextDirection = null;
                 // eslint-disable-next-line no-param-reassign
                 player.direction = direction;
             }
-            switch (direction) {
-                case directions.N:
-                    // eslint-disable-next-line no-param-reassign
-                    map.sy -= speed;
-                    break;
-                case directions.E:
-                    // eslint-disable-next-line no-param-reassign
-                    map.sx += speed;
-                    break;
-                case directions.S:
-                    // eslint-disable-next-line no-param-reassign
-                    map.sy += speed;
-                    break;
-                case directions.W:
-                    // eslint-disable-next-line no-param-reassign
-                    map.sx -= speed;
-                    break;
-                default:
-            }
+            moveCamera(map, direction);
         },
         render() {
             map.render();
             player.render();
+            virus.render();
             const { x, y } = calculateGridCoordinates(map.sx, map.sy);
             const idx = calculateGridIndex(x, y);
             // eslint-disable-next-line no-param-reassign
