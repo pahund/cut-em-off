@@ -16,15 +16,15 @@ let nextDirection = null;
 export default ({ map, player, virus, devbox }) =>
     kontra.gameLoop({
         update() {
-            nextDirection = getNewDirectionFromKeyboard();
+            nextDirection = getNewDirectionFromKeyboard() || nextDirection;
             if (isInTheMiddle(map)) {
                 const tile = calculateTile(map.sx, map.sy);
                 if (nextDirection && directionIsAllowed(tile, nextDirection)) {
                     direction = nextDirection;
+                    nextDirection = null;
                 } else {
                     direction = switchDirection(tile, direction);
                 }
-                nextDirection = null;
                 // eslint-disable-next-line no-param-reassign
                 player.direction = direction;
             }
