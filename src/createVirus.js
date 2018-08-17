@@ -1,16 +1,39 @@
 /* global kontra */
 
-import { startDirection, lightRed, darkRed, virusStartCol, virusStartRow } from './config';
+import { virusStartDirection, lightRed, darkRed, virusStartCol, virusStartRow, tileWidth, tileHeight } from './config';
 import ri from './getRandomInt';
-import calculateVirusCoordinates from './calculateVirusCoordinates';
+import calculateVirusCoordinates from './transformMapCoordinates';
+import { virusSpeed } from './config';
+import { N, E, S, W } from './directions';
 
 export default ({ x, y }) =>
     kontra.sprite({
         x,
         y,
-        direction: startDirection,
+        mapX: (virusStartCol - 1) * tileWidth,
+        mapY: (virusStartRow - 1) * tileHeight,
+        direction: virusStartDirection,
         update(map) {
-            const { x: newX, y: newY } = calculateVirusCoordinates(map, { col: virusStartCol, row: virusStartRow });
+            switch (this.direction) {
+                case N:
+                    // eslint-disable-next-line no-param-reassign
+                    this.mapY -= virusSpeed;
+                    break;
+                case E:
+                    // eslint-disable-next-line no-param-reassign
+                    this.mapX += virusSpeed;
+                    break;
+                case S:
+                    // eslint-disable-next-line no-param-reassign
+                    this.mapY += virusSpeed;
+                    break;
+                case W:
+                    // eslint-disable-next-line no-param-reassign
+                    this.mapX -= virusSpeed;
+                    break;
+                default:
+            }
+            const { x: newX, y: newY } = calculateVirusCoordinates(map, { x: this.mapX, y: this.mapY });
             this.x = newX;
             this.y = newY;
         },

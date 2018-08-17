@@ -1,13 +1,13 @@
 /* global kontra */
 
 import calculateRotation from './calculateRotation';
-import { canvasHeight, canvasWidth, lightGreen, darkGreen, startDirection } from './config';
+import { canvasHeight, canvasWidth, lightGreen, darkGreen, playerStartDirection } from './config';
 
 export default () =>
     kontra.sprite({
         x: canvasWidth / 2,
         y: canvasHeight / 2,
-        direction: startDirection,
+        direction: playerStartDirection,
         render() {
             this.context.save();
             this.context.translate(this.x, this.y);

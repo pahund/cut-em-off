@@ -7,7 +7,7 @@ import createMap from './createMap';
 import createPlayer from './createPlayer';
 import createVirus from './createVirus';
 import loadAssets from './loadAssets';
-import calculateVirusCoordinates from './calculateVirusCoordinates';
+import calculateVirusCoordinates from './transformMapCoordinates';
 import { virusStartCol, virusStartRow } from './config';
 
 (async () => {

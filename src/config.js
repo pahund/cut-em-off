@@ -1,4 +1,4 @@
-import directions from './directions';
+import { N, W } from './directions';
 
 export const canvasWidth = 800;
 export const canvasHeight = 600;
@@ -8,12 +8,18 @@ export const mapWidth = 20;
 export const mapHeight = 20;
 export const mapPaddingX = 4;
 export const mapPaddingY = 3;
+
+/* player */
 export const playerStartCol = 5;
 export const playerStartRow = 6;
+export const playerStartDirection = N;
+export const playerSpeed = 1;
+
+/* virus */
 export const virusStartCol = 5;
 export const virusStartRow = 4;
-export const startDirection = directions.N;
-export const speed = 2.5;
+export const virusStartDirection = W;
+export const virusSpeed = 1;
 
 /* colors */
 export const lightGreen = '#75a042';
