@@ -1,11 +1,11 @@
 /* global kontra */
 
+import createCanvas from './createCanvas';
+import createDevbox from './createDevbox';
+import createLoop from './createLoop';
 import createMap from './createMap';
 import createPlayer from './createPlayer';
 import createVirus from './createVirus';
-import createCanvas from './createCanvas';
-import createLoop from './createLoop';
-import createDevbox from './createDevbox';
 
 (async () => {
     createCanvas();
