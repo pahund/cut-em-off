@@ -1,13 +1,19 @@
 /* global kontra */
 
-import { startDirection, lightRed, darkRed } from './config';
+import { startDirection, lightRed, darkRed, virusStartCol, virusStartRow } from './config';
 import ri from './getRandomInt';
+import calculateVirusCoordinates from './calculateVirusCoordinates';
 
-export default () =>
+export default ({ x, y }) =>
     kontra.sprite({
-        x: 100,
-        y: 100,
+        x,
+        y,
         direction: startDirection,
+        update(map) {
+            const { x: newX, y: newY } = calculateVirusCoordinates(map, { col: virusStartCol, row: virusStartRow });
+            this.x = newX;
+            this.y = newY;
+        },
         render() {
             this.context.save();
             this.context.translate(this.x, this.y);

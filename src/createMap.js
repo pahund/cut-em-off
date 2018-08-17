@@ -9,13 +9,13 @@ import {
     mapWidth as width,
     mapPaddingX,
     mapPaddingY,
-    startX,
-    startY
+    playerStartCol,
+    playerStartRow
 } from './config';
 import data from './map';
 
 export default () => {
-    const { sx, sy } = calculateCameraCoordinates(startX, startY);
+    const { sx, sy } = calculateCameraCoordinates({ col: playerStartCol, row: playerStartRow });
     const map = kontra.tileEngine({
         // tile size
         tileWidth,

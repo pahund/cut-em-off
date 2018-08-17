@@ -7,7 +7,6 @@ export default (arr, w, h, x, y) => {
                 retVal.push(0);
                 continue;
             }
-            // retVal.push(14);
             retVal.push(arr[idx++]);
         }
     }

@@ -25,6 +25,7 @@ export default ({ map, player, virus, devbox }) =>
                 // eslint-disable-next-line no-param-reassign
                 player.direction = direction;
             }
+            virus.update(map);
             moveCamera(map, direction);
         },
         render() {
