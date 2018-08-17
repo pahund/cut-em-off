@@ -6,11 +6,13 @@ import createLoop from './createLoop';
 import createMap from './createMap';
 import createPlayer from './createPlayer';
 import createVirus from './createVirus';
+import loadAssets from './loadAssets';
 
 (async () => {
     createCanvas();
     kontra.init();
-    const map = await createMap();
+    await loadAssets();
+    const map = createMap();
     const player = createPlayer();
     const virus = createVirus();
     const devbox = createDevbox();
