@@ -1,4 +1,5 @@
 /* global kontra */
+
 import { N, E, S, W } from './directions';
 
 export default () => {

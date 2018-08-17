@@ -1,4 +1,5 @@
 /* global kontra */
+
 import { startDirection } from './config';
 import directionIsAllowed from './directionIsAllowed';
 import getNewDirectionFromKeyboard from './getNewDirectionFromKeyboard';

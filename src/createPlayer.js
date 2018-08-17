@@ -1,6 +1,7 @@
 /* global kontra */
-import { canvasHeight, canvasWidth, lightGreen, darkGreen, startDirection } from './config';
+
 import calculateRotation from './calculateRotation';
+import { canvasHeight, canvasWidth, lightGreen, darkGreen, startDirection } from './config';
 
 export default () =>
     kontra.sprite({

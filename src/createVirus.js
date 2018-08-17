@@ -1,4 +1,5 @@
 /* global kontra */
+
 import { startDirection, lightRed, darkRed } from './config';
 import ri from './getRandomInt';
 
