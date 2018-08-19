@@ -1,29 +1,20 @@
-import { virusSpeed } from '../config';
-import { N, E, S, W, switchDirection } from '../directions';
-import { transformMapCoordinates } from '../utils';
-import { isInTheMiddle } from './utils';
+import { switchDirection, isIntersection, directionSwitchMap, getOppositeDirection } from '../directions';
+import { transformMapCoordinates, getRandomInt } from '../utils';
+import { isInTheMiddle, moveVirus } from './utils';
 
 export default sprite => {
-    let { direction, mapY, mapX, x, y } = sprite;
+    let { direction, x, y } = sprite;
     const { map } = sprite;
-    switch (direction) {
-        case N:
-            mapY -= virusSpeed;
-            break;
-        case E:
-            mapX += virusSpeed;
-            break;
-        case S:
-            mapY += virusSpeed;
-            break;
-        case W:
-            mapX -= virusSpeed;
-            break;
-        default:
-    }
+    const { mapX, mapY } = moveVirus(sprite);
     if (isInTheMiddle({ mapX, mapY })) {
         const tile = map.tileAtLayer('main', { x, y });
-        direction = switchDirection(tile, direction);
+        if (isIntersection(tile)) {
+            const { allowed } = directionSwitchMap[tile];
+            const viable = allowed.filter(dir => dir !== getOppositeDirection(direction));
+            direction = viable[getRandomInt(0, viable.length - 1)];
+        } else {
+            direction = switchDirection(tile, direction);
+        }
     }
     ({ x, y } = transformMapCoordinates(map, { x: mapX, y: mapY }));
     return {
