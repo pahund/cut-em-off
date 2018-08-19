@@ -1,9 +1,7 @@
 /* global kontra */
 
 import { canvasHeight, canvasWidth, playerStartDirection } from '../config';
-import { drawPlayer } from '.';
-import { isInTheMiddle, getNewDirectionFromKeyboard } from './utils';
-import { directionIsAllowed, switchDirection } from '../directions';
+import { drawPlayer, updatePlayer } from '.';
 
 export default map =>
     kontra.sprite({
@@ -13,17 +11,7 @@ export default map =>
         direction: playerStartDirection,
         nextDirection: null,
         update() {
-            this.nextDirection = getNewDirectionFromKeyboard() || this.nextDirection;
-            if (!isInTheMiddle({ x: map.sx, y: map.sy })) {
-                return;
-            }
-            const tile = map.tileAtLayer('main', { x: this.x, y: this.y });
-            if (this.nextDirection && directionIsAllowed(tile, this.nextDirection)) {
-                this.direction = this.nextDirection;
-                this.nextDirection = null;
-            } else {
-                this.direction = switchDirection(tile, this.direction);
-            }
+            ({ nextDirection: this.nextDirection, direction: this.direction } = updatePlayer(this));
         },
         render() {
             drawPlayer(this);
