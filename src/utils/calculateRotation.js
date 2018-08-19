@@ -1,5 +1,5 @@
-import degreesToRadians from './degreesToRadians';
-import { N, E, S, W } from './directions';
+import { degreesToRadians } from '.';
+import { N, E, S, W } from '../directions';
 
 export default direction => {
     switch (direction) {

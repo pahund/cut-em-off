@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // prettier-ignore
 export default [
     0, 17,  0,  0,  0, 17,  0,  0,  0, 17,  0,  0,  0, 17,  0,  0,  0, 17,  0,  0,

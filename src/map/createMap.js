@@ -1,7 +1,5 @@
 /* global kontra */
 
-import addPadding from './addPadding';
-import calculateCameraCoordinates from './calculateCameraCoordinates';
 import {
     tileHeight,
     tileWidth,
@@ -11,8 +9,10 @@ import {
     mapPaddingY,
     playerStartCol,
     playerStartRow
-} from './config';
-import data from './map';
+} from '../config';
+import { calculateCameraCoordinates } from '../utils';
+import mapData from './mapData';
+import { addPadding } from './utils';
 
 export default () => {
     const { sx, sy } = calculateCameraCoordinates({ col: playerStartCol, row: playerStartRow });
@@ -29,11 +29,17 @@ export default () => {
         sy
     });
 
-    const paddedMap = addPadding(data, width, height, mapPaddingX, mapPaddingY);
+    const paddedMap = addPadding(mapData, width, height, mapPaddingX, mapPaddingY);
     map.addTilesets({ image: kontra.assets.images.tilesheet });
-    map.addLayers({
-        name: 'main',
-        data: paddedMap
-    });
+    map.addLayers([
+        {
+            name: 'main',
+            data: paddedMap
+        }
+        // {
+        //     name: 'grid',
+        //     data: new Array(paddedMap.length).fill(15)
+        // }
+    ]);
     return map;
 };

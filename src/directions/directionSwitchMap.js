@@ -1,4 +1,4 @@
-import { N, E, S, W } from './directions';
+import { N, E, S, W } from '.';
 
 export default {
     // curve from S to E

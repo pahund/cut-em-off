@@ -1,8 +1,8 @@
-import { canvasHeight, canvasWidth } from './config';
+import { canvasHeight, canvasWidth } from '../config';
 
 /**
  * Transforms coordinates relative to the map (either row/col or x/y)
- * to coordinates on the canvsas.
+ * to coordinates on the canvas.
  *
  * @param map The map to calculate the coordinates from
  * @param row The row on the map (use either this or y)

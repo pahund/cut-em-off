@@ -2,13 +2,11 @@
 
 import createCanvas from './createCanvas';
 import createDevbox from './createDevbox';
-import createLoop from './createLoop';
-import createMap from './createMap';
-import createPlayer from './createPlayer';
-import createVirus from './createVirus';
 import loadAssets from './loadAssets';
-import calculateVirusCoordinates from './transformMapCoordinates';
-import { virusStartCol, virusStartRow } from './config';
+import { createLoop } from './loop';
+import { createMap } from './map';
+import { createPlayer } from './player';
+import { createVirus } from './virus';
 
 (async () => {
     createCanvas();
@@ -16,8 +14,7 @@ import { virusStartCol, virusStartRow } from './config';
     await loadAssets();
     const map = createMap();
     const player = createPlayer();
-    const { x, y } = calculateVirusCoordinates(map, { row: virusStartRow, col: virusStartCol });
-    const virus = createVirus({ x, y });
+    const virus = createVirus(map);
     const devbox = createDevbox();
     const loop = createLoop({ map, player, virus, devbox });
     loop.start();
