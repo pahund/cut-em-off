@@ -1,33 +1,13 @@
 /* global kontra */
 
-import { playerStartDirection } from '../config';
-import { getNewDirectionFromKeyboard, directionIsAllowed, switchDirection } from '../directions';
-import { moveCamera, isInTheMiddle } from './utils';
+import { moveCamera } from './utils';
 
-let direction = playerStartDirection;
-let nextDirection = null;
-
-export default ({ map, player, virus, devbox }) => {
-    function updatePlayer() {
-        if (!isInTheMiddle({ x: map.sx, y: map.sy })) {
-            return;
-        }
-        const tile = map.tileAtLayer('main', { x: player.x, y: player.y });
-        if (nextDirection && directionIsAllowed(tile, nextDirection)) {
-            direction = nextDirection;
-            nextDirection = null;
-        } else {
-            direction = switchDirection(tile, direction);
-        }
-        // eslint-disable-next-line no-param-reassign
-        player.direction = direction;
-    }
-    return kontra.gameLoop({
+export default ({ map, player, virus, devbox }) =>
+    kontra.gameLoop({
         update() {
-            nextDirection = getNewDirectionFromKeyboard() || nextDirection;
-            updatePlayer();
-            virus.update(map);
-            moveCamera(map, direction);
+            player.update();
+            virus.update();
+            moveCamera(map, player.direction);
         },
         render() {
             map.render();
@@ -44,4 +24,3 @@ export default ({ map, player, virus, devbox }) => {
                 mapXY ${mapX}/${mapY}; sx/sy ${sx}/${sy}`;
         }
     });
-};

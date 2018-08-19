@@ -1,6 +1,6 @@
 /* global kontra */
 
-import { N, E, S, W } from './directions';
+import { N, E, S, W } from '../../directions';
 
 export default () => {
     if (kontra.keys.pressed('right')) {

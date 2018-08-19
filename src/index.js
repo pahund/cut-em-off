@@ -13,7 +13,7 @@ import { createVirus } from './virus';
     kontra.init();
     await loadAssets();
     const map = createMap();
-    const player = createPlayer();
+    const player = createPlayer(map);
     const virus = createVirus(map);
     const devbox = createDevbox();
     const loop = createLoop({ map, player, virus, devbox });

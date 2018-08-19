@@ -13,13 +13,13 @@ export const mapPaddingY = 3;
 export const playerStartCol = 5;
 export const playerStartRow = 6;
 export const playerStartDirection = N;
-export const playerSpeed = 1;
+export const playerSpeed = 5;
 
 /* virus */
 export const virusStartCol = 5;
 export const virusStartRow = 4;
 export const virusStartDirection = W;
-export const virusSpeed = 1;
+export const virusSpeed = 2.5;
 
 /* colors */
 export const lightGreen = '#75a042';
