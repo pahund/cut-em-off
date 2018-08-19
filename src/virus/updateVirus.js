@@ -3,33 +3,33 @@ import { N, E, S, W, switchDirection } from '../directions';
 import { transformMapCoordinates } from '../utils';
 
 export default sprite => {
-    switch (sprite.direction) {
+    let { direction, mapY, mapX, x, y } = sprite;
+    const { map } = sprite;
+    switch (direction) {
         case N:
-            // eslint-disable-next-line no-param-reassign
-            sprite.mapY -= virusSpeed;
+            mapY -= virusSpeed;
             break;
         case E:
-            // eslint-disable-next-line no-param-reassign
-            sprite.mapX += virusSpeed;
+            mapX += virusSpeed;
             break;
         case S:
-            // eslint-disable-next-line no-param-reassign
-            sprite.mapY += virusSpeed;
+            mapY += virusSpeed;
             break;
         case W:
-            // eslint-disable-next-line no-param-reassign
-            sprite.mapX -= virusSpeed;
+            mapX -= virusSpeed;
             break;
         default:
     }
-    if (sprite.mapX % tileWidth === 0 && sprite.mapY % tileHeight === 0) {
-        const tile = sprite.map.tileAtLayer('main', { x: sprite.x, y: sprite.y });
-        // eslint-disable-next-line no-param-reassign
-        sprite.direction = switchDirection(tile, sprite.direction);
+    if (mapX % tileWidth === 0 && mapY % tileHeight === 0) {
+        const tile = map.tileAtLayer('main', { x, y });
+        direction = switchDirection(tile, direction);
     }
-    const { x: newX, y: newY } = transformMapCoordinates(sprite.map, { x: sprite.mapX, y: sprite.mapY });
-    // eslint-disable-next-line no-param-reassign
-    sprite.x = newX;
-    // eslint-disable-next-line no-param-reassign
-    sprite.y = newY;
+    ({ x, y } = transformMapCoordinates(map, { x: mapX, y: mapY }));
+    return {
+        direction,
+        mapY,
+        mapX,
+        x,
+        y
+    };
 };

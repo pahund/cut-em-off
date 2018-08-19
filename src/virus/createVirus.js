@@ -14,7 +14,7 @@ export default map => {
         mapY: (virusStartRow - 1) * tileHeight,
         direction: virusStartDirection,
         update() {
-            updateVirus(this);
+            ({ x: this.x, y: this.y, mapX: this.mapX, mapY: this.mapY, direction: this.direction } = updateVirus(this));
         },
         render() {
             drawVirus(this);
