@@ -1,6 +1,7 @@
-import { tileWidth, tileHeight, virusSpeed } from '../config';
+import { virusSpeed } from '../config';
 import { N, E, S, W, switchDirection } from '../directions';
 import { transformMapCoordinates } from '../utils';
+import { isInTheMiddle } from './utils';
 
 export default sprite => {
     let { direction, mapY, mapX, x, y } = sprite;
@@ -20,7 +21,7 @@ export default sprite => {
             break;
         default:
     }
-    if (mapX % tileWidth === 0 && mapY % tileHeight === 0) {
+    if (isInTheMiddle({ mapX, mapY })) {
         const tile = map.tileAtLayer('main', { x, y });
         direction = switchDirection(tile, direction);
     }
