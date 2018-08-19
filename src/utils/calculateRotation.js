@@ -1,15 +1,15 @@
-import degreesToRadians from './degreesToRadians';
-import directions from './directions';
+import { degreesToRadians } from '.';
+import { N, E, S, W } from '../directions';
 
 export default direction => {
     switch (direction) {
-        case directions.N:
+        case N:
             return degreesToRadians(0);
-        case directions.E:
+        case E:
             return degreesToRadians(90);
-        case directions.S:
+        case S:
             return degreesToRadians(180);
-        case directions.W:
+        case W:
             return degreesToRadians(270);
         default:
             return null;

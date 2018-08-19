@@ -1,18 +1,19 @@
 /* global kontra */
 
-import createMap from './createMap';
-import createPlayer from './createPlayer';
-import createCanvas from './createCanvas';
-import createLoop from './createLoop';
-import createDevbox from './createDevbox';
-
+import { createLoop } from './loop';
+import { createMap } from './map';
+import { createPlayer } from './player';
+import { createDevbox, createCanvas, loadAssets } from './utils';
+import { createVirus } from './virus';
 
 (async () => {
     createCanvas();
     kontra.init();
-    const map = await createMap();
-    const player = createPlayer();
+    await loadAssets();
+    const map = createMap();
+    const player = createPlayer(map);
+    const virus = createVirus(map);
     const devbox = createDevbox();
-    const loop = createLoop({ map, player, devbox });
+    const loop = createLoop({ map, player, virus, devbox });
     loop.start();
 })();
