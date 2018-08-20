@@ -78,7 +78,7 @@ export default {
     },
     // player start
     14: {
-        allowed: [N, E, S, W],
+        allowed: [N, S],
         change: {}
     },
     // terminus S

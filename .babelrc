@@ -1,0 +1,4 @@
+/* Note: we use Babel only for tests */
+{
+  "presets": ["env"]
+}
