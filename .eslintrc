@@ -1,12 +1,24 @@
 {
-  "extends": [
-    "motor-talk",
-    "prettier",
-    "prettier/standard"
-  ],
-  "rules": {
-    "max-len": ["error", {"code": 120, "ignoreUrls": true}],
-    "prettier/prettier": "error"
-  },
-  "plugins": ["prettier"]
+    "extends": ["motor-talk", "prettier", "prettier/standard"],
+    "rules": {
+        "max-len": ["error", { "code": 120, "ignoreUrls": true }],
+        "prettier/prettier": "error"
+    },
+    "plugins": ["prettier", "jest"],
+    "env": {
+        "jest/globals": true
+    },
+    "overrides": [
+        // Special settings for jest tests
+        {
+            "files": ["src/**/*.test.js"],
+            "rules": {
+                "jest/no-disabled-tests": "warn",
+                "jest/no-focused-tests": "error",
+                "jest/valid-expect": "error",
+                "no-shadow": 0,
+                "no-unused-expressions": 0
+            }
+        }
+    ]
 }
