@@ -9,6 +9,7 @@ export default map =>
         y: canvasHeight / 2,
         collisionRadius,
         map,
+        infected: false,
         direction: playerStartDirection,
         nextDirection: null,
         update() {

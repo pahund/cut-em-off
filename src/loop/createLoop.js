@@ -2,17 +2,15 @@
 
 import { moveCamera, collides } from './utils';
 
-export default ({ map, player, virus, devbox }) =>
+export default ({ map, player, virus, messageBox }) =>
     kontra.gameLoop({
         update() {
             player.update();
             virus.update();
             if (collides(virus, player)) {
                 // eslint-disable-next-line no-param-reassign
-                devbox.innerHTML = 'COLLISION!!1!';
-            } else {
-                // eslint-disable-next-line no-param-reassign
-                devbox.innerHTML = '&nbsp;';
+                player.infected = true;
+                messageBox.show('player infected<br>game over');
             }
 
             moveCamera(map, player.direction);

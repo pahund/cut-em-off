@@ -6,3 +6,4 @@ export { default as transformMapCoordinates } from './transformMapCoordinates';
 export { default as createCanvas } from './createCanvas';
 export { default as createDevbox } from './createDevbox';
 export { default as loadAssets } from './loadAssets';
+export { default as createMessageBox } from './createMessageBox';
