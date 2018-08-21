@@ -1,6 +1,6 @@
 /* global kontra */
 
-import { virusStartDirection, virusStartCol, virusStartRow, tileWidth, tileHeight } from '../config';
+import { virusStartDirection, virusStartCol, virusStartRow, tileWidth, tileHeight, collisionRadius } from '../config';
 import { transformMapCoordinates } from '../utils';
 import { drawVirus, updateVirus } from '.';
 
@@ -9,6 +9,7 @@ export default map => {
     return kontra.sprite({
         x,
         y,
+        collisionRadius,
         map,
         mapX: (virusStartCol - 1) * tileWidth,
         mapY: (virusStartRow - 1) * tileHeight,
