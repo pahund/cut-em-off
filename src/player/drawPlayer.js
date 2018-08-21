@@ -1,14 +1,14 @@
-import { lightGreen, darkGreen } from '../config';
+import { lightGreen, darkGreen, lightRed, darkRed } from '../config';
 import { calculateRotation } from '../utils';
 
 export default sprite => {
-    const { context: ctx, x, y, direction } = sprite;
+    const { context: ctx, x, y, direction, infected } = sprite;
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(calculateRotation(direction));
     ctx.lineWidth = 3;
-    ctx.strokeStyle = lightGreen;
-    ctx.fillStyle = darkGreen;
+    ctx.strokeStyle = infected ? lightRed : lightGreen;
+    ctx.fillStyle = infected ? darkRed : darkGreen;
     ctx.beginPath();
     ctx.moveTo(-15, 25);
     ctx.lineTo(0, -25);

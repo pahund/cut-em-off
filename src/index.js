@@ -3,7 +3,7 @@
 import { createLoop } from './loop';
 import { createMap } from './map';
 import { createPlayer } from './player';
-import { createDevbox, createCanvas, loadAssets } from './utils';
+import { createDevbox, createCanvas, loadAssets, createMessageBox } from './utils';
 import { createVirus } from './virus';
 
 (async () => {
@@ -14,6 +14,7 @@ import { createVirus } from './virus';
     const player = createPlayer(map);
     const virus = createVirus(map);
     const devbox = createDevbox();
-    const loop = createLoop({ map, player, virus, devbox });
+    const messageBox = createMessageBox();
+    const loop = createLoop({ map, player, virus, devbox, messageBox });
     loop.start();
 })();

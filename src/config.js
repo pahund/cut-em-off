@@ -28,3 +28,5 @@ export const lightBlue = '#52638a';
 // export const darkBlue = '#2b3653';
 export const lightRed = '#cd3926';
 export const darkRed = '#7a2431';
+
+export const collisionRadius = 30;
