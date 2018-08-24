@@ -1,4 +1,4 @@
-import { createUser } from '.';
+import { createUser, INFECTED } from '.';
 import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config';
 import { multiCollides } from '../utils';
 import { allInfected } from './utils';
@@ -28,7 +28,7 @@ export default class {
     }
     infect(viruses, messageBox) {
         const { users, pubsub, gameOver } = this;
-        const userVirusCollisions = multiCollides(users, viruses);
+        const userVirusCollisions = multiCollides(users, viruses).filter(([user]) => user.status !== INFECTED);
         if (userVirusCollisions.length === 0) {
             return;
         }

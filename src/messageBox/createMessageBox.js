@@ -10,8 +10,10 @@ export default () => {
         display: flex;
         color: rgba(255,255,255,0);
         position: absolute;
-        width: 100%;
-        height: 100%;
+        top: 0;
+        left:0;
+        width: 100vw;
+        height: 100vh;
         text-align: center;
         pointer-events: none;
         transition: background-color 3s ease-out, color 3s ease-out;
@@ -35,7 +37,7 @@ export default () => {
             messageBox.style.color = 'rgba(255,255,255,1)';
             timeoutHandler = setTimeout(() => {
                 messageBox.style.color = 'rgba(255,255,255,0)';
-            }, 0);
+            }, 500);
         }
     };
 };
