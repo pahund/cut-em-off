@@ -35,7 +35,7 @@ export default () => {
             messageBox.style.color = 'rgba(255,255,255,1)';
             timeoutHandler = setTimeout(() => {
                 messageBox.style.color = 'rgba(255,255,255,0)';
-            }, 1000);
+            }, 0);
         }
     };
 };

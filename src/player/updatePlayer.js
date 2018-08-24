@@ -3,8 +3,8 @@ import { getNewDirectionFromKeyboard, isInTheMiddle } from './utils';
 
 export default sprite => {
     let { nextDirection, direction } = sprite;
-    const { map, x, y, infected } = sprite;
-    if (!infected) {
+    const { map, x, y, gameOver } = sprite;
+    if (!gameOver) {
         nextDirection = getNewDirectionFromKeyboard() || nextDirection;
     }
     if (!isInTheMiddle({ x: map.sx, y: map.sy })) {
