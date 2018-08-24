@@ -1,7 +1,8 @@
 /* global kontra */
 
-import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from '../config';
 import { drawPlayer, updatePlayer } from '.';
+import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from '../config';
+import { collides } from '../utils';
 
 export default map =>
     kontra.sprite({
@@ -17,5 +18,12 @@ export default map =>
         },
         render() {
             drawPlayer(this);
+        },
+        infect(virus, messageBox) {
+            if (collides(virus, this)) {
+                // eslint-disable-next-line no-param-reassign
+                this.infected = true;
+                messageBox.show('player infected<br>game over');
+            }
         }
     });

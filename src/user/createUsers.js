@@ -1,5 +1,6 @@
 import { createUser } from '.';
 import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config';
+import { multiCollides } from '../utils';
 
 export default map => {
     const users = [];
@@ -17,6 +18,10 @@ export default map => {
         },
         render() {
             users.forEach(user => user.render());
+        },
+        infect(viruses) {
+            const userVirusCollisions = multiCollides(users, viruses);
+            userVirusCollisions.forEach(([user]) => user.infect());
         }
     };
 };

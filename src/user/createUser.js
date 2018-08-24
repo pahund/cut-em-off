@@ -1,6 +1,6 @@
 /* global kontra */
 
-import { drawUser } from '.';
+import { drawUser, INFECTED } from '.';
 import { tileWidth, tileHeight, collisionRadius } from '../config';
 import { transformMapCoordinates } from '../utils';
 import { ONLINE } from '.';
@@ -21,6 +21,9 @@ export default ({ map, row, col }) => {
         },
         render() {
             drawUser(this);
+        },
+        infect() {
+            this.status = INFECTED;
         }
     });
 };

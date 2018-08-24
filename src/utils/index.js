@@ -7,3 +7,5 @@ export { default as createCanvas } from './createCanvas';
 export { default as createDevbox } from './createDevbox';
 export { default as loadAssets } from './loadAssets';
 export { default as createMessageBox } from './createMessageBox';
+export { default as multiCollides } from './multiCollides';
+export { default as collides } from './collides';
