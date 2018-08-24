@@ -13,8 +13,8 @@ import { canvasHeight, canvasWidth } from '../config';
  */
 export default (map, { row, col, x, y }) => {
     const { tileWidth, tileHeight, sx, sy } = map;
-    const calcX = x || (col - 1) * tileWidth;
-    const calcY = y || (row - 1) * tileHeight;
+    const calcX = x !== undefined ? x : (col - 1) * tileWidth;
+    const calcY = y !== undefined ? y : (row - 1) * tileHeight;
     const nextX = calcX - sx + canvasWidth / 2 + tileWidth / 2;
     const nextY = calcY - sy + canvasHeight / 2 + tileHeight / 2;
     return { x: nextX, y: nextY };
