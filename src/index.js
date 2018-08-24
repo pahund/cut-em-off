@@ -1,10 +1,13 @@
 /* global kontra */
 
+import { createCanvas } from './canvas';
+import { createDevbox } from './devbox';
 import { createLoop } from './loop';
 import { createMap } from './map';
+import { createMessageBox } from './messageBox';
 import { createPlayer } from './player';
 import { createUsers } from './user';
-import { createDevbox, createCanvas, loadAssets, createMessageBox } from './utils';
+import { loadAssets } from './utils';
 import { createVirus } from './virus';
 
 (async () => {

@@ -1,6 +1,7 @@
 import { createUser } from '.';
 import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config';
 import { multiCollides } from '../utils';
+import { allInfected } from './utils';
 
 export default map => {
     const users = [];
@@ -19,8 +20,16 @@ export default map => {
         render() {
             users.forEach(user => user.render());
         },
-        infect(viruses) {
+        infect(viruses, messageBox) {
             const userVirusCollisions = multiCollides(users, viruses);
+            if (userVirusCollisions.length === 0) {
+                return;
+            }
+            if (allInfected(users)) {
+                messageBox.show('all users infected<br>game over');
+                return;
+            }
+            messageBox.flash('user infected!');
             userVirusCollisions.forEach(([user]) => user.infect());
         }
     };

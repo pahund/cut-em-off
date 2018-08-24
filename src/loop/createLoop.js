@@ -10,7 +10,7 @@ export default ({ map, player, virus, users, messageBox }) =>
             player.infect(virus, messageBox);
             moveCamera(map, player.direction);
             users.update();
-            users.infect([virus]);
+            users.infect([virus], messageBox);
         },
         render() {
             map.render();
