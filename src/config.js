@@ -2,6 +2,8 @@ import { N, W } from './directions';
 
 export const canvasWidth = 800;
 export const canvasHeight = 600;
+
+/* map */
 export const tileWidth = 100;
 export const tileHeight = 100;
 export const mapWidth = 20;
