@@ -2,7 +2,7 @@
 
 import { moveCamera } from './utils';
 
-export default ({ map, player, virus, users, messageBox }) =>
+export default ({ map, player, virus, users, messageBox, bomb }) =>
     kontra.gameLoop({
         update() {
             virus.update();
@@ -11,11 +11,13 @@ export default ({ map, player, virus, users, messageBox }) =>
             moveCamera(map, player.direction);
             users.update();
             users.infect([virus], messageBox);
+            bomb.update();
         },
         render() {
             map.render();
             users.render();
             player.render();
             virus.render();
+            bomb.render();
         }
     });

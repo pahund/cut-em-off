@@ -27,7 +27,7 @@ export const virusSpeed = 2.5;
 export const lightGreen = '#75a042';
 export const darkGreen = '#365b1d';
 export const lightBlue = '#52638a';
-// export const darkBlue = '#2b3653';
+export const darkBlue = '#2b3653';
 export const lightRed = '#cd3926';
 export const darkRed = '#7a2431';
 
