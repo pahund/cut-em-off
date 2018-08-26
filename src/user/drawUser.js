@@ -1,28 +1,40 @@
 /* global kontra */
-import { tileHeight, tileWidth } from '../config';
+import { lightBlue, darkBlue, lightGreen, darkGreen, lightRed, darkRed } from '../config';
 import { ONLINE, OFFLINE, INFECTED } from './constants';
+import { degreesToRadians as deg2rad } from '../utils';
 
 const spriteMapping = {
-    [ONLINE]: { sx: 600, sy: 0 },
-    [OFFLINE]: { sx: 600, sy: 0 },
-    [INFECTED]: { sx: 700, sy: 100 }
+    [ONLINE]: { fg: lightBlue, bg: darkBlue },
+    [OFFLINE]: { fg: lightGreen, bg: darkGreen },
+    [INFECTED]: { fg: lightRed, bg: darkRed }
 };
 
 export default sprite => {
     const { context: ctx, x, y, status } = sprite;
-    const { sx, sy } = spriteMapping[status];
+    const { fg, bg } = spriteMapping[status];
     ctx.save();
     ctx.translate(x, y);
-    ctx.drawImage(
-        kontra.assets.images.tilesheet,
-        sx,
-        sy,
-        tileWidth,
-        tileHeight,
-        (-1 * tileWidth) / 2,
-        (-1 * tileHeight) / 2,
-        tileWidth,
-        tileHeight
-    );
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = fg;
+    ctx.fillStyle = bg;
+    ctx.beginPath();
+    ctx.moveTo(-40, 40);
+    ctx.lineTo(-40, 20);
+    ctx.arc(-20, 20, 20, deg2rad(180), deg2rad(270));
+    ctx.moveTo(-20, 0);
+    ctx.lineTo(20, 0);
+    ctx.arc(20, 20, 20, deg2rad(270), deg2rad(0));
+    ctx.lineTo(40, 40);
+    ctx.lineTo(-40, 40);
+    ctx.moveTo(-23, 20);
+    ctx.lineTo(-23, 40);
+    ctx.moveTo(23, 20);
+    ctx.lineTo(23, 40);
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(0, -15, 25, deg2rad(0), deg2rad(360));
+    ctx.fill();
+    ctx.stroke();
     ctx.restore();
 };
