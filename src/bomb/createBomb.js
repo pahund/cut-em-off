@@ -22,7 +22,9 @@ export default (map, { row, col }) => {
             ({
                 status: this.status,
                 fuseLength: this.fuseLength,
-                explosionDuration: this.explosionDuration
+                explosionDuration: this.explosionDuration,
+                x: this.x,
+                y: this.y
             } = updateBomb(this));
         },
         render() {
