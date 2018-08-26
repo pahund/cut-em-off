@@ -13,9 +13,10 @@ import {
 import { calculateCameraCoordinates } from '../utils';
 import mapData from './mapData';
 import { addPadding } from './utils';
+import { createTilesheet } from './tilesheet';
 import { createTileEngine } from '../tileEngine';
 
-export default () => {
+export default async () => {
     const { sx, sy } = calculateCameraCoordinates({ col: playerStartCol, row: playerStartRow });
     const map = createTileEngine({
         // tile size
@@ -31,7 +32,9 @@ export default () => {
     });
 
     const paddedMap = addPadding(mapData, width, height, mapPaddingX, mapPaddingY);
-    map.addTilesets({ image: kontra.assets.images.tilesheet });
+    const image = await createTilesheet();
+    map.addTilesets({ image });
+    // map.addTilesets({ image: kontra.assets.images.tilesheet });
     map.addLayers([
         {
             name: 'main',

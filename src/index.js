@@ -8,7 +8,6 @@ import { createMessageBox } from './messageBox';
 import { createPlayer } from './player';
 import { Pubsub } from './pubsub';
 import { Users } from './user';
-import { loadAssets } from './utils';
 import { createVirus } from './virus';
 import { Bombs } from './bomb';
 
@@ -16,8 +15,7 @@ import { Bombs } from './bomb';
     const pubsub = new Pubsub();
     createCanvas();
     kontra.init();
-    await loadAssets();
-    const map = createMap();
+    const map = await createMap();
     const player = createPlayer(map, pubsub);
     const virus = createVirus(map);
     const bombs = new Bombs(map, pubsub);
