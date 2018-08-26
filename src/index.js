@@ -10,7 +10,7 @@ import { Pubsub } from './pubsub';
 import { Users } from './user';
 import { loadAssets } from './utils';
 import { createVirus } from './virus';
-import { createBomb } from './bomb';
+import { Bombs } from './bomb';
 
 (async () => {
     const pubsub = new Pubsub();
@@ -20,10 +20,10 @@ import { createBomb } from './bomb';
     const map = createMap();
     const player = createPlayer(map, pubsub);
     const virus = createVirus(map);
-    const bomb = createBomb(map, { col: 5, row: 6 });
+    const bombs = new Bombs(map, pubsub);
     const users = new Users(map, pubsub);
     const devbox = createDevbox();
     const messageBox = createMessageBox();
-    const loop = createLoop({ map, player, virus, users, devbox, messageBox, bomb });
+    const loop = createLoop({ map, player, virus, users, devbox, messageBox, bombs });
     loop.start();
 })();
