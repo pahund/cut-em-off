@@ -1,4 +1,5 @@
 /* global kontra */
+import { flatIndex } from './utils';
 
 /**
  * A tile engine for rendering tilesets. Works well with the tile engine program Tiled.
@@ -141,14 +142,14 @@ export default (properties = {}) => {
                 // eslint-disable-next-line no-param-reassign
                 layer.render = layer.render === undefined ? true : layer.render;
 
-                let data, r, row, c, value;
+                let data, row, c, value;
 
                 // flatten a 2D array into a single array
                 if (Array.isArray(layer.data[0])) {
                     data = [];
 
                     // eslint-disable-next-line no-cond-assign
-                    for (r = 0; (row = layer.data[r]); r++) {
+                    for (let r = 0; (row = layer.data[r]); r++) {
                         for (c = 0; c < width; c++) {
                             data.push(row[c] || 0);
                         }
@@ -187,6 +188,13 @@ export default (properties = {}) => {
             });
 
             preRenderImage();
+        },
+
+        changeTile(layerId, { row, col }, tile) {
+            const dataIndex = flatIndex(row, col, width);
+            const layer = tileEngine.layers[layerId];
+            layer.data[dataIndex] = tile;
+            renderTile(layer, dataIndex, true);
         },
 
         /**
@@ -471,34 +479,39 @@ export default (properties = {}) => {
      * @private
      */
     function preRenderImage() {
-        let tile, tileset, image, x, y, sx, sy, tileOffset, w;
-
         // draw each layer in order
         // eslint-disable-next-line no-cond-assign
-        for (let i = 0, layer; (layer = tileEngine.layers[layerOrder[i]]); i++) {
-            for (let j = 0, len = layer.data.length; j < len; j++) {
-                tile = layer.data[j];
-
-                // skip empty tiles (0)
-                if (!tile) {
-                    continue;
-                }
-
-                tileset = getTileset(tile);
-                image = tileset.image;
-
-                x = (j % width) * tileWidth;
-                y = ((j / width) | 0) * tileHeight;
-
-                tileOffset = tile - tileset.firstGrid;
-                w = image.width / tileWidth;
-
-                sx = (tileOffset % w) * tileWidth;
-                sy = ((tileOffset / w) | 0) * tileHeight;
-
-                offscreenContext.drawImage(image, sx, sy, tileWidth, tileHeight, x, y, tileWidth, tileHeight);
+        for (let layerIndex = 0, layer; (layer = tileEngine.layers[layerOrder[layerIndex]]); layerIndex++) {
+            for (let dataIndex = 0, len = layer.data.length; dataIndex < len; dataIndex++) {
+                renderTile(layer, dataIndex);
             }
         }
+    }
+
+    function renderTile(layer, dataIndex, clear = false) {
+        const tile = layer.data[dataIndex];
+
+        // skip empty tiles (0)
+        if (!tile) {
+            return;
+        }
+
+        const tileset = getTileset(tile);
+        const image = tileset.image;
+
+        const x = (dataIndex % width) * tileWidth;
+        const y = ((dataIndex / width) | 0) * tileHeight;
+
+        const tileOffset = tile - tileset.firstGrid;
+        const w = image.width / tileWidth;
+
+        const sx = (tileOffset % w) * tileWidth;
+        const sy = ((tileOffset / w) | 0) * tileHeight;
+
+        if (clear) {
+            offscreenContext.clearRect(x, y, tileWidth, tileHeight);
+        }
+        offscreenContext.drawImage(image, sx, sy, tileWidth, tileHeight, x, y, tileWidth, tileHeight);
     }
 
     return tileEngine;
