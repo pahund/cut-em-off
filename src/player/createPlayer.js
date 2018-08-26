@@ -15,8 +15,12 @@ export default (map, pubsub) => {
         gameOver: false,
         direction: playerStartDirection,
         nextDirection: null,
+        dropBomb: false,
         update() {
-            ({ nextDirection: this.nextDirection, direction: this.direction } = updatePlayer(this));
+            ({ nextDirection: this.nextDirection, direction: this.direction, dropBomb: this.dropBomb } = updatePlayer(
+                this,
+                pubsub
+            ));
         },
         render() {
             drawPlayer(this);

@@ -1,14 +1,16 @@
 import { directionIsAllowed, switchDirection } from '../directions';
-import { getNewDirectionFromKeyboard, isInTheMiddle } from './utils';
+import { DROP_BOMB } from '../pubsub';
+import { getKey, isInTheMiddle } from './utils';
+import { calculateRowAndCol } from '../utils';
 
-export default sprite => {
-    let { nextDirection, direction } = sprite;
+export default (sprite, pubsub) => {
+    let { nextDirection, direction, dropBomb } = sprite;
     const { map, x, y, gameOver } = sprite;
     if (!gameOver) {
-        nextDirection = getNewDirectionFromKeyboard() || nextDirection;
+        ({ nextDirection, dropBomb } = getKey(sprite));
     }
     if (!isInTheMiddle({ x: map.sx, y: map.sy })) {
-        return { direction, nextDirection };
+        return { direction, nextDirection, dropBomb };
     }
     const tile = map.tileAtLayer('main', { x, y });
     if (nextDirection && directionIsAllowed(tile, nextDirection)) {
@@ -17,5 +19,9 @@ export default sprite => {
     } else {
         direction = switchDirection(tile, direction);
     }
-    return { direction, nextDirection };
+    if (dropBomb) {
+        pubsub.publish(DROP_BOMB, calculateRowAndCol(map));
+        dropBomb = false;
+    }
+    return { direction, nextDirection, dropBomb };
 };

@@ -6,3 +6,4 @@ export { default as transformMapCoordinates } from './transformMapCoordinates';
 export { default as loadAssets } from './loadAssets';
 export { default as multiCollides } from './multiCollides';
 export { default as collides } from './collides';
+export { default as calculateRowAndCol } from './calculateRowAndCol';
