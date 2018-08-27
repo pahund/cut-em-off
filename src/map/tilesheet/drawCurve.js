@@ -15,21 +15,21 @@ export default ({ ctx, row, col, deg, broken = false }) => {
     ctx.beginPath();
     if (broken) {
         ctx.moveTo(20, 50);
-        ctx.arc(50, 50, 30, deg2rad(180), deg2rad(200));
-        ctx.moveTo(...calculatePointOnArc(200, 30));
-        ctx.lineTo(10, 40);
-        ctx.lineTo(10, 20);
-        ctx.lineTo(-10, 30);
-        ctx.lineTo(...calculatePointOnArc(200, 70));
-        ctx.arc(50, 50, 70, deg2rad(200), deg2rad(180), true);
+        ctx.arc(50, 50, 30, deg2rad(180), deg2rad(190));
+        ctx.moveTo(...calculatePointOnArc(190, 30));
+        ctx.lineTo(10, 45);
+        ctx.lineTo(10, 35);
+        ctx.lineTo(-10, 40);
+        ctx.lineTo(...calculatePointOnArc(190, 70));
+        ctx.arc(50, 50, 70, deg2rad(190), deg2rad(180), true);
         ctx.moveTo(50, 20);
-        ctx.arc(50, 50, 30, deg2rad(270), deg2rad(250), true);
-        ctx.moveTo(...calculatePointOnArc(250, 30));
-        ctx.lineTo(30, 10);
-        ctx.lineTo(40, 0);
-        ctx.lineTo(20, 0);
-        ctx.lineTo(...calculatePointOnArc(250, 70));
-        ctx.arc(50, 50, 70, deg2rad(250), deg2rad(270));
+        ctx.arc(50, 50, 30, deg2rad(270), deg2rad(260), true);
+        ctx.moveTo(...calculatePointOnArc(260, 30));
+        ctx.lineTo(40, 10);
+        ctx.lineTo(45, 0);
+        ctx.lineTo(35, 0);
+        ctx.lineTo(...calculatePointOnArc(260, 70));
+        ctx.arc(50, 50, 70, deg2rad(260), deg2rad(270));
     } else {
         ctx.moveTo(20, 50);
         ctx.arc(50, 50, 30, deg2rad(180), deg2rad(270));

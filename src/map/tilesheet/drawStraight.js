@@ -11,20 +11,20 @@ export default ({ ctx, row, col, deg, broken = false }) => {
     ctx.beginPath();
     if (broken) {
         ctx.moveTo(-20, 50);
-        ctx.lineTo(-20, 10);
-        ctx.lineTo(-10, 30);
-        ctx.lineTo(0, 0);
-        ctx.lineTo(10, 20);
-        ctx.lineTo(20, 10);
+        ctx.lineTo(-20, 30);
+        ctx.lineTo(-10, 40);
+        ctx.lineTo(0, 25);
+        ctx.lineTo(10, 35);
+        ctx.lineTo(20, 30);
         ctx.lineTo(20, 50);
         ctx.stroke();
         ctx.beginPath();
         ctx.moveTo(-20, -50);
-        ctx.lineTo(-20, -30);
-        ctx.lineTo(-10, 0);
-        ctx.lineTo(0, -20);
-        ctx.lineTo(10, -10);
-        ctx.lineTo(20, -30);
+        ctx.lineTo(-20, -40);
+        ctx.lineTo(-10, -25);
+        ctx.lineTo(0, -35);
+        ctx.lineTo(10, -30);
+        ctx.lineTo(20, -40);
         ctx.lineTo(20, -50);
     } else {
         ctx.moveTo(-20, -50);
