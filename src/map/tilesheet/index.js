@@ -1,5 +1,5 @@
 export { default as createTilesheet } from './createTilesheet';
-export { default as drawCurves } from './drawCurves';
+export { default as drawCurve } from './drawCurve';
 export { default as drawStraight } from './drawStraight';
 export { default as drawTSection } from './drawTSection';
 export { default as drawCrossing } from './drawCrossing';
