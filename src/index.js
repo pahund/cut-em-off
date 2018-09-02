@@ -1,7 +1,6 @@
 /* global kontra */
 
 import { createCanvas } from './canvas';
-import { createDevbox } from './devbox';
 import { createLoop } from './loop';
 import { createMap } from './map';
 import { createMessageBox } from './messageBox';
@@ -10,6 +9,10 @@ import { Pubsub } from './pubsub';
 import { Users } from './user';
 import { createVirus } from './virus';
 import { Bombs } from './bomb';
+
+if (process.env.NODE_ENV === 'development') {
+    require('./devbox/createDevbox').default();
+}
 
 (async () => {
     const pubsub = new Pubsub();
@@ -20,8 +23,7 @@ import { Bombs } from './bomb';
     const virus = createVirus(map);
     const bombs = new Bombs(map, pubsub);
     const users = new Users(map, pubsub);
-    const devbox = createDevbox();
     const messageBox = createMessageBox();
-    const loop = createLoop({ map, player, virus, users, devbox, messageBox, bombs });
+    const loop = createLoop({ map, player, virus, users, messageBox, bombs });
     loop.start();
 })();
