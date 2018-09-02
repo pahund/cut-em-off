@@ -1,4 +1,10 @@
-import { switchDirection, isIntersection, directionSwitchMap, getOppositeDirection } from '../directions';
+import {
+    switchDirection,
+    isIntersection,
+    directionSwitchMap,
+    getOppositeDirection,
+    directionIsAllowed
+} from '../directions';
 import { transformMapCoordinates, getRandomInt } from '../utils';
 import { isInTheMiddle, moveVirus, getBestDirection } from './utils';
 import { mapWidth, mapHeight, tileWidth, tileHeight } from '../config';
@@ -18,11 +24,13 @@ export default sprite => {
         visits[row - 1][col - 1] = visits[row - 1][col - 1] + 1;
         if (isIntersection(tile)) {
             const { allowed } = directionSwitchMap[tile];
-            const viable = allowed.filter(dir => dir !== getOppositeDirection(direction));
+            const viable = allowed.filter(
+                dir => dir !== getOppositeDirection(direction) && directionIsAllowed(map, { x, y }, dir)
+            );
             const bestDirections = getBestDirection({ viable, visits, row, col });
             direction = bestDirections[getRandomInt(0, bestDirections.length - 1)];
         } else {
-            direction = switchDirection(tile, direction);
+            direction = switchDirection(map, { x, y }, direction);
         }
     }
     ({ x, y } = transformMapCoordinates(map, { x: mapX, y: mapY }));

@@ -37,7 +37,11 @@ export default () => {
     drawTerminus({ ctx, row: 6, col: 3, deg: 180, broken: true });
     drawTerminus({ ctx, row: 6, col: 4, deg: 270, broken: true });
     drawServer({ ctx, row: 2, col: 6 });
+    if (process.env.NODE_ENV === 'development') {
+        require('./drawDebugGrid').default({ ctx, row: 5, col: 6 });
+    }
     const image = new Image();
     image.src = canvas.toDataURL('image/png');
+    // document.getElementById('wrapper').appendChild(image);
     return new Promise(resolve => setTimeout(() => resolve(image), 100));
 };

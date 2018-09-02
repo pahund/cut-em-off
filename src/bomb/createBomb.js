@@ -18,6 +18,8 @@ export default (map, { row, col }) => {
         map,
         mapX: (col - 1) * tileWidth,
         mapY: (row - 1) * tileHeight,
+        row,
+        col,
         update() {
             ({
                 status: this.status,

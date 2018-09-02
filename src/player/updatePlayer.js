@@ -12,12 +12,11 @@ export default (sprite, pubsub) => {
     if (!isInTheMiddle({ x: map.sx, y: map.sy })) {
         return { direction, nextDirection, dropBomb };
     }
-    const tile = map.tileAtLayer('main', { x, y });
-    if (nextDirection && directionIsAllowed(tile, nextDirection)) {
+    if (nextDirection && directionIsAllowed(map, { x, y }, nextDirection)) {
         direction = nextDirection;
         nextDirection = null;
     } else {
-        direction = switchDirection(tile, direction);
+        direction = switchDirection(map, { x, y }, direction);
     }
     if (dropBomb) {
         pubsub.publish(DROP_BOMB, calculateRowAndCol(map));

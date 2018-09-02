@@ -3,7 +3,7 @@
 import { moveCamera } from './utils';
 import { calculateRowAndCol } from '../utils';
 
-export default ({ map, player, virus, users, messageBox, bombs, devbox }) => {
+export default ({ map, player, virus, users, messageBox, bombs }) => {
     const times = [];
     let fps;
     return kontra.gameLoop({
@@ -22,16 +22,18 @@ export default ({ map, player, virus, users, messageBox, bombs, devbox }) => {
             bombs.render();
             player.render();
             virus.render();
-            const now = performance.now();
-            while (times.length > 0 && times[0] <= now - 1000) {
-                times.shift();
-            }
-            times.push(now);
-            fps = times.length;
-            const { row, col } = calculateRowAndCol(map);
+            if (process.env.NODE_ENV === 'development') {
+                const now = performance.now();
+                while (times.length > 0 && times[0] <= now - 1000) {
+                    times.shift();
+                }
+                times.push(now);
+                fps = times.length;
+                const { row, col } = calculateRowAndCol(map);
 
-            // eslint-disable-next-line no-param-reassign
-            devbox.innerHTML = `${fps} fps – sx=${map.sx}, sy=${map.sy}, row=${row}, col=${col}`;
+                // eslint-disable-next-line no-param-reassign
+                window.devbox.innerHTML = `${fps} fps – sx=${map.sx}, sy=${map.sy}, row=${row}, col=${col}`;
+            }
         }
     });
 };

@@ -3,10 +3,11 @@
 import { FUSE_BURNING, EXPLODING, EXPLODED } from '.';
 import { createShrapnel } from '.';
 import { transformMapCoordinates } from '../utils';
+import { mapPaddingX, mapPaddingY } from '../config';
 
 export default sprite => {
     let { status, fuseLength, explosionDuration, x, y } = sprite;
-    const { shrapnel, map, mapX, mapY } = sprite;
+    const { shrapnel, map, mapX, mapY, row, col } = sprite;
 
     ({ x, y } = transformMapCoordinates(map, { x: mapX, y: mapY }));
     switch (status) {
@@ -17,6 +18,8 @@ export default sprite => {
                 for (let i = 0; i < 50; i++) {
                     shrapnel.push(createShrapnel({ x, y }));
                 }
+                const tile = map.tileAtLayer('main', { row: row + mapPaddingY - 1, col: col + mapPaddingX - 1 });
+                map.changeTile('main', { row: row + mapPaddingY, col: col + mapPaddingX }, tile + 24);
             }
             break;
         case EXPLODING:
