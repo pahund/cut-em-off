@@ -2,16 +2,22 @@
 
 import { moveCamera } from './utils';
 import { calculateRowAndCol } from '../utils';
+import { DROP_SHIP } from '../pubsub';
 
-export default ({ map, player, virus, users, messageBox, bombs }) => {
+export default ({ map, player, virus, users, messageBox, bombs, pubsub }) => {
     const times = [];
     let fps;
+    let shipMoving = true;
+    pubsub.subscribe(DROP_SHIP, () => (shipMoving = false));
+
     return kontra.gameLoop({
         update() {
             virus.update();
-            player.update();
+            player.update(messageBox);
             player.infect(virus, messageBox);
-            moveCamera(map, player.direction);
+            if (shipMoving) {
+                moveCamera(map, player.direction);
+            }
             users.update();
             users.infect([virus], messageBox);
             bombs.update();
