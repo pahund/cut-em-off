@@ -644,7 +644,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ((map, { x, y }, direction) => {
     const tile = map.tileAtLayer('main', { x, y });
-    if (!___WEBPACK_IMPORTED_MODULE_0__["directionSwitchMap"][tile].allowed.includes(direction)) {
+    if (!Object(___WEBPACK_IMPORTED_MODULE_0__["isValidTile"])(tile) || !___WEBPACK_IMPORTED_MODULE_0__["directionSwitchMap"][tile].allowed.includes(direction)) {
         return false;
     }
     const nextTile = Object(___WEBPACK_IMPORTED_MODULE_0__["getNextTile"])(map, { x, y }, direction);
@@ -1987,7 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
         if (scale > 0) {
             scale -= 0.01;
         } else {
-            messageBox.show('You fell into the abyss<br>Game over')
+            messageBox.show('You fell into the abyss<br>Game over');
             pubsub.publish(_pubsub__WEBPACK_IMPORTED_MODULE_1__["GAME_OVER"]);
         }
         return { direction, nextDirection, dropBomb, scale };
