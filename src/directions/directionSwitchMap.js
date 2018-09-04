@@ -76,7 +76,7 @@ export default {
             [E]: W
         }
     },
-    // player start
+    // server
     14: {
         allowed: [N, S],
         change: {}
@@ -108,5 +108,10 @@ export default {
         change: {
             [W]: E
         }
+    },
+    // broken server
+    38: {
+        allowed: [N, S],
+        change: {}
     }
 };

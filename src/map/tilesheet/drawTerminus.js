@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { tileWidth, tileHeight, lightBlue } from '../../config';
 import { degreesToRadians as deg2rad } from '../../utils';
+import { krakel } from './utils';
 
 export default ({ ctx, row, col, deg, broken = false }) => {
     ctx.save();
@@ -10,18 +11,9 @@ export default ({ ctx, row, col, deg, broken = false }) => {
     ctx.strokeStyle = lightBlue;
     ctx.beginPath();
     if (broken) {
-        ctx.moveTo(-20, 50);
-        ctx.lineTo(-20, 40);
-        ctx.lineTo(-10, 45);
-        ctx.lineTo(0, 35);
-        ctx.lineTo(10, 45);
-        ctx.lineTo(20, 40);
-        ctx.lineTo(20, 50);
+        krakel(ctx, [[0, -20, 50], [1, -20, 40], [1, -10, 45], [1, 0, 35], [1, 10, 45], [1, 20, 40], [1, 20, 50]]);
     } else {
-        ctx.moveTo(-20, 50);
-        ctx.lineTo(-20, 0);
-        ctx.lineTo(20, 0);
-        ctx.lineTo(20, 50);
+        krakel(ctx, [[0, -20, 50], [1, -20, 0], [1, 20, 0], [1, 20, 50]]);
     }
     ctx.stroke();
     ctx.restore();

@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { tileWidth, tileHeight, lightBlue } from '../../config';
 import { degreesToRadians as deg2rad } from '../../utils';
+import { krakel } from './utils';
 
 export default ({ ctx, row, col, deg, broken = false }) => {
     ctx.save();
@@ -10,39 +11,39 @@ export default ({ ctx, row, col, deg, broken = false }) => {
     ctx.strokeStyle = lightBlue;
     ctx.beginPath();
     if (broken) {
-        ctx.moveTo(50, 20);
-        ctx.lineTo(40, 20);
-        ctx.lineTo(45, 10);
-        ctx.lineTo(40, -10);
-        ctx.lineTo(45, -20);
-        ctx.lineTo(50, -20);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(20, -50);
-        ctx.lineTo(20, -35);
-        ctx.lineTo(10, -40);
-        ctx.lineTo(0, -30);
-        ctx.lineTo(-10, -40);
-        ctx.lineTo(-20, -35);
-        ctx.lineTo(-20, -50);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(-50, -20);
-        ctx.lineTo(-40, -20);
-        ctx.lineTo(-35, -10);
-        ctx.lineTo(-45, 0);
-        ctx.lineTo(-30, 10);
-        ctx.lineTo(-35, 20);
-        ctx.lineTo(-50, 20);
+        krakel(ctx, [
+            [0, 50, 20],
+            [1, 40, 20],
+            [1, 45, 10],
+            [1, 40, -10],
+            [1, 45, -20],
+            [1, 50, -20],
+            [0, 20, -50],
+            [1, 20, -35],
+            [1, 10, -40],
+            [1, 0, -30],
+            [1, -10, -40],
+            [1, -20, -35],
+            [1, -20, -50],
+            [0, -50, -20],
+            [1, -40, -20],
+            [1, -35, -10],
+            [1, -45, 0],
+            [1, -30, 10],
+            [1, -35, 20],
+            [1, -50, 20]
+        ]);
     } else {
-        ctx.moveTo(-20, -50);
-        ctx.lineTo(-20, -20);
-        ctx.lineTo(-50, -20);
-        ctx.moveTo(20, -50);
-        ctx.lineTo(20, -20);
-        ctx.lineTo(50, -20);
-        ctx.moveTo(-50, 20);
-        ctx.lineTo(50, 20);
+        krakel(ctx, [
+            [0, -20, -50],
+            [1, -20, -20],
+            [1, -50, -20],
+            [0, 20, -50],
+            [1, 20, -20],
+            [1, 50, -20],
+            [0, -50, 20],
+            [1, 50, 20]
+        ]);
     }
     ctx.stroke();
     ctx.restore();

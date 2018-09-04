@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
     const virus = createVirus(map);
     const bombs = new Bombs(map, pubsub);
     const users = new Users(map, pubsub);
-    const messageBox = createMessageBox();
-    const loop = createLoop({ map, player, virus, users, messageBox, bombs });
+    const messageBox = createMessageBox(pubsub);
+    const loop = createLoop({ map, player, virus, users, messageBox, bombs, pubsub });
     loop.start();
 })();

@@ -2,7 +2,7 @@
 
 import { drawPlayer, updatePlayer } from '.';
 import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from '../config';
-import { GAME_OVER } from '../pubsub';
+import { GAME_OVER, DROP_SHIP } from '../pubsub';
 import { collides } from '../utils';
 
 export default (map, pubsub) => {
@@ -16,11 +16,16 @@ export default (map, pubsub) => {
         direction: playerStartDirection,
         nextDirection: null,
         dropBomb: false,
-        update() {
-            ({ nextDirection: this.nextDirection, direction: this.direction, dropBomb: this.dropBomb } = updatePlayer(
-                this,
-                pubsub
-            ));
+        scale: 1,
+        dropping: false,
+        update(messageBox) {
+            const updated = updatePlayer(this, pubsub, messageBox);
+            ({
+                nextDirection: this.nextDirection,
+                direction: this.direction,
+                dropBomb: this.dropBomb,
+                scale: this.scale
+            } = updated);
         },
         render() {
             drawPlayer(this);
@@ -37,5 +42,6 @@ export default (map, pubsub) => {
         }
     });
     pubsub.subscribe(GAME_OVER, () => (player.gameOver = true));
+    pubsub.subscribe(DROP_SHIP, () => (player.dropping = true));
     return player;
 };

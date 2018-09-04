@@ -1,8 +1,12 @@
-import { directionSwitchMap, directionIsAllowed } from '.';
+import { directionSwitchMap, directionIsAllowed, isValidTile } from '.';
 import { getRandomInt } from '../utils';
 
 export default (map, { x, y }, curr) => {
     const tile = map.tileAtLayer('main', { x, y });
+    /* player accidentally stepped onto a broken conduit tile */
+    if (!isValidTile(tile)) {
+        throw new Error('dropped');
+    }
     const nextDirection = directionSwitchMap[tile].change[curr] || curr;
     if (directionIsAllowed(map, { x, y }, nextDirection)) {
         return nextDirection;
@@ -11,7 +15,7 @@ export default (map, { x, y }, curr) => {
     switch (otherDirections.length) {
         case 0:
             /* oh no, player locked themselves in! */
-            return null;
+            throw new Error('locked in');
         case 1:
             return otherDirections[0];
         default:
