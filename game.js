@@ -742,7 +742,7 @@ __webpack_require__.r(__webpack_exports__);
             [___WEBPACK_IMPORTED_MODULE_0__["E"]]: ___WEBPACK_IMPORTED_MODULE_0__["W"]
         }
     },
-    // player start
+    // server
     14: {
         allowed: [___WEBPACK_IMPORTED_MODULE_0__["N"], ___WEBPACK_IMPORTED_MODULE_0__["S"]],
         change: {}
@@ -774,6 +774,11 @@ __webpack_require__.r(__webpack_exports__);
         change: {
             [___WEBPACK_IMPORTED_MODULE_0__["W"]]: ___WEBPACK_IMPORTED_MODULE_0__["E"]
         }
+    },
+    // broken server
+    38: {
+        allowed: [___WEBPACK_IMPORTED_MODULE_0__["N"], ___WEBPACK_IMPORTED_MODULE_0__["S"]],
+        change: {}
     }
 });
 
@@ -1004,7 +1009,7 @@ if (true) {
     const virus = Object(_virus__WEBPACK_IMPORTED_MODULE_7__["createVirus"])(map);
     const bombs = new _bomb__WEBPACK_IMPORTED_MODULE_8__["Bombs"](map, pubsub);
     const users = new _user__WEBPACK_IMPORTED_MODULE_6__["Users"](map, pubsub);
-    const messageBox = Object(_messageBox__WEBPACK_IMPORTED_MODULE_3__["createMessageBox"])();
+    const messageBox = Object(_messageBox__WEBPACK_IMPORTED_MODULE_3__["createMessageBox"])(pubsub);
     const loop = Object(_loop__WEBPACK_IMPORTED_MODULE_1__["createLoop"])({ map, player, virus, users, messageBox, bombs, pubsub });
     loop.start();
 })();
@@ -1200,7 +1205,7 @@ __webpack_require__.r(__webpack_exports__);
         }
         // {
         //     name: 'grid',
-        //     data: new Array(paddedMap.length).fill(38)
+        //     data: new Array(paddedMap.length).fill(8)
         // }
     ]);
     return map;
@@ -1296,6 +1301,7 @@ __webpack_require__.r(__webpack_exports__);
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawTerminus"])({ ctx, row: 3, col: 2, deg: 90 });
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawTerminus"])({ ctx, row: 3, col: 3, deg: 180 });
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawTerminus"])({ ctx, row: 3, col: 4, deg: 270 });
+    Object(___WEBPACK_IMPORTED_MODULE_1__["drawServer"])({ ctx, row: 2, col: 6 });
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawCurve"])({ ctx, row: 4, col: 1, deg: 0, broken: true });
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawCurve"])({ ctx, row: 4, col: 2, deg: 90, broken: true });
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawCurve"])({ ctx, row: 5, col: 1, deg: 270, broken: true });
@@ -1311,9 +1317,9 @@ __webpack_require__.r(__webpack_exports__);
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawTerminus"])({ ctx, row: 6, col: 2, deg: 90, broken: true });
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawTerminus"])({ ctx, row: 6, col: 3, deg: 180, broken: true });
     Object(___WEBPACK_IMPORTED_MODULE_1__["drawTerminus"])({ ctx, row: 6, col: 4, deg: 270, broken: true });
-    Object(___WEBPACK_IMPORTED_MODULE_1__["drawServer"])({ ctx, row: 2, col: 6 });
+    Object(___WEBPACK_IMPORTED_MODULE_1__["drawServer"])({ ctx, row: 5, col: 6, broken: true });
     if (true) {
-        __webpack_require__(/*! ./drawDebugGrid */ "./src/map/tilesheet/drawDebugGrid.js").default({ ctx, row: 5, col: 6 });
+        __webpack_require__(/*! ./drawDebugGrid */ "./src/map/tilesheet/drawDebugGrid.js").default({ ctx, row: 1, col: 8 });
     }
     const image = new Image();
     image.src = canvas.toDataURL('image/png');
@@ -1334,7 +1340,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./src/config.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./src/map/tilesheet/utils/index.js");
 /* eslint-disable no-param-reassign */
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (({ ctx, row, col, broken = false }) => {
@@ -1344,52 +1352,50 @@ __webpack_require__.r(__webpack_exports__);
     ctx.strokeStyle = _config__WEBPACK_IMPORTED_MODULE_0__["lightBlue"];
     ctx.beginPath();
     if (broken) {
-        ctx.moveTo(-20, 50);
-        ctx.lineTo(-20, 45);
-        ctx.lineTo(-10, 40);
-        ctx.lineTo(0, 45);
-        ctx.lineTo(10, 35);
-        ctx.lineTo(20, 40);
-        ctx.lineTo(20, 50);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(50, 20);
-        ctx.lineTo(40, 20);
-        ctx.lineTo(45, 10);
-        ctx.lineTo(40, -10);
-        ctx.lineTo(45, -20);
-        ctx.lineTo(50, -20);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(20, -50);
-        ctx.lineTo(20, -35);
-        ctx.lineTo(10, -40);
-        ctx.lineTo(0, -30);
-        ctx.lineTo(-10, -40);
-        ctx.lineTo(-20, -35);
-        ctx.lineTo(-20, -50);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(-50, -20);
-        ctx.lineTo(-40, -20);
-        ctx.lineTo(-35, -10);
-        ctx.lineTo(-45, 0);
-        ctx.lineTo(-30, 10);
-        ctx.lineTo(-35, 20);
-        ctx.lineTo(-50, 20);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_1__["krakel"])(ctx, [
+            [0, -20, 50],
+            [1, -20, 45],
+            [1, -10, 40],
+            [1, 0, 45],
+            [1, 10, 35],
+            [1, 20, 40],
+            [1, 20, 50],
+            [0, 50, 20],
+            [1, 40, 20],
+            [1, 45, 10],
+            [1, 40, -10],
+            [1, 45, -20],
+            [1, 50, -20],
+            [0, 20, -50],
+            [1, 20, -35],
+            [1, 10, -40],
+            [1, 0, -30],
+            [1, -10, -40],
+            [1, -20, -35],
+            [1, -20, -50],
+            [0, -50, -20],
+            [1, -40, -20],
+            [1, -35, -10],
+            [1, -45, 0],
+            [1, -30, 10],
+            [1, -35, 20],
+            [1, -50, 20]
+        ]);
     } else {
-        ctx.moveTo(-20, -50);
-        ctx.lineTo(-20, -20);
-        ctx.lineTo(-50, -20);
-        ctx.moveTo(20, -50);
-        ctx.lineTo(20, -20);
-        ctx.lineTo(50, -20);
-        ctx.moveTo(-50, 20);
-        ctx.lineTo(-20, 20);
-        ctx.lineTo(-20, 50);
-        ctx.moveTo(50, 20);
-        ctx.lineTo(20, 20);
-        ctx.lineTo(20, 50);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_1__["krakel"])(ctx, [
+            [0, -20, -50],
+            [1, -20, -20],
+            [1, -50, -20],
+            [0, 20, -50],
+            [1, 20, -20],
+            [1, 50, -20],
+            [0, -50, 20],
+            [1, -20, 20],
+            [1, -20, 50],
+            [0, 50, 20],
+            [1, 20, 20],
+            [1, 20, 50]
+        ]);
     }
     ctx.stroke();
     ctx.restore();
@@ -1495,25 +1501,85 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./src/config.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./src/map/tilesheet/utils/index.js");
 /* eslint-disable no-param-reassign */
 
 
-/* harmony default export */ __webpack_exports__["default"] = (({ ctx, row, col }) => {
+
+/* harmony default export */ __webpack_exports__["default"] = (({ ctx, row, col, broken }) => {
     ctx.save();
     ctx.translate((col - 1) * _config__WEBPACK_IMPORTED_MODULE_0__["tileWidth"] + _config__WEBPACK_IMPORTED_MODULE_0__["tileWidth"] / 2, (row - 1) * _config__WEBPACK_IMPORTED_MODULE_0__["tileHeight"] + _config__WEBPACK_IMPORTED_MODULE_0__["tileHeight"] / 2);
     ctx.lineWidth = 3;
     ctx.strokeStyle = _config__WEBPACK_IMPORTED_MODULE_0__["lightBlue"];
     ctx.beginPath();
-    ctx.moveTo(30, -48);
-    ctx.lineTo(48, -30);
-    ctx.lineTo(48, 30);
-    ctx.lineTo(30, 48);
-    ctx.lineTo(-30, 48);
-    ctx.lineTo(-48, 30);
-    ctx.lineTo(-48, -30);
-    ctx.lineTo(-30, -48);
-    ctx.lineTo(30, -48);
+    Object(_utils__WEBPACK_IMPORTED_MODULE_1__["krakel"])(ctx, [
+        [0, 30, -48],
+        [1, 48, -30],
+        [1, 48, 30],
+        [1, 30, 48],
+        [1, -30, 48],
+        [1, -48, 30],
+        [1, -48, -30],
+        [1, -30, -48],
+        [1, 30, -48]
+    ]);
     ctx.stroke();
+    if (broken) {
+        ctx.lineWidth = 2;
+        Object(_utils__WEBPACK_IMPORTED_MODULE_1__["krakel"])(ctx, [
+            [0, 10, -48],
+            [1, 0, -40],
+            [0, 24, -48],
+            [1, 20, -30],
+            [0, 48, -27],
+            [1, 20, -20],
+            [0, -10, -30],
+            [1, 10, -30],
+            [1, 30, -10],
+            [1, 20, 0],
+            [1, 10, 0],
+            [0, 48, 7],
+            [1, 30, 10],
+            [0, 20, 0],
+            [1, 30, 10],
+            [1, 10, 20],
+            [0, 30, 48],
+            [1, 30, 30],
+            [1, 10, 30],
+            [0, 20, 20],
+            [1, 20, 30],
+            [0, -10, 48],
+            [1, -10, 20],
+            [1, 0, 10],
+            [0, -20, 0],
+            [1, -20, 20],
+            [1, -10, 30],
+            [0, -30, 48],
+            [1, -20, 40],
+            [1, -20, 30],
+            [0, -30, 30],
+            [1, -20, 40],
+            [0, -48, 20],
+            [1, -30, 20],
+            [0, -40, 20],
+            [1, -40, 10],
+            [0, -48, 0],
+            [1, -30, 0],
+            [1, -20, -10],
+            [0, -40, 0],
+            [1, -30, 10],
+            [0, -48, -17],
+            [1, -40, -30],
+            [1, -30, -20],
+            [0, -30, -48],
+            [1, -10, -20],
+            [1, -10, -10],
+            [0, -20, -30],
+            [1, -20, -20],
+            [1, -30, -10]
+        ]);
+        ctx.stroke();
+    }
     ctx.restore();
 });
 
@@ -1531,7 +1597,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./src/config.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/map/tilesheet/utils/index.js");
 /* eslint-disable no-param-reassign */
+
 
 
 
@@ -1543,27 +1611,24 @@ __webpack_require__.r(__webpack_exports__);
     ctx.strokeStyle = _config__WEBPACK_IMPORTED_MODULE_0__["lightBlue"];
     ctx.beginPath();
     if (broken) {
-        ctx.moveTo(-20, 50);
-        ctx.lineTo(-20, 30);
-        ctx.lineTo(-10, 40);
-        ctx.lineTo(0, 25);
-        ctx.lineTo(10, 35);
-        ctx.lineTo(20, 30);
-        ctx.lineTo(20, 50);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(-20, -50);
-        ctx.lineTo(-20, -40);
-        ctx.lineTo(-10, -25);
-        ctx.lineTo(0, -35);
-        ctx.lineTo(10, -30);
-        ctx.lineTo(20, -40);
-        ctx.lineTo(20, -50);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["krakel"])(ctx, [
+            [0, -20, 50],
+            [1, -20, 30],
+            [1, -10, 40],
+            [1, 0, 25],
+            [1, 10, 35],
+            [1, 20, 30],
+            [1, 20, 50],
+            [0, -20, -50],
+            [1, -20, -40],
+            [1, -10, -25],
+            [1, 0, -35],
+            [1, 10, -30],
+            [1, 20, -40],
+            [1, 20, -50]
+        ]);
     } else {
-        ctx.moveTo(-20, -50);
-        ctx.lineTo(-20, 50);
-        ctx.moveTo(20, -50);
-        ctx.lineTo(20, 50);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["krakel"])(ctx, [[0, -20, -50], [1, -20, 50], [0, 20, -50], [1, 20, 50]]);
     }
     ctx.stroke();
     ctx.restore();
@@ -1583,7 +1648,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./src/config.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/map/tilesheet/utils/index.js");
 /* eslint-disable no-param-reassign */
+
 
 
 
@@ -1595,39 +1662,39 @@ __webpack_require__.r(__webpack_exports__);
     ctx.strokeStyle = _config__WEBPACK_IMPORTED_MODULE_0__["lightBlue"];
     ctx.beginPath();
     if (broken) {
-        ctx.moveTo(50, 20);
-        ctx.lineTo(40, 20);
-        ctx.lineTo(45, 10);
-        ctx.lineTo(40, -10);
-        ctx.lineTo(45, -20);
-        ctx.lineTo(50, -20);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(20, -50);
-        ctx.lineTo(20, -35);
-        ctx.lineTo(10, -40);
-        ctx.lineTo(0, -30);
-        ctx.lineTo(-10, -40);
-        ctx.lineTo(-20, -35);
-        ctx.lineTo(-20, -50);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(-50, -20);
-        ctx.lineTo(-40, -20);
-        ctx.lineTo(-35, -10);
-        ctx.lineTo(-45, 0);
-        ctx.lineTo(-30, 10);
-        ctx.lineTo(-35, 20);
-        ctx.lineTo(-50, 20);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["krakel"])(ctx, [
+            [0, 50, 20],
+            [1, 40, 20],
+            [1, 45, 10],
+            [1, 40, -10],
+            [1, 45, -20],
+            [1, 50, -20],
+            [0, 20, -50],
+            [1, 20, -35],
+            [1, 10, -40],
+            [1, 0, -30],
+            [1, -10, -40],
+            [1, -20, -35],
+            [1, -20, -50],
+            [0, -50, -20],
+            [1, -40, -20],
+            [1, -35, -10],
+            [1, -45, 0],
+            [1, -30, 10],
+            [1, -35, 20],
+            [1, -50, 20]
+        ]);
     } else {
-        ctx.moveTo(-20, -50);
-        ctx.lineTo(-20, -20);
-        ctx.lineTo(-50, -20);
-        ctx.moveTo(20, -50);
-        ctx.lineTo(20, -20);
-        ctx.lineTo(50, -20);
-        ctx.moveTo(-50, 20);
-        ctx.lineTo(50, 20);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["krakel"])(ctx, [
+            [0, -20, -50],
+            [1, -20, -20],
+            [1, -50, -20],
+            [0, 20, -50],
+            [1, 20, -20],
+            [1, 50, -20],
+            [0, -50, 20],
+            [1, 50, 20]
+        ]);
     }
     ctx.stroke();
     ctx.restore();
@@ -1647,7 +1714,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./src/config.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/map/tilesheet/utils/index.js");
 /* eslint-disable no-param-reassign */
+
 
 
 
@@ -1659,18 +1728,9 @@ __webpack_require__.r(__webpack_exports__);
     ctx.strokeStyle = _config__WEBPACK_IMPORTED_MODULE_0__["lightBlue"];
     ctx.beginPath();
     if (broken) {
-        ctx.moveTo(-20, 50);
-        ctx.lineTo(-20, 40);
-        ctx.lineTo(-10, 45);
-        ctx.lineTo(0, 35);
-        ctx.lineTo(10, 45);
-        ctx.lineTo(20, 40);
-        ctx.lineTo(20, 50);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["krakel"])(ctx, [[0, -20, 50], [1, -20, 40], [1, -10, 45], [1, 0, 35], [1, 10, 45], [1, 20, 40], [1, 20, 50]]);
     } else {
-        ctx.moveTo(-20, 50);
-        ctx.lineTo(-20, 0);
-        ctx.lineTo(20, 0);
-        ctx.lineTo(20, 50);
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["krakel"])(ctx, [[0, -20, 50], [1, -20, 0], [1, 20, 0], [1, 20, 50]]);
     }
     ctx.stroke();
     ctx.restore();
@@ -1716,6 +1776,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+/***/ }),
+
+/***/ "./src/map/tilesheet/utils/index.js":
+/*!******************************************!*\
+  !*** ./src/map/tilesheet/utils/index.js ***!
+  \******************************************/
+/*! exports provided: krakel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _krakel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./krakel */ "./src/map/tilesheet/utils/krakel.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "krakel", function() { return _krakel__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/map/tilesheet/utils/krakel.js":
+/*!*******************************************!*\
+  !*** ./src/map/tilesheet/utils/krakel.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* creates canvas moveTo and lineTo commands from arrays; doing this mostly to save a couple of bytes */
+/* harmony default export */ __webpack_exports__["default"] = ((ctx, data) => data.forEach(([draw, x, y]) => ctx[draw ? 'lineTo' : 'moveTo'](x, y)));
 
 
 /***/ }),

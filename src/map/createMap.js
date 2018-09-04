@@ -46,7 +46,7 @@ export default async () => {
         }
         // {
         //     name: 'grid',
-        //     data: new Array(paddedMap.length).fill(38)
+        //     data: new Array(paddedMap.length).fill(8)
         // }
     ]);
     return map;
