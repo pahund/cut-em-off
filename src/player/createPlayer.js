@@ -19,18 +19,22 @@ export default map => {
         dropBomb: false,
         scale: 1,
         dropping: false,
+        bombCoolingDown: false,
+
         update() {
-            const updated = updatePlayer(this);
             ({
                 nextDirection: this.nextDirection,
                 direction: this.direction,
                 dropBomb: this.dropBomb,
-                scale: this.scale
-            } = updated);
+                scale: this.scale,
+                bombCoolingDown: this.bombCoolingDown
+            } = updatePlayer(this, pubsub, messageBox));
         },
+
         render() {
             drawPlayer(this);
         },
+
         infect(virus) {
             if (collides(virus, this)) {
                 // eslint-disable-next-line no-param-reassign
@@ -42,7 +46,9 @@ export default map => {
             }
         }
     });
+
     pubsub.subscribe(GAME_OVER, () => (player.gameOver = true));
     pubsub.subscribe(DROP_SHIP, () => (player.dropping = true));
+
     return player;
 };
