@@ -32,4 +32,4 @@ export const lightRed = '#cd3926';
 export const darkRed = '#7a2431';
 
 export const collisionRadius = 30;
-export const bombCooldown = 500;
+export const bombCooldown = 100;

@@ -109,6 +109,13 @@ __webpack_require__.r(__webpack_exports__);
         _pubsub__WEBPACK_IMPORTED_MODULE_0__["pubsub"].subscribe(_pubsub__WEBPACK_IMPORTED_MODULE_0__["DROP_BOMB"], mapCoords => this.dropBomb(mapCoords));
     }
     dropBomb(mapCoords) {
+        if (
+            this.bombs.length > 0 &&
+            this.bombs.find(({ col, row }) => col === mapCoords.col && row === mapCoords.row)
+        ) {
+            // don't drop a bomb where there already is one waiting to explode
+            return;
+        }
         this.bombs.push(Object(___WEBPACK_IMPORTED_MODULE_2__["createBomb"])(this.map, mapCoords));
     }
     update() {
