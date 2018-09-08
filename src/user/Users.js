@@ -2,12 +2,12 @@ import { createUser, INFECTED } from '.';
 import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config';
 import { multiCollides } from '../utils';
 import { allInfected } from './utils';
-import { GAME_OVER } from '../pubsub';
+import { pubsub, GAME_OVER } from '../pubsub';
+import { messageBox } from '../messageBox';
 
 export default class {
-    constructor(map, pubsub) {
+    constructor(map) {
         this.map = map;
-        this.pubsub = pubsub;
         this.users = [];
         this.gameOver = false;
         for (let row = 1; row <= mapHeight + mapPaddingY * 2; row++) {
@@ -18,7 +18,7 @@ export default class {
                 }
             }
         }
-        this.pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
+        pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
     }
     update() {
         this.users.forEach(user => user.update());
@@ -26,8 +26,8 @@ export default class {
     render() {
         this.users.forEach(user => user.render());
     }
-    infect(viruses, messageBox) {
-        const { users, pubsub, gameOver } = this;
+    infect(viruses) {
+        const { users, gameOver } = this;
         const userVirusCollisions = multiCollides(users, viruses).filter(([user]) => user.status !== INFECTED);
         if (userVirusCollisions.length === 0) {
             return;

@@ -2,10 +2,11 @@
 
 import { drawPlayer, updatePlayer } from '.';
 import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from '../config';
-import { GAME_OVER, DROP_SHIP } from '../pubsub';
+import { pubsub, GAME_OVER, DROP_SHIP } from '../pubsub';
 import { collides } from '../utils';
+import { messageBox } from '../messageBox';
 
-export default (map, pubsub) => {
+export default map => {
     const player = kontra.sprite({
         x: canvasWidth / 2,
         y: canvasHeight / 2,
@@ -18,8 +19,8 @@ export default (map, pubsub) => {
         dropBomb: false,
         scale: 1,
         dropping: false,
-        update(messageBox) {
-            const updated = updatePlayer(this, pubsub, messageBox);
+        update() {
+            const updated = updatePlayer(this);
             ({
                 nextDirection: this.nextDirection,
                 direction: this.direction,
@@ -30,7 +31,7 @@ export default (map, pubsub) => {
         render() {
             drawPlayer(this);
         },
-        infect(virus, messageBox) {
+        infect(virus) {
             if (collides(virus, this)) {
                 // eslint-disable-next-line no-param-reassign
                 this.infected = true;

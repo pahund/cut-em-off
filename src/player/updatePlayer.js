@@ -1,9 +1,10 @@
 import { directionIsAllowed, switchDirection } from '../directions';
-import { DROP_BOMB, DROP_SHIP, GAME_OVER } from '../pubsub';
+import { pubsub, DROP_BOMB, DROP_SHIP, GAME_OVER } from '../pubsub';
 import { getKey, isInTheMiddle } from './utils';
 import { calculateRowAndCol } from '../utils';
+import { messageBox } from '../messageBox';
 
-export default (sprite, pubsub, messageBox) => {
+export default sprite => {
     let { nextDirection, direction, dropBomb, scale } = sprite;
     const { dropping } = sprite;
     if (dropping) {
