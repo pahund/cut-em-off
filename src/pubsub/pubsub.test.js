@@ -1,4 +1,4 @@
-import Pubsub from './Pubsub';
+import { Pubsub } from './Pubsub';
 
 const message = 'foo';
 const payload = 'bar';

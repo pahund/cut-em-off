@@ -2,9 +2,9 @@
 
 import { moveCamera } from './utils';
 import { calculateRowAndCol } from '../utils';
-import { DROP_SHIP } from '../pubsub';
+import { pubsub, DROP_SHIP } from '../pubsub';
 
-export default ({ map, player, virus, users, messageBox, bombs, pubsub }) => {
+export default ({ map, player, virus, users, messageBox, bombs }) => {
     const times = [];
     let fps;
     let shipMoving = true;

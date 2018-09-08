@@ -1,4 +1,5 @@
-export default class {
+// exported for testing
+export class Pubsub {
     constructor() {
         this.subscribers = [];
     }
@@ -9,3 +10,5 @@ export default class {
         this.subscribers.forEach(({ message, callback }) => message === incomingMessage && callback(payload));
     }
 }
+
+export default new Pubsub();
