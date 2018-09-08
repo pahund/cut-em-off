@@ -3,7 +3,6 @@
 import { createCanvas } from './canvas';
 import { createLoop } from './loop';
 import { createMap } from './map';
-import { createMessageBox } from './messageBox';
 import { createPlayer } from './player';
 import { Users } from './user';
 import { createVirus } from './virus';
@@ -21,7 +20,6 @@ if (process.env.NODE_ENV === 'development') {
     const virus = createVirus(map);
     const bombs = new Bombs(map);
     const users = new Users(map);
-    const messageBox = createMessageBox();
-    const loop = createLoop({ map, player, virus, users, messageBox, bombs });
+    const loop = createLoop({ map, player, virus, users, bombs });
     loop.start();
 })();

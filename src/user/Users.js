@@ -3,6 +3,7 @@ import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config';
 import { multiCollides } from '../utils';
 import { allInfected } from './utils';
 import { pubsub, GAME_OVER } from '../pubsub';
+import { messageBox } from '../messageBox';
 
 export default class {
     constructor(map) {
@@ -25,7 +26,7 @@ export default class {
     render() {
         this.users.forEach(user => user.render());
     }
-    infect(viruses, messageBox) {
+    infect(viruses) {
         const { users, gameOver } = this;
         const userVirusCollisions = multiCollides(users, viruses).filter(([user]) => user.status !== INFECTED);
         if (userVirusCollisions.length === 0) {
