@@ -22,6 +22,8 @@ export const virusStartCol = 5;
 export const virusStartRow = 4;
 export const virusStartDirection = W;
 export const virusSpeed = 2.5;
+export const virusBlipInterval = 1000;
+export const virusBlipTtl = 180;
 
 /* colors */
 export const lightGreen = '#75a042';
