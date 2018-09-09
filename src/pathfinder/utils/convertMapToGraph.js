@@ -6,19 +6,32 @@ export default ({ width, layers }, layer) => {
     for (const [node, adjacent] of graph) {
         const currAllowed = allowed.get(node);
         const { row, col } = node;
+        let target;
         for (const dir of currAllowed) {
             switch (dir) {
                 case N:
-                    adjacent.set(getNodeByCoords(graph, { row: row - 1, col }), 1);
+                    target = getNodeByCoords(graph, { row: row - 1, col });
+                    if (target) {
+                        adjacent.set(target, 1);
+                    }
                     break;
                 case E:
-                    adjacent.set(getNodeByCoords(graph, { row, col: col + 1 }), 1);
+                    target = getNodeByCoords(graph, { row, col: col + 1 });
+                    if (target) {
+                        adjacent.set(target, 1);
+                    }
                     break;
                 case S:
-                    adjacent.set(getNodeByCoords(graph, { row: row + 1, col }), 1);
+                    target = getNodeByCoords(graph, { row: row + 1, col });
+                    if (target) {
+                        adjacent.set(target, 1);
+                    }
                     break;
                 case W:
-                    adjacent.set(getNodeByCoords(graph, { row, col: col - 1 }), 1);
+                    target = getNodeByCoords(graph, { row, col: col - 1 });
+                    if (target) {
+                        adjacent.set(target, 1);
+                    }
                     break;
                 default:
             }

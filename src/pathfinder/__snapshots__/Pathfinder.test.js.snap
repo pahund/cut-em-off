@@ -92,6 +92,39 @@ Object {
 }
 `;
 
+exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the shortest path between the user and the virus using their coordinates the result is correct 1`] = `
+Array [
+  Object {
+    "col": 1,
+    "row": 1,
+  },
+  Object {
+    "col": 2,
+    "row": 1,
+  },
+  Object {
+    "col": 2,
+    "row": 2,
+  },
+  Object {
+    "col": 2,
+    "row": 3,
+  },
+  Object {
+    "col": 1,
+    "row": 3,
+  },
+  Object {
+    "col": 1,
+    "row": 4,
+  },
+  Object {
+    "col": 2,
+    "row": 4,
+  },
+]
+`;
+
 exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map the graph property of the pathfinder is correct 1`] = `
 Map {
   Object {
@@ -196,6 +229,146 @@ Map {
     Object {
       "col": 2,
       "row": 2,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 3,
+    } => 1,
+  },
+  Object {
+    "col": 3,
+    "row": 3,
+  } => Map {
+    Object {
+      "col": 2,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 4,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 4,
+    } => 1,
+  },
+  Object {
+    "col": 4,
+    "row": 3,
+  } => Map {
+    Object {
+      "col": 3,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 4,
+      "row": 2,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 4,
+  } => Map {
+    Object {
+      "col": 1,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 2,
+      "row": 4,
+    } => 1,
+  },
+  Object {
+    "col": 2,
+    "row": 4,
+  } => Map {
+    Object {
+      "col": 1,
+      "row": 4,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 4,
+    } => 1,
+  },
+  Object {
+    "col": 3,
+    "row": 4,
+  } => Map {
+    Object {
+      "col": 2,
+      "row": 4,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 3,
+    } => 1,
+  },
+}
+`;
+
+exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map with broken conduits that block the way from user to virus the graph property of the pathfinder is correct 1`] = `
+Map {
+  Object {
+    "col": 1,
+    "row": 1,
+  } => Map {
+    Object {
+      "col": 2,
+      "row": 1,
+    } => 1,
+  },
+  Object {
+    "col": 2,
+    "row": 1,
+  } => Map {
+    Object {
+      "col": 1,
+      "row": 1,
+    } => 1,
+  },
+  Object {
+    "col": 4,
+    "row": 1,
+  } => Map {
+    Object {
+      "col": 4,
+      "row": 2,
+    } => 1,
+  },
+  Object {
+    "col": 4,
+    "row": 2,
+  } => Map {
+    Object {
+      "col": 4,
+      "row": 1,
+    } => 1,
+    Object {
+      "col": 4,
+      "row": 3,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 3,
+  } => Map {
+    Object {
+      "col": 1,
+      "row": 4,
+    } => 1,
+    Object {
+      "col": 2,
+      "row": 3,
+    } => 1,
+  },
+  Object {
+    "col": 2,
+    "row": 3,
+  } => Map {
+    Object {
+      "col": 1,
+      "row": 3,
     } => 1,
     Object {
       "col": 3,

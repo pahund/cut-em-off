@@ -1,4 +1,5 @@
 import { directionSwitchMap } from '../../directions';
+import { isValidTile } from '../../utils';
 
 export default (layerData, width) => {
     const graph = new Map();
@@ -7,7 +8,7 @@ export default (layerData, width) => {
     let col = 1;
     let index = 0;
     for (const tile of layerData) {
-        if (tile !== 0) {
+        if (isValidTile(tile)) {
             const node = { row, col };
             allowed.set(node, directionSwitchMap[tile].allowed);
             graph.set(node, new Map());

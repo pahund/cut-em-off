@@ -6,3 +6,4 @@ export { default as transformMapCoordinates } from './transformMapCoordinates.js
 export { default as multiCollides } from './multiCollides.js';
 export { default as collides } from './collides.js';
 export { default as calculateRowAndCol } from './calculateRowAndCol.js';
+export { default as isValidTile } from './isValidTile.js';

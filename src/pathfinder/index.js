@@ -1,1 +1,1 @@
-export { default as Pathfinder } from './Pathfinder';
+export { default as pathfinder } from './pathfinder';

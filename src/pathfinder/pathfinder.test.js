@@ -1,4 +1,4 @@
-import Pathfinder from './Pathfinder';
+import { Pathfinder } from './pathfinder';
 
 // prettier-ignore
 const simpleData = new Map([
@@ -95,28 +95,30 @@ describe('The shortest path between a user and a virus (using coordinates game d
     it('is correct', () => expect(shortestPath).toMatchSnapshot());
 });
 
-const map = {
-    width: 4,
-    height: 4,
-    layers: {
-        main: {
-            // prettier-ignore
-            data: [
-                20,  6, 11,  2,
-                0,  3,  0,  3,
-                1,  4,  6, 10,
-                9, 11, 10,  0
-            ]
-        }
-    }
-};
-
 describe('When I create a pathfinder without setting a graph using the constructor', () => {
     let pathfinder;
     beforeEach(() => (pathfinder = new Pathfinder()));
     describe('the graph property of the pathfinder', () => it('is null', () => expect(pathfinder.graph).toBeNull()));
     describe('and I set the graph from a map', () => {
-        beforeEach(() => pathfinder.setDataFromMap(map, 'main'));
+        beforeEach(() =>
+            pathfinder.setDataFromMap(
+                {
+                    width: 4,
+                    height: 4,
+                    layers: {
+                        main: {
+                            // prettier-ignore
+                            data: [
+                                20,  6, 11,  2,
+                                 0,  3,  0,  3,
+                                 1,  4,  6, 10,
+                                 9, 11, 10,  0
+                            ]
+                        }
+                    }
+                },
+                'main'
+            ));
         describe('the graph property of the pathfinder', () =>
             it('is correct', () => expect(pathfinder.graph).toMatchSnapshot()));
         describe("and I get the node of the user's position (row 1, column 1)", () => {
@@ -133,6 +135,42 @@ describe('When I create a pathfinder without setting a graph using the construct
                     describe('the result', () => it('is correct', () => expect(shortestPath).toMatchSnapshot()));
                 });
             });
+        });
+        describe('and I get the shortest path between the user and the virus using their coordinates', () => {
+            let shortestPath;
+            beforeEach(() =>
+                (shortestPath = pathfinder.findShortestPathByCoords({ row: 1, col: 1 }, { row: 4, col: 2 })));
+            describe('the result', () => it('is correct', () => expect(shortestPath).toMatchSnapshot()));
+        });
+    });
+    describe('and I set the graph from a map with broken conduits that block the way from user to virus', () => {
+        beforeEach(() =>
+            pathfinder.setDataFromMap(
+                {
+                    width: 4,
+                    height: 4,
+                    layers: {
+                        main: {
+                            // prettier-ignore
+                            data: [
+                                20,  6, 35,  2,
+                                 0, 27,  0,  3,
+                                 1,  4,  6, 10,
+                                 9, 11, 10,  0
+                            ]
+                        }
+                    }
+                },
+                'main'
+            ));
+        describe('the graph property of the pathfinder', () =>
+            it('is correct', () => expect(pathfinder.graph).toMatchSnapshot()));
+        describe('and I get the shortest path between the user and the virus using their coordinates', () => {
+            let shortestPath;
+            beforeEach(() =>
+                (shortestPath = pathfinder.findShortestPathByCoords({ row: 1, col: 1 }, { row: 4, col: 2 })));
+            describe('the result', () =>
+                it('is null (there is no path from user to virus)', () => expect(shortestPath).toBeNull()));
         });
     });
 });
