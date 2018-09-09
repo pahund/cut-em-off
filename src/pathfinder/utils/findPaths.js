@@ -6,7 +6,9 @@ export default (data, start, end) => {
 
     function addToOpen(cost, vertex) {
         const key = `${cost}`;
-        if (!open[key]) open[key] = [];
+        if (!open[key]) {
+            open[key] = [];
+        }
         open[key].push(vertex);
     }
 
@@ -26,7 +28,9 @@ export default (data, start, end) => {
         const currentCost = parseFloat(key);
         const adjacentNodes = data[node] || {};
 
-        if (!bucket.length) delete open[key];
+        if (!bucket.length) {
+            delete open[key];
+        }
 
         for (const vertex of Object.keys(adjacentNodes)) {
             const cost = adjacentNodes[vertex];
