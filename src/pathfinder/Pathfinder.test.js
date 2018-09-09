@@ -1,4 +1,4 @@
-import Graph from './Graph';
+import Pathfinder from './Pathfinder';
 
 // prettier-ignore
 const simpleData = new Map([
@@ -7,9 +7,9 @@ const simpleData = new Map([
     ['c', new Map([['a', 4],['b', 1]])]
 ]);
 
-describe('When I construct a graph with some graph data', () => {
+describe('When I construct a pathfinder with some graph data', () => {
     let graph;
-    beforeEach(() => (graph = new Graph(simpleData)));
+    beforeEach(() => (graph = new Pathfinder(simpleData)));
     test.each([
         [['a', 'b'], ['a', 'c', 'b']],
         [['a', 'c'], ['a', 'c']],
@@ -38,14 +38,14 @@ const gameData = new Map([
 
 describe('The shortest path between a user and a virus (using abstract game data)', () => {
     let shortestPath;
-    beforeEach(() => (shortestPath = new Graph(gameData).findShortestPath('user', 'virus')));
+    beforeEach(() => (shortestPath = new Pathfinder(gameData).findShortestPath('user', 'virus')));
     it('is correct', () => expect(shortestPath).toMatchSnapshot());
 });
 
 test('simple-string-map', () => {
     expect(
         // prettier-ignore
-        new Graph(new Map([
+        new Pathfinder(new Map([
             ['foo', new Map([['bar', 1]])],
             ['bar', new Map([['foo', 1]])]
         ])).findShortestPath(
@@ -59,7 +59,7 @@ test('simple-object', () => {
     const foo = { foo: 'shmoo' };
     const bar = { bar: 'bar' };
     expect(
-        new Graph(new Map([[foo, new Map([[bar, 1]])], [bar, new Map([[foo, 1]])]])).findShortestPath(foo, bar)
+        new Pathfinder(new Map([[foo, new Map([[bar, 1]])], [bar, new Map([[foo, 1]])]])).findShortestPath(foo, bar)
     ).toEqual([foo, bar]);
 });
 
@@ -91,6 +91,48 @@ const gameCoordinatesData = new Map([
 
 describe('The shortest path between a user and a virus (using coordinates game data)', () => {
     let shortestPath;
-    beforeEach(() => (shortestPath = new Graph(gameCoordinatesData).findShortestPath(user, virus)));
+    beforeEach(() => (shortestPath = new Pathfinder(gameCoordinatesData).findShortestPath(user, virus)));
     it('is correct', () => expect(shortestPath).toMatchSnapshot());
+});
+
+const map = {
+    width: 4,
+    height: 4,
+    layers: {
+        main: {
+            // prettier-ignore
+            data: [
+                20,  6, 11,  2,
+                0,  3,  0,  3,
+                1,  4,  6, 10,
+                9, 11, 10,  0
+            ]
+        }
+    }
+};
+
+describe('When I create a pathfinder without setting a graph using the constructor', () => {
+    let pathfinder;
+    beforeEach(() => (pathfinder = new Pathfinder()));
+    describe('the graph property of the pathfinder', () => it('is null', () => expect(pathfinder.graph).toBeNull()));
+    describe('and I set the graph from a map', () => {
+        beforeEach(() => pathfinder.setDataFromMap(map, 'main'));
+        describe('the graph property of the pathfinder', () =>
+            it('is correct', () => expect(pathfinder.graph).toMatchSnapshot()));
+        describe("and I get the node of the user's position (row 1, column 1)", () => {
+            let user;
+            beforeEach(() => (user = pathfinder.getNodeByCoords({ row: 1, col: 1 })));
+            describe('the node', () => it('is correct', () => expect(user).toMatchSnapshot()));
+            describe("and I get the node of the virus' position (row 4, column 2)", () => {
+                let virus;
+                beforeEach(() => (virus = pathfinder.getNodeByCoords({ row: 4, col: 2 })));
+                describe('the node', () => it('is correct', () => expect(virus).toMatchSnapshot()));
+                describe('and I get the shortest path between the user and the virus', () => {
+                    let shortestPath;
+                    beforeEach(() => (shortestPath = pathfinder.findShortestPath(user, virus)));
+                    describe('the result', () => it('is correct', () => expect(shortestPath).toMatchSnapshot()));
+                });
+            });
+        });
+    });
 });
