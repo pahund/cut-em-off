@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The shortest path between a user and a virus (using abstract game data) is correct 1`] = `
+Array [
+  "user",
+  "b",
+  "f",
+  "g",
+  "h",
+  "i",
+  "virus",
+]
+`;
