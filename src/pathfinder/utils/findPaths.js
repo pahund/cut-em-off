@@ -1,52 +1,39 @@
 export default (data, start, end) => {
-    const costs = {};
-    const open = { '0': [start] };
-    const predecessors = {};
-    let keys;
+    const costs = new Map([[start, 0]]);
+    const open = new Map([[0, [start]]]);
+    const predecessors = new Map();
 
     function addToOpen(cost, vertex) {
-        const key = `${cost}`;
-        if (!open[key]) {
-            open[key] = [];
+        let vertices = open.get(cost);
+        if (!vertices) {
+            vertices = [];
+            open.set(cost, vertices);
         }
-        open[key].push(vertex);
+        vertices.push(vertex);
     }
 
-    costs[start] = 0;
+    while (open.size > 0) {
+        const currentCost = Array.from(open.keys()).sort((a, b) => a - b)[0];
 
-    while (open) {
-        keys = Object.keys(open);
-        if (!keys.length) {
-            break;
-        }
-
-        keys.sort((a, b) => parseFloat(a) - parseFloat(b));
-
-        const key = keys[0];
-        const bucket = open[key];
+        const bucket = open.get(currentCost);
         const node = bucket.shift();
-        const currentCost = parseFloat(key);
-        const adjacentNodes = data[node] || {};
+        const adjacentNodes = data.get(node) || new Map();
 
-        if (!bucket.length) {
-            delete open[key];
+        if (bucket.length === 0) {
+            open.delete(currentCost);
         }
 
-        for (const vertex of Object.keys(adjacentNodes)) {
-            const cost = adjacentNodes[vertex];
+        for (const [vertex, cost] of adjacentNodes) {
             const totalCost = cost + currentCost;
-            const vertexCost = costs[vertex];
+            const vertexCost = costs.get(vertex);
 
             if (vertexCost === undefined || vertexCost > totalCost) {
-                costs[vertex] = totalCost;
+                costs.set(vertex, totalCost);
                 addToOpen(totalCost, vertex);
-                predecessors[vertex] = node;
+                predecessors.set(vertex, node);
             }
         }
     }
 
-    if (costs[end] === undefined) {
-        return null;
-    }
-    return predecessors;
+    return costs.get(end) === undefined ? null : predecessors;
 };

@@ -4,7 +4,7 @@ export default (predecessors, end) => {
 
     while (u !== undefined) {
         nodes.push(u);
-        u = predecessors[u];
+        u = predecessors.get(u);
     }
 
     nodes.reverse();
