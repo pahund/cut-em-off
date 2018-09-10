@@ -1,4 +1,4 @@
-import { pubsub, DROP_BOMB } from '../pubsub';
+import { pubsub, DROP_BOMB, BOMB_EXPLODES } from '../pubsub';
 import { EXPLODED } from './constants';
 import { createBomb } from '.';
 

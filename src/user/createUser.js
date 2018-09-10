@@ -2,6 +2,7 @@
 
 import { drawUser, INFECTED } from '.';
 import { tileWidth, tileHeight, collisionRadius } from '../config';
+import { pubsub, INFECTED as INFECTED_EVENT } from '../pubsub';
 import { transformMapCoordinates } from '../utils';
 import { ONLINE } from '.';
 
@@ -24,6 +25,7 @@ export default ({ map, row, col }) => {
         },
         infect() {
             this.status = INFECTED;
+            pubsub.publish(INFECTED_EVENT);
         }
     });
 };

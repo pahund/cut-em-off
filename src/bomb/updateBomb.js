@@ -4,6 +4,7 @@ import { FUSE_BURNING, EXPLODING, EXPLODED } from '.';
 import { createShrapnel } from '.';
 import { transformMapCoordinates } from '../utils';
 import { mapPaddingX, mapPaddingY } from '../config';
+import { pubsub, BOMB_EXPLODES } from '../pubsub';
 
 export default sprite => {
     let { status, fuseLength, explosionDuration, x, y } = sprite;
@@ -15,6 +16,7 @@ export default sprite => {
             fuseLength -= 1;
             if (fuseLength < 0) {
                 status = EXPLODING;
+                pubsub.publish(BOMB_EXPLODES);
                 for (let i = 0; i < 50; i++) {
                     shrapnel.push(createShrapnel({ x, y }));
                 }
