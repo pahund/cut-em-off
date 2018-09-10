@@ -288,6 +288,13 @@ export default (properties = {}) => {
             }
         },
 
+        getRowAndCol({ x, y }) {
+            return {
+                row: this.getRow(x),
+                col: this.getCol(y)
+            };
+        },
+
         /**
          * Get the row from the y coordinate.
          * @memberof kontra.tileEngine
@@ -296,10 +303,7 @@ export default (properties = {}) => {
          *
          * @return {number}
          */
-        getRow(y) {
-            // eslint-disable-next-line no-param-reassign
-            y = y || 0;
-
+        getRow(y = 0) {
             return ((tileEngine.sy + y) / tileHeight) | 0;
         },
 
@@ -311,10 +315,7 @@ export default (properties = {}) => {
          *
          * @return {number}
          */
-        getCol(x) {
-            // eslint-disable-next-line no-param-reassign
-            x = x || 0;
-
+        getCol(x = 0) {
             return ((tileEngine.sx + x) / tileWidth) | 0;
         },
 
