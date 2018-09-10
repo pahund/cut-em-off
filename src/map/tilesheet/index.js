@@ -1,7 +1,7 @@
-export { default as createTilesheet } from './createTilesheet';
-export { default as drawCurve } from './drawCurve';
-export { default as drawStraight } from './drawStraight';
-export { default as drawTSection } from './drawTSection';
-export { default as drawCrossing } from './drawCrossing';
-export { default as drawServer } from './drawServer';
-export { default as drawTerminus } from './drawTerminus';
+export { default as createTilesheet } from './createTilesheet.js';
+export { default as drawCurve } from './drawCurve.js';
+export { default as drawStraight } from './drawStraight.js';
+export { default as drawTSection } from './drawTSection.js';
+export { default as drawCrossing } from './drawCrossing.js';
+export { default as drawServer } from './drawServer.js';
+export { default as drawTerminus } from './drawTerminus.js';

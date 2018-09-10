@@ -1,5 +1,5 @@
-import { N, E, S, W } from '.';
-import { tileHeight, tileWidth } from '../config';
+import { N, E, S, W } from './index.js';
+import { tileHeight, tileWidth } from '../config.js';
 
 export default (map, { x, y }, direction) =>
     map.tileAtLayer('main', {

@@ -1,5 +1,5 @@
-import { lightRed } from '../config';
-import { degreesToRadians as deg2rad } from '../utils';
+import { lightRed } from '../config.js';
+import { degreesToRadians as deg2rad } from '../utils/index.js';
 
 export default sprite => {
     const { context: ctx, x, y, radius } = sprite;

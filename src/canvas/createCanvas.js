@@ -1,4 +1,4 @@
-import { canvasHeight, canvasWidth, lightBlue } from '../config';
+import { canvasHeight, canvasWidth, lightBlue } from '../config.js';
 
 export default () => {
     const canvas = document.createElement('canvas');

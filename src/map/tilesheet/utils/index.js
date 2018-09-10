@@ -1,1 +1,1 @@
-export { default as krakel } from './krakel';
+export { default as krakel } from './krakel.js';

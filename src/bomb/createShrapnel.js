@@ -1,7 +1,7 @@
 /* global kontra */
-import { getRandomInt as ri } from '../utils';
-import { degreesToRadians as deg2rad } from '../utils';
-import { drawShrapnel } from '.';
+import { getRandomInt as ri } from '../utils/index.js';
+import { degreesToRadians as deg2rad } from '../utils/index.js';
+import { drawShrapnel } from './index.js';
 
 export default ({ x, y }) => {
     const dir = ri(0, 360);

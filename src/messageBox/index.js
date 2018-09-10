@@ -1,1 +1,1 @@
-export { default as messageBox } from './messageBox';
+export { default as messageBox } from './messageBox.js';

@@ -1,4 +1,4 @@
-import { collides } from '.';
+import { collides } from './index.js';
 
 export default (arr1, arr2) => {
     const collisions = [];

@@ -1,3 +1,3 @@
-export { default as createPlayer } from './createPlayer';
-export { default as drawPlayer } from './drawPlayer';
-export { default as updatePlayer } from './updatePlayer';
+export { default as createPlayer } from './createPlayer.js';
+export { default as drawPlayer } from './drawPlayer.js';
+export { default as updatePlayer } from './updatePlayer.js';

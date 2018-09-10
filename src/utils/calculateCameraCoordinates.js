@@ -1,4 +1,4 @@
-import { tileHeight, tileWidth } from '../config';
+import { tileHeight, tileWidth } from '../config.js';
 
 export default ({ col, row }) => ({
     sx: (col - 1) * tileWidth + tileWidth / 2,

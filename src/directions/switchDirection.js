@@ -1,5 +1,5 @@
-import { directionSwitchMap, directionIsAllowed, isValidTile } from '.';
-import { getRandomInt } from '../utils';
+import { directionSwitchMap, directionIsAllowed, isValidTile } from './index.js';
+import { getRandomInt } from '../utils/index.js';
 
 export default (map, { x, y }, curr) => {
     const tile = map.tileAtLayer('main', { x, y });

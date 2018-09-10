@@ -1,4 +1,4 @@
-import { canvasHeight, canvasWidth } from '../config';
+import { canvasHeight, canvasWidth } from '../config.js';
 
 /**
  * Transforms coordinates relative to the map (either row/col or x/y)

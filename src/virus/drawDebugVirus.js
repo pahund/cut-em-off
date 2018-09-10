@@ -1,4 +1,4 @@
-import { lightRed, darkRed } from '../config';
+import { lightRed, darkRed } from '../config.js';
 
 // noinspection JSUnusedGlobalSymbols
 export default sprite => {

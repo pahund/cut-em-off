@@ -1,15 +1,17 @@
 /* global kontra */
 
-import { createCanvas } from './canvas';
-import { createLoop } from './loop';
-import { createMap } from './map';
-import { createPlayer } from './player';
-import { Users } from './user';
-import { createVirus } from './virus';
-import { Bombs } from './bomb';
+import { createCanvas } from './canvas/index.js';
+import { createLoop } from './loop/index.js';
+import { createMap } from './map/index.js';
+import { createPlayer } from './player/index.js';
+import { Users } from './user/index.js';
+import { createVirus } from './virus/index.js';
+import { Bombs } from './bomb/index.js';
 
+// will be removed by tree shaking
+import createDevbox from './devbox/createDevbox.js';
 if (process.env.NODE_ENV === 'development') {
-    require('./devbox/createDevbox').default();
+    createDevbox();
 }
 
 (async () => {
