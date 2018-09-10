@@ -1,5 +1,4 @@
 /* global kontra */
-import { flatIndex } from './utils/index.js';
 
 /**
  * A tile engine for rendering tilesets. Works well with the tile engine program Tiled.
@@ -17,12 +16,10 @@ import { flatIndex } from './utils/index.js';
  * @param {Context} [properties.context=kontra.context] - Provide a context for the tile engine to draw on.
  */
 export default (properties = {}) => {
-    // size of the map (in tiles)
-    // @if DEBUG
-    if (!properties.width || !properties.height) {
+    if (process.env.NODE_ENV === 'development' && (!properties.width || !properties.height)) {
         throw Error('You must provide width and height properties');
     }
-    // @endif
+
     const width = properties.width;
     const height = properties.height;
 
@@ -190,8 +187,8 @@ export default (properties = {}) => {
             preRenderImage();
         },
 
-        changeTile(layerId, { row, col }, tile) {
-            const dataIndex = flatIndex(row, col, width);
+        changeTile(layerId, position, tile) {
+            const dataIndex = getIndex(position);
             const layer = tileEngine.layers[layerId];
             layer.data[dataIndex] = tile;
             renderTile(layer, dataIndex, true);

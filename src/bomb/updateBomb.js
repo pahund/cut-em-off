@@ -21,7 +21,7 @@ export default sprite => {
                     shrapnel.push(createShrapnel({ x, y }));
                 }
                 const tile = map.tileAtLayer('main', { row: row + mapPaddingY - 1, col: col + mapPaddingX - 1 });
-                map.changeTile('main', { row: row + mapPaddingY, col: col + mapPaddingX }, tile + 24);
+                map.changeTile('main', { row: row + mapPaddingY - 1, col: col + mapPaddingX - 1 }, tile + 24);
                 pubsub.publish(MAP_CHANGED, map);
                 pubsub.publish(USERS_POSSIBLY_OFFLINE);
             }
