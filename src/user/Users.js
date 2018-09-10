@@ -4,7 +4,7 @@ import { allInfected } from './utils/index.js';
 import { pubsub, GAME_OVER } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { pathfinder } from '../pathfinder/index.js';
-import { mapPaddingX, mapPaddingY } from '../config.js';
+import { mapPadding } from '../config.js';
 
 export default class {
     constructor(map) {
@@ -15,7 +15,7 @@ export default class {
             for (let col = 1; col <= map.width; col++) {
                 const tile = map.tileAtLayer('main', { row, col });
                 if (tile >= 17 && tile <= 20) {
-                    this.users.push(createUser({ map, row: row - mapPaddingY + 1, col: col - mapPaddingX + 1 }));
+                    this.users.push(createUser({ map, row: row - mapPadding + 2, col: col - mapPadding + 1 }));
                 }
             }
         }
@@ -30,7 +30,7 @@ export default class {
         for (const user of this.users) {
             for (const virus of virusesWithRowAndCol) {
                 const path = pathfinder.findShortestPathByCoords(user, virus);
-                console.log(`[PH_LOG] path\n${JSON.stringify(path, null, 4)}`); // PH_TODO
+                // PH_TODO
             }
         }
     }

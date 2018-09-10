@@ -8,18 +8,17 @@ export const tileWidth = 100;
 export const tileHeight = 100;
 export const mapWidth = 20;
 export const mapHeight = 20;
-export const mapPaddingX = 4;
-export const mapPaddingY = 3;
+export const mapPadding = 4;
 
 /* player */
 export const playerStartCol = 5;
-export const playerStartRow = 6;
+export const playerStartRow = 7;
 export const playerStartDirection = N;
 export const playerSpeed = 5;
 
 /* virus */
 export const virusStartCol = 5;
-export const virusStartRow = 4;
+export const virusStartRow = 5;
 export const virusStartDirection = W;
 export const virusSpeed = 2.5;
 export const virusBlipInterval = 1000;

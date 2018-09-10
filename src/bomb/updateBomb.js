@@ -3,7 +3,7 @@
 import { FUSE_BURNING, EXPLODING, EXPLODED } from './index.js';
 import { createShrapnel } from './index.js';
 import { transformMapCoordinates } from '../utils/index.js';
-import { mapPaddingX, mapPaddingY } from '../config.js';
+import { mapPadding } from '../config.js';
 import { pubsub, MAP_CHANGED, USERS_POSSIBLY_OFFLINE, BOMB_EXPLODES } from '../pubsub/index.js';
 
 export default sprite => {
@@ -20,8 +20,8 @@ export default sprite => {
                 for (let i = 0; i < 50; i++) {
                     shrapnel.push(createShrapnel({ x, y }));
                 }
-                const tile = map.tileAtLayer('main', { row: row + mapPaddingY - 1, col: col + mapPaddingX - 1 });
-                map.changeTile('main', { row: row + mapPaddingY - 1, col: col + mapPaddingX - 1 }, tile + 24);
+                const tile = map.tileAtLayer('main', { row: row + mapPadding - 1, col: col + mapPadding - 1 });
+                map.changeTile('main', { row: row + mapPadding - 1, col: col + mapPadding - 1 }, tile + 24);
                 pubsub.publish(MAP_CHANGED, map);
                 pubsub.publish(USERS_POSSIBLY_OFFLINE);
             }

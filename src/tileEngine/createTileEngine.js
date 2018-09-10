@@ -290,8 +290,8 @@ export default (properties = {}) => {
 
         getRowAndCol({ x, y }) {
             return {
-                row: this.getRow(x),
-                col: this.getCol(y)
+                row: this.getRow(y),
+                col: this.getCol(x)
             };
         },
 

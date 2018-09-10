@@ -7,7 +7,7 @@ import { bombCooldown } from '../config.js';
 
 export default sprite => {
     let { nextDirection, direction, dropBomb, scale, bombCoolingDown } = sprite;
-    const { dropping } = sprite;
+    const { dropping, map, gameOver, x, y } = sprite;
     if (dropping) {
         if (scale > 0) {
             scale -= 0.01;
@@ -17,7 +17,6 @@ export default sprite => {
         }
         return { direction, nextDirection, dropBomb, scale, bombCoolingDown };
     }
-    const { map, x, y, gameOver } = sprite;
     if (!gameOver) {
         ({ nextDirection, dropBomb } = getKey(sprite));
         if (bombCoolingDown) {
@@ -40,7 +39,8 @@ export default sprite => {
         }
     }
     if (dropBomb) {
-        pubsub.publish(DROP_BOMB, calculateRowAndCol(map));
+        pubsub.publish(DROP_BOMB, map.getRowAndCol({ x, y }));
+        // pubsub.publish(DROP_BOMB, calculateRowAndCol(map));
         dropBomb = false;
         bombCoolingDown = true;
         setTimeout(() => {
