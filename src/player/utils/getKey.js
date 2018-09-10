@@ -3,7 +3,7 @@
 import { N, E, S, W } from '../../directions/index.js';
 
 export default sprite => {
-    let { nextDirection, dropBomb } = sprite;
+    let { nextDirection, dropBomb, teleportToServer } = sprite;
     if (kontra.keys.pressed('right')) {
         nextDirection = E;
     }
@@ -19,5 +19,9 @@ export default sprite => {
     if (kontra.keys.pressed('space')) {
         dropBomb = true;
     }
-    return { nextDirection, dropBomb };
+    if (kontra.keys.pressed('enter')) {
+        teleportToServer = true;
+    }
+
+    return { nextDirection, dropBomb, teleportToServer };
 };

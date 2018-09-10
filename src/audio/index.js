@@ -5,7 +5,6 @@ const aa = new ArcadeAudio();
 
 export function initAudio() {
     pubsub.subscribe(DROP_BOMB, () => aa.play('drop-bomb'));
-    pubsub.subscribe(DROP_BOMB, () => console.log('drop bomb'));
     pubsub.subscribe(BOMB_EXPLODES, () => aa.play('explode'));
     pubsub.subscribe(INFECTED, () => aa.play('infected'));
     pubsub.subscribe(DROP_SHIP, () => aa.play('drop-ship'));

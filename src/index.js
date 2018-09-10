@@ -9,5 +9,4 @@ if (process.env.NODE_ENV === 'development') {
 (async () => {
     await gameManager.init();
     gameManager.showStartScreen();
-    // gameManager.startLevel();
 })();

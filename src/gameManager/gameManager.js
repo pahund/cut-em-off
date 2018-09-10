@@ -11,7 +11,10 @@ import { createCanvas } from '../canvas/index.js';
 import { initPathfinder } from '../pathfinder/index.js';
 import { pubsub, USERS_POSSIBLY_OFFLINE } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
-import { lightGreen, lightBlue } from '../config.js';
+import { lightGreen } from '../config.js';
+import { Servers } from '../server/index.js';
+
+const serverCoordinates = [{ row: 9, col: 8 }, { row: 9, col: 12 }];
 
 class GameManager {
     async init() {
@@ -23,8 +26,9 @@ class GameManager {
         const virus = createVirus(map);
         const bombs = new Bombs(map);
         const users = new Users(map);
+        const servers = Servers.init(map, serverCoordinates);
         pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
-        this.loop = createLoop({ map, player: this.player, virus, users, bombs });
+        this.loop = createLoop({ map, player: this.player, virus, users, bombs, servers });
         initAudio();
         map.render();
         users.render();

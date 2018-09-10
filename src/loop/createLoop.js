@@ -3,7 +3,7 @@
 import { moveCamera } from './utils/index.js';
 import { pubsub, DROP_SHIP } from '../pubsub/index.js';
 
-export default ({ map, player, virus, users, bombs }) => {
+export default ({ map, player, virus, users, bombs, servers }) => {
     const times = [];
     let fps;
     let shipMoving = true;
@@ -14,16 +14,19 @@ export default ({ map, player, virus, users, bombs }) => {
             virus.update();
             player.update();
             player.infect(virus);
+            player.teleport();
             if (shipMoving) {
                 moveCamera(map, player.direction);
             }
             users.update();
             users.infect(virus);
             bombs.update();
+            servers.update();
         },
         render() {
             map.render();
             users.render();
+            servers.render();
             bombs.render();
             player.render();
             virus.render();
