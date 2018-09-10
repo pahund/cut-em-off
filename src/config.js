@@ -11,14 +11,14 @@ export const mapHeight = 20;
 export const mapPadding = 4;
 
 /* player */
-export const playerStartCol = 5;
-export const playerStartRow = 7;
+export const playerStartCol = 8;
+export const playerStartRow = 9;
 export const playerStartDirection = N;
 export const playerSpeed = 5;
 
 /* virus */
-export const virusStartCol = 5;
-export const virusStartRow = 5;
+export const virusStartCol = 8;
+export const virusStartRow = 7;
 export const virusStartDirection = W;
 export const virusSpeed = 2.5;
 export const virusBlipInterval = 1000;

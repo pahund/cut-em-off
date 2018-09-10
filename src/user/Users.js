@@ -1,21 +1,20 @@
 import { createUser, INFECTED } from './index.js';
-import { multiCollides, calculateRowAndCol } from '../utils/index.js';
+import { multiCollides } from '../utils/index.js';
 import { allInfected } from './utils/index.js';
 import { pubsub, GAME_OVER } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { pathfinder } from '../pathfinder/index.js';
-import { mapPadding } from '../config.js';
 
 export default class {
     constructor(map) {
         this.map = map;
         this.users = [];
         this.gameOver = false;
-        for (let row = 1; row <= map.height; row++) {
-            for (let col = 1; col <= map.width; col++) {
+        for (let row = 0; row < map.height; row++) {
+            for (let col = 0; col < map.width; col++) {
                 const tile = map.tileAtLayer('main', { row, col });
                 if (tile >= 17 && tile <= 20) {
-                    this.users.push(createUser({ map, row: row - mapPadding + 2, col: col - mapPadding + 1 }));
+                    this.users.push(createUser({ map, row, col }));
                 }
             }
         }
@@ -25,12 +24,12 @@ export default class {
     updateOnlineStatus(...viruses) {
         const virusesWithRowAndCol = viruses.map(virus => ({
             ...virus,
-            ...calculateRowAndCol({ sx: virus.mapX, sy: virus.mapY })
+            ...this.map.getRowAndCol({ x: virus.x, y: virus.y })
         }));
         for (const user of this.users) {
             for (const virus of virusesWithRowAndCol) {
                 const path = pathfinder.findShortestPathByCoords(user, virus);
-                // PH_TODO
+                console.log(`[PH_LOG] path\n${JSON.stringify(path, null, 4)}`); // PH_TODO
             }
         }
     }

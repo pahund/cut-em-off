@@ -8,11 +8,10 @@ import {
     tileHeight,
     collisionRadius
 } from '../config.js';
-import { transformMapCoordinates } from '../utils/index.js';
 import { drawVirus, updateVirus, Blips } from './index.js';
 
 export default map => {
-    const { x, y } = transformMapCoordinates(map, { row: virusStartRow, col: virusStartCol });
+    const { x, y } = map.getXAndY({ row: virusStartRow, col: virusStartCol });
     const blips = new Blips();
     const virus = {
         context: kontra.context,
@@ -20,8 +19,8 @@ export default map => {
         y,
         collisionRadius,
         map,
-        mapX: (virusStartCol - 1) * tileWidth,
-        mapY: (virusStartRow - 1) * tileHeight,
+        mapX: virusStartCol * tileWidth,
+        mapY: virusStartRow * tileHeight,
         direction: virusStartDirection,
         blips,
         update() {

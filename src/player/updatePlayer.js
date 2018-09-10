@@ -1,7 +1,6 @@
 import { directionIsAllowed, switchDirection } from '../directions/index.js';
 import { pubsub, DROP_BOMB, DROP_SHIP, GAME_OVER } from '../pubsub/index.js';
 import { getKey, isInTheMiddle } from './utils/index.js';
-import { calculateRowAndCol } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { bombCooldown } from '../config.js';
 
@@ -40,7 +39,6 @@ export default sprite => {
     }
     if (dropBomb) {
         pubsub.publish(DROP_BOMB, map.getRowAndCol({ x, y }));
-        // pubsub.publish(DROP_BOMB, calculateRowAndCol(map));
         dropBomb = false;
         bombCoolingDown = true;
         setTimeout(() => {
