@@ -3,28 +3,67 @@
 exports[`When I convert a map to a graph the result is correct 1`] = `
 Map {
   Object {
-    "col": 1,
-    "row": 1,
+    "col": 0,
+    "row": 0,
   } => Map {
     Object {
+      "col": 1,
+      "row": 0,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 0,
+  } => Map {
+    Object {
+      "col": 0,
+      "row": 0,
+    } => 1,
+    Object {
       "col": 2,
+      "row": 0,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 1,
     } => 1,
   },
   Object {
     "col": 2,
-    "row": 1,
+    "row": 0,
   } => Map {
     Object {
       "col": 1,
-      "row": 1,
+      "row": 0,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 0,
+    } => 1,
+  },
+  Object {
+    "col": 3,
+    "row": 0,
+  } => Map {
+    Object {
+      "col": 2,
+      "row": 0,
     } => 1,
     Object {
       "col": 3,
       "row": 1,
     } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 1,
+  } => Map {
     Object {
-      "col": 2,
+      "col": 1,
+      "row": 0,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 2,
     } => 1,
   },
@@ -33,24 +72,41 @@ Map {
     "row": 1,
   } => Map {
     Object {
-      "col": 2,
-      "row": 1,
+      "col": 3,
+      "row": 0,
     } => 1,
     Object {
-      "col": 4,
-      "row": 1,
+      "col": 3,
+      "row": 2,
     } => 1,
   },
   Object {
-    "col": 4,
-    "row": 1,
+    "col": 0,
+    "row": 2,
   } => Map {
     Object {
-      "col": 3,
+      "col": 0,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 1,
+      "row": 2,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 2,
+  } => Map {
+    Object {
+      "col": 0,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 1,
     } => 1,
     Object {
-      "col": 4,
+      "col": 2,
       "row": 2,
     } => 1,
   },
@@ -59,8 +115,12 @@ Map {
     "row": 2,
   } => Map {
     Object {
-      "col": 2,
-      "row": 1,
+      "col": 1,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 2,
     } => 1,
     Object {
       "col": 2,
@@ -68,15 +128,28 @@ Map {
     } => 1,
   },
   Object {
-    "col": 4,
+    "col": 3,
     "row": 2,
   } => Map {
     Object {
-      "col": 4,
+      "col": 2,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 3,
       "row": 1,
     } => 1,
+  },
+  Object {
+    "col": 0,
+    "row": 3,
+  } => Map {
     Object {
-      "col": 4,
+      "col": 0,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 3,
     } => 1,
   },
@@ -85,8 +158,8 @@ Map {
     "row": 3,
   } => Map {
     Object {
-      "col": 1,
-      "row": 4,
+      "col": 0,
+      "row": 3,
     } => 1,
     Object {
       "col": 2,
@@ -104,79 +177,6 @@ Map {
     Object {
       "col": 2,
       "row": 2,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 3,
-    } => 1,
-  },
-  Object {
-    "col": 3,
-    "row": 3,
-  } => Map {
-    Object {
-      "col": 2,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 4,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 4,
-    } => 1,
-  },
-  Object {
-    "col": 4,
-    "row": 3,
-  } => Map {
-    Object {
-      "col": 3,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 4,
-      "row": 2,
-    } => 1,
-  },
-  Object {
-    "col": 1,
-    "row": 4,
-  } => Map {
-    Object {
-      "col": 1,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 2,
-      "row": 4,
-    } => 1,
-  },
-  Object {
-    "col": 2,
-    "row": 4,
-  } => Map {
-    Object {
-      "col": 1,
-      "row": 4,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 4,
-    } => 1,
-  },
-  Object {
-    "col": 3,
-    "row": 4,
-  } => Map {
-    Object {
-      "col": 2,
-      "row": 4,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 3,
     } => 1,
   },
 }

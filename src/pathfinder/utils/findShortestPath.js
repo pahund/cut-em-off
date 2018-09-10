@@ -1,13 +1,13 @@
 import { findPaths, extractShortest } from './index.js';
 
-export default (data, nodes) => {
+export default (graph, nodes) => {
     let start = nodes.shift();
     const path = [];
     let end, predecessors, shortest;
 
     while (nodes.length) {
         end = nodes.shift();
-        predecessors = findPaths(data, start, end);
+        predecessors = findPaths(graph, start, end);
 
         if (predecessors) {
             shortest = extractShortest(predecessors, end);

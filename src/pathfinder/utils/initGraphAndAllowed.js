@@ -4,8 +4,8 @@ import { isValidTile } from '../../utils/index.js';
 export default (layerData, width) => {
     const graph = new Map();
     const allowed = new Map();
-    let row = 1;
-    let col = 1;
+    let row = 0;
+    let col = 0;
     let index = 0;
     for (const tile of layerData) {
         if (isValidTile(tile)) {
@@ -15,7 +15,7 @@ export default (layerData, width) => {
         }
         if (++index % width === 0) {
             row++;
-            col = 1;
+            col = 0;
         } else {
             col++;
         }

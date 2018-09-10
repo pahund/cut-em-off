@@ -121,13 +121,13 @@ describe('When I create a pathfinder without setting a graph using the construct
             ));
         describe('the graph property of the pathfinder', () =>
             it('is correct', () => expect(pathfinder.graph).toMatchSnapshot()));
-        describe("and I get the node of the user's position (row 1, column 1)", () => {
+        describe("and I get the node of the user's position (row 0, column 0)", () => {
             let user;
-            beforeEach(() => (user = pathfinder.getNodeByCoords({ row: 1, col: 1 })));
+            beforeEach(() => (user = pathfinder.getNodeByCoords({ row: 0, col: 0 })));
             describe('the node', () => it('is correct', () => expect(user).toMatchSnapshot()));
-            describe("and I get the node of the virus' position (row 4, column 2)", () => {
+            describe("and I get the node of the virus' position (row 3, column 1)", () => {
                 let virus;
-                beforeEach(() => (virus = pathfinder.getNodeByCoords({ row: 4, col: 2 })));
+                beforeEach(() => (virus = pathfinder.getNodeByCoords({ row: 3, col: 1 })));
                 describe('the node', () => it('is correct', () => expect(virus).toMatchSnapshot()));
                 describe('and I get the shortest path between the user and the virus', () => {
                     let shortestPath;
@@ -168,7 +168,7 @@ describe('When I create a pathfinder without setting a graph using the construct
         describe('and I get the shortest path between the user and the virus using their coordinates', () => {
             let shortestPath;
             beforeEach(() =>
-                (shortestPath = pathfinder.findShortestPathByCoords({ row: 1, col: 1 }, { row: 4, col: 2 })));
+                (shortestPath = pathfinder.findShortestPathByCoords({ row: 0, col: 0 }, { row: 3, col: 1 })));
             describe('the result', () =>
                 it('is null (there is no path from user to virus)', () => expect(shortestPath).toBeNull()));
         });

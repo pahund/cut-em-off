@@ -45,111 +45,119 @@ Array [
 ]
 `;
 
-exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the node of the user's position (row 1, column 1) and I get the node of the virus' position (row 4, column 2) and I get the shortest path between the user and the virus the result is correct 1`] = `
+exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the node of the user's position (row 0, column 0) and I get the node of the virus' position (row 3, column 1) and I get the shortest path between the user and the virus the result is correct 1`] = `
 Array [
+  Object {
+    "col": 0,
+    "row": 0,
+  },
+  Object {
+    "col": 1,
+    "row": 0,
+  },
   Object {
     "col": 1,
     "row": 1,
   },
   Object {
-    "col": 2,
-    "row": 1,
-  },
-  Object {
-    "col": 2,
+    "col": 1,
     "row": 2,
   },
   Object {
-    "col": 2,
+    "col": 0,
+    "row": 2,
+  },
+  Object {
+    "col": 0,
     "row": 3,
   },
   Object {
     "col": 1,
     "row": 3,
-  },
-  Object {
-    "col": 1,
-    "row": 4,
-  },
-  Object {
-    "col": 2,
-    "row": 4,
   },
 ]
 `;
 
-exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the node of the user's position (row 1, column 1) and I get the node of the virus' position (row 4, column 2) the node is correct 1`] = `
-Object {
-  "col": 2,
-  "row": 4,
-}
-`;
-
-exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the node of the user's position (row 1, column 1) the node is correct 1`] = `
+exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the node of the user's position (row 0, column 0) and I get the node of the virus' position (row 3, column 1) the node is correct 1`] = `
 Object {
   "col": 1,
-  "row": 1,
+  "row": 3,
 }
 `;
 
-exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the shortest path between the user and the virus using their coordinates the result is correct 1`] = `
-Array [
-  Object {
-    "col": 1,
-    "row": 1,
-  },
-  Object {
-    "col": 2,
-    "row": 1,
-  },
-  Object {
-    "col": 2,
-    "row": 2,
-  },
-  Object {
-    "col": 2,
-    "row": 3,
-  },
-  Object {
-    "col": 1,
-    "row": 3,
-  },
-  Object {
-    "col": 1,
-    "row": 4,
-  },
-  Object {
-    "col": 2,
-    "row": 4,
-  },
-]
+exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the node of the user's position (row 0, column 0) the node is correct 1`] = `
+Object {
+  "col": 0,
+  "row": 0,
+}
 `;
+
+exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map and I get the shortest path between the user and the virus using their coordinates the result is correct 1`] = `null`;
 
 exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map the graph property of the pathfinder is correct 1`] = `
 Map {
   Object {
-    "col": 1,
-    "row": 1,
+    "col": 0,
+    "row": 0,
   } => Map {
     Object {
+      "col": 1,
+      "row": 0,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 0,
+  } => Map {
+    Object {
+      "col": 0,
+      "row": 0,
+    } => 1,
+    Object {
       "col": 2,
+      "row": 0,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 1,
     } => 1,
   },
   Object {
     "col": 2,
-    "row": 1,
+    "row": 0,
   } => Map {
     Object {
       "col": 1,
-      "row": 1,
+      "row": 0,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 0,
+    } => 1,
+  },
+  Object {
+    "col": 3,
+    "row": 0,
+  } => Map {
+    Object {
+      "col": 2,
+      "row": 0,
     } => 1,
     Object {
       "col": 3,
       "row": 1,
     } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 1,
+  } => Map {
     Object {
-      "col": 2,
+      "col": 1,
+      "row": 0,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 2,
     } => 1,
   },
@@ -158,24 +166,41 @@ Map {
     "row": 1,
   } => Map {
     Object {
-      "col": 2,
-      "row": 1,
+      "col": 3,
+      "row": 0,
     } => 1,
     Object {
-      "col": 4,
-      "row": 1,
+      "col": 3,
+      "row": 2,
     } => 1,
   },
   Object {
-    "col": 4,
-    "row": 1,
+    "col": 0,
+    "row": 2,
   } => Map {
     Object {
-      "col": 3,
+      "col": 0,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 1,
+      "row": 2,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 2,
+  } => Map {
+    Object {
+      "col": 0,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 1,
     } => 1,
     Object {
-      "col": 4,
+      "col": 2,
       "row": 2,
     } => 1,
   },
@@ -184,8 +209,12 @@ Map {
     "row": 2,
   } => Map {
     Object {
-      "col": 2,
-      "row": 1,
+      "col": 1,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 3,
+      "row": 2,
     } => 1,
     Object {
       "col": 2,
@@ -193,15 +222,28 @@ Map {
     } => 1,
   },
   Object {
-    "col": 4,
+    "col": 3,
     "row": 2,
   } => Map {
     Object {
-      "col": 4,
+      "col": 2,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 3,
       "row": 1,
     } => 1,
+  },
+  Object {
+    "col": 0,
+    "row": 3,
+  } => Map {
     Object {
-      "col": 4,
+      "col": 0,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 3,
     } => 1,
   },
@@ -210,8 +252,8 @@ Map {
     "row": 3,
   } => Map {
     Object {
-      "col": 1,
-      "row": 4,
+      "col": 0,
+      "row": 3,
     } => 1,
     Object {
       "col": 2,
@@ -229,79 +271,6 @@ Map {
     Object {
       "col": 2,
       "row": 2,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 3,
-    } => 1,
-  },
-  Object {
-    "col": 3,
-    "row": 3,
-  } => Map {
-    Object {
-      "col": 2,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 4,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 4,
-    } => 1,
-  },
-  Object {
-    "col": 4,
-    "row": 3,
-  } => Map {
-    Object {
-      "col": 3,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 4,
-      "row": 2,
-    } => 1,
-  },
-  Object {
-    "col": 1,
-    "row": 4,
-  } => Map {
-    Object {
-      "col": 1,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 2,
-      "row": 4,
-    } => 1,
-  },
-  Object {
-    "col": 2,
-    "row": 4,
-  } => Map {
-    Object {
-      "col": 1,
-      "row": 4,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 4,
-    } => 1,
-  },
-  Object {
-    "col": 3,
-    "row": 4,
-  } => Map {
-    Object {
-      "col": 2,
-      "row": 4,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 3,
     } => 1,
   },
 }
@@ -310,138 +279,138 @@ Map {
 exports[`When I create a pathfinder without setting a graph using the constructor and I set the graph from a map with broken conduits that block the way from user to virus the graph property of the pathfinder is correct 1`] = `
 Map {
   Object {
-    "col": 1,
-    "row": 1,
-  } => Map {
-    Object {
-      "col": 2,
-      "row": 1,
-    } => 1,
-  },
-  Object {
-    "col": 2,
-    "row": 1,
+    "col": 0,
+    "row": 0,
   } => Map {
     Object {
       "col": 1,
+      "row": 0,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 0,
+  } => Map {
+    Object {
+      "col": 0,
+      "row": 0,
+    } => 1,
+  },
+  Object {
+    "col": 3,
+    "row": 0,
+  } => Map {
+    Object {
+      "col": 3,
       "row": 1,
     } => 1,
   },
   Object {
-    "col": 4,
+    "col": 3,
     "row": 1,
   } => Map {
     Object {
-      "col": 4,
+      "col": 3,
+      "row": 0,
+    } => 1,
+    Object {
+      "col": 3,
       "row": 2,
     } => 1,
   },
   Object {
-    "col": 4,
+    "col": 0,
     "row": 2,
   } => Map {
     Object {
-      "col": 4,
-      "row": 1,
-    } => 1,
-    Object {
-      "col": 4,
+      "col": 0,
       "row": 3,
     } => 1,
-  },
-  Object {
-    "col": 1,
-    "row": 3,
-  } => Map {
     Object {
       "col": 1,
-      "row": 4,
-    } => 1,
-    Object {
-      "col": 2,
-      "row": 3,
-    } => 1,
-  },
-  Object {
-    "col": 2,
-    "row": 3,
-  } => Map {
-    Object {
-      "col": 1,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 3,
-    } => 1,
-  },
-  Object {
-    "col": 3,
-    "row": 3,
-  } => Map {
-    Object {
-      "col": 2,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 4,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 3,
-      "row": 4,
-    } => 1,
-  },
-  Object {
-    "col": 4,
-    "row": 3,
-  } => Map {
-    Object {
-      "col": 3,
-      "row": 3,
-    } => 1,
-    Object {
-      "col": 4,
       "row": 2,
     } => 1,
   },
   Object {
     "col": 1,
-    "row": 4,
+    "row": 2,
   } => Map {
     Object {
-      "col": 1,
-      "row": 3,
+      "col": 0,
+      "row": 2,
     } => 1,
     Object {
       "col": 2,
-      "row": 4,
+      "row": 2,
     } => 1,
   },
   Object {
     "col": 2,
-    "row": 4,
+    "row": 2,
   } => Map {
     Object {
       "col": 1,
-      "row": 4,
+      "row": 2,
     } => 1,
     Object {
       "col": 3,
-      "row": 4,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 2,
+      "row": 3,
     } => 1,
   },
   Object {
     "col": 3,
-    "row": 4,
+    "row": 2,
   } => Map {
     Object {
       "col": 2,
-      "row": 4,
+      "row": 2,
     } => 1,
     Object {
       "col": 3,
+      "row": 1,
+    } => 1,
+  },
+  Object {
+    "col": 0,
+    "row": 3,
+  } => Map {
+    Object {
+      "col": 0,
+      "row": 2,
+    } => 1,
+    Object {
+      "col": 1,
       "row": 3,
+    } => 1,
+  },
+  Object {
+    "col": 1,
+    "row": 3,
+  } => Map {
+    Object {
+      "col": 0,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 2,
+      "row": 3,
+    } => 1,
+  },
+  Object {
+    "col": 2,
+    "row": 3,
+  } => Map {
+    Object {
+      "col": 1,
+      "row": 3,
+    } => 1,
+    Object {
+      "col": 2,
+      "row": 2,
     } => 1,
   },
 }
