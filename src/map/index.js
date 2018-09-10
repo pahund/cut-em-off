@@ -1,1 +1,1 @@
-export { default as createMap } from './createMap';
+export { default as createMap } from './createMap.js';

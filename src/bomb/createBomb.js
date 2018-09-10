@@ -1,9 +1,9 @@
 /* global kontra */
 
-import { collisionRadius, tileHeight, tileWidth } from '../config';
-import { transformMapCoordinates } from '../utils';
-import { drawBomb, updateBomb } from '.';
-import { FUSE_BURNING } from '.';
+import { collisionRadius, tileHeight, tileWidth } from '../config.js';
+import { transformMapCoordinates } from '../utils/index.js';
+import { drawBomb, updateBomb } from './index.js';
+import { FUSE_BURNING } from './index.js';
 
 export default (map, { row, col }) => {
     const { x, y } = transformMapCoordinates(map, { row, col });

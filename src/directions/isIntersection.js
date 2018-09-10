@@ -1,4 +1,4 @@
-import { directionSwitchMap } from './index';
+import { directionSwitchMap } from './index.js';
 
 const intersectionTiles = [];
 for (const [tile, { allowed }] of Object.entries(directionSwitchMap)) {

@@ -1,10 +1,10 @@
 /* global kontra */
 
-import { drawPlayer, updatePlayer } from '.';
-import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from '../config';
-import { pubsub, GAME_OVER, DROP_SHIP } from '../pubsub';
-import { collides } from '../utils';
-import { messageBox } from '../messageBox';
+import { drawPlayer, updatePlayer } from './index.js';
+import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from '../config.js';
+import { pubsub, GAME_OVER, DROP_SHIP } from '../pubsub/index.js';
+import { collides } from '../utils/index.js';
+import { messageBox } from '../messageBox/index.js';
 
 export default map => {
     const player = {

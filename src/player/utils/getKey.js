@@ -1,6 +1,6 @@
 /* global kontra */
 
-import { N, E, S, W } from '../../directions';
+import { N, E, S, W } from '../../directions/index.js';
 
 export default sprite => {
     let { nextDirection, dropBomb } = sprite;

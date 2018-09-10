@@ -1,7 +1,7 @@
 /* global kontra */
 
-import { tileHeight, virusBlipTtl } from '../config';
-import { drawBlip } from '.';
+import { tileHeight, virusBlipTtl } from '../config.js';
+import { drawBlip } from './index.js';
 
 export default ({ x, y }) => ({
     context: kontra.context,

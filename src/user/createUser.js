@@ -1,9 +1,9 @@
 /* global kontra */
 
-import { drawUser, INFECTED } from '.';
-import { tileWidth, tileHeight, collisionRadius } from '../config';
-import { transformMapCoordinates } from '../utils';
-import { ONLINE } from '.';
+import { drawUser, INFECTED } from './index.js';
+import { tileWidth, tileHeight, collisionRadius } from '../config.js';
+import { transformMapCoordinates } from '../utils/index.js';
+import { ONLINE } from './index.js';
 
 export default ({ map, row, col }) => {
     const { x, y } = transformMapCoordinates(map, { row, col });

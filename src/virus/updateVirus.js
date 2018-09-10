@@ -4,10 +4,10 @@ import {
     directionSwitchMap,
     getOppositeDirection,
     directionIsAllowed
-} from '../directions';
-import { transformMapCoordinates, getRandomInt } from '../utils';
-import { isInTheMiddle, moveVirus, getBestDirection } from './utils';
-import { mapWidth, mapHeight, tileWidth, tileHeight } from '../config';
+} from '../directions/index.js';
+import { transformMapCoordinates, getRandomInt } from '../utils/index.js';
+import { isInTheMiddle, moveVirus, getBestDirection } from './utils/index.js';
+import { mapWidth, mapHeight, tileWidth, tileHeight } from '../config.js';
 
 const visits = Array(mapHeight)
     .fill()

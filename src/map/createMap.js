@@ -9,12 +9,12 @@ import {
     mapPaddingY,
     playerStartCol,
     playerStartRow
-} from '../config';
-import { calculateCameraCoordinates } from '../utils';
-import mapData from './mapData';
-import { addPadding } from './utils';
-import { createTilesheet } from './tilesheet';
-import { createTileEngine } from '../tileEngine';
+} from '../config.js';
+import { calculateCameraCoordinates } from '../utils/index.js';
+import mapData from './mapData.js';
+import { addPadding } from './utils/index.js';
+import { createTilesheet } from './tilesheet/index.js';
+import { createTileEngine } from '../tileEngine/index.js';
 
 export default async () => {
     const { sx, sy } = calculateCameraCoordinates({ col: playerStartCol, row: playerStartRow });

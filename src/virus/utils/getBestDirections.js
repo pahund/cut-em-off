@@ -1,4 +1,4 @@
-import { N, E, S, W } from '../../directions';
+import { N, E, S, W } from '../../directions/index.js';
 
 export default ({ viable, visits, row, col }) => {
     let minVis = Number.MAX_SAFE_INTEGER;

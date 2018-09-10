@@ -1,9 +1,9 @@
 /* global kontra */
 
-import { FUSE_BURNING, EXPLODING, EXPLODED } from '.';
-import { createShrapnel } from '.';
-import { transformMapCoordinates } from '../utils';
-import { mapPaddingX, mapPaddingY } from '../config';
+import { FUSE_BURNING, EXPLODING, EXPLODED } from './index.js';
+import { createShrapnel } from './index.js';
+import { transformMapCoordinates } from '../utils/index.js';
+import { mapPaddingX, mapPaddingY } from '../config.js';
 
 export default sprite => {
     let { status, fuseLength, explosionDuration, x, y } = sprite;

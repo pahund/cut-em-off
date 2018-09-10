@@ -1,4 +1,4 @@
-import { N, W } from './directions';
+import { N, W } from './directions/index.js';
 
 export const canvasWidth = 800;
 export const canvasHeight = 600;

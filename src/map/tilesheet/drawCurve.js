@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { degreesToRadians as deg2rad } from '../../utils';
-import { tileHeight, tileWidth, lightBlue } from '../../config';
+import { degreesToRadians as deg2rad } from '../../utils/index.js';
+import { tileHeight, tileWidth, lightBlue } from '../../config.js';
 
 function calculatePointOnArc(deg, r) {
     return [Math.cos(deg2rad(deg)) * r + 50, Math.sin(deg2rad(deg)) * r + 50];

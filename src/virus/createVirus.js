@@ -1,8 +1,15 @@
 /* global kontra */
 
-import { virusStartDirection, virusStartCol, virusStartRow, tileWidth, tileHeight, collisionRadius } from '../config';
-import { transformMapCoordinates } from '../utils';
-import { drawVirus, updateVirus, Blips } from '.';
+import {
+    virusStartDirection,
+    virusStartCol,
+    virusStartRow,
+    tileWidth,
+    tileHeight,
+    collisionRadius
+} from '../config.js';
+import { transformMapCoordinates } from '../utils/index.js';
+import { drawVirus, updateVirus, Blips } from './index.js';
 
 export default map => {
     const { x, y } = transformMapCoordinates(map, { row: virusStartRow, col: virusStartCol });

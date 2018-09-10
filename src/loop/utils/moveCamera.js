@@ -1,5 +1,5 @@
-import { playerSpeed } from '../../config';
-import { N, E, S, W } from '../../directions';
+import { playerSpeed } from '../../config.js';
+import { N, E, S, W } from '../../directions/index.js';
 
 export default (map, direction) => {
     switch (direction) {

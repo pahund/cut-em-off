@@ -1,5 +1,5 @@
-import { virusBlipInterval } from '../config';
-import { createBlip } from '.';
+import { virusBlipInterval } from '../config.js';
+import { createBlip } from './index.js';
 
 export default class {
     constructor() {

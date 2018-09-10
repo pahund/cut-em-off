@@ -1,6 +1,6 @@
-import { pubsub, DROP_BOMB } from '../pubsub';
-import { EXPLODED } from './constants';
-import { createBomb } from '.';
+import { pubsub, DROP_BOMB } from '../pubsub/index.js';
+import { EXPLODED } from './constants.js';
+import { createBomb } from './index.js';
 
 export default class {
     constructor(map) {

@@ -1,1 +1,1 @@
-export { default as createCanvas } from './createCanvas';
+export { default as createCanvas } from './createCanvas.js';

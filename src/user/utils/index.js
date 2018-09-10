@@ -1,1 +1,1 @@
-export { default as allInfected } from './allInfected';
+export { default as allInfected } from './allInfected.js';

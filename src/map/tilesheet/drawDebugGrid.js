@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { tileWidth, tileHeight } from '../../config';
+import { tileWidth, tileHeight } from '../../config.js';
 
 export default ({ ctx, row, col }) => {
     ctx.save();

@@ -1,1 +1,1 @@
-export { default as addPadding } from './addPadding';
+export { default as addPadding } from './addPadding.js';

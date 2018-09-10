@@ -1,8 +1,8 @@
 /* global kontra */
 
-import { moveCamera } from './utils';
-import { calculateRowAndCol } from '../utils';
-import { pubsub, DROP_SHIP } from '../pubsub';
+import { moveCamera } from './utils/index.js';
+import { calculateRowAndCol } from '../utils/index.js';
+import { pubsub, DROP_SHIP } from '../pubsub/index.js';
 
 export default ({ map, player, virus, users, bombs }) => {
     const times = [];

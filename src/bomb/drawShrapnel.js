@@ -1,5 +1,5 @@
-import { lightBlue, darkBlue } from '../config';
-import { degreesToRadians as deg2rad } from '../utils';
+import { lightBlue, darkBlue } from '../config.js';
+import { degreesToRadians as deg2rad } from '../utils/index.js';
 
 export default sprite => {
     const { context: ctx, x, y, rotation } = sprite;

@@ -1,9 +1,9 @@
-import { createUser, INFECTED } from '.';
-import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config';
-import { multiCollides } from '../utils';
-import { allInfected } from './utils';
-import { pubsub, GAME_OVER } from '../pubsub';
-import { messageBox } from '../messageBox';
+import { createUser, INFECTED } from './index.js';
+import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config.js';
+import { multiCollides } from '../utils/index.js';
+import { allInfected } from './utils/index.js';
+import { pubsub, GAME_OVER } from '../pubsub/index.js';
+import { messageBox } from '../messageBox/index.js';
 
 export default class {
     constructor(map) {
