@@ -7,6 +7,7 @@ import { createPlayer } from './player';
 import { Users } from './user';
 import { createVirus } from './virus';
 import { Bombs } from './bomb';
+import { initAudio } from './audio';
 
 if (process.env.NODE_ENV === 'development') {
     require('./devbox/createDevbox').default();
@@ -21,5 +22,6 @@ if (process.env.NODE_ENV === 'development') {
     const bombs = new Bombs(map);
     const users = new Users(map);
     const loop = createLoop({ map, player, virus, users, bombs });
+    initAudio();
     loop.start();
 })();
