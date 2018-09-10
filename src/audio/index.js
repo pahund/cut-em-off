@@ -1,37 +1,19 @@
 import { pubsub, DROP_BOMB, BOMB_EXPLODES, INFECTED, GAME_OVER } from '../pubsub';
-import sfxr from '../../vendor/sfxr';
-const { SoundEffect, Params } = sfxr;
+import ArcadeAudio from './ArcadeAudio';
+import generateSounds from './sounds';
 
-const sounds = {};
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
-generate('jump');
-generate('explosion');
-generate('hitHurt');
-
-function generate(fx) {
-    const PARAMS = new Params();
-    PARAMS[fx]();
-    const SOUND = new SoundEffect(PARAMS).generate();
-    sounds[fx] = toAudioElement(SOUND);
-}
-
-function toAudioElement(wave) {
-    const audio = new Audio();
-    audio.src = wave.dataURI;
-
-    return audio;
-}
+const aa = new ArcadeAudio();
+generateSounds(aa);
 
 export function initAudio() {
-    pubsub.subscribe(DROP_BOMB, () => sounds.jump.play());
-    pubsub.subscribe(BOMB_EXPLODES, () => sounds.explosion.play());
-    pubsub.subscribe(INFECTED, () => sounds.hitHurt.play());
+    pubsub.subscribe(DROP_BOMB, () => aa.play('powerup'));
+    pubsub.subscribe(BOMB_EXPLODES, () => aa.play('damage'));
+    pubsub.subscribe(INFECTED, () => aa.play('damage'));
     // pubsub.subscribe(GAME_OVER, () => sounds.hitHurt.play()); // game over is published more than once
 
     /*
-  * try to reduce space
-  * add some music
-  *
-  * */
+   * GENERATE NEW SOUNDS ON http://www.superflashbros.net/as3sfxr/
+   * CMD + C copies the values
+   *
+   * */
 }
