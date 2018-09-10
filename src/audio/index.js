@@ -21,6 +21,12 @@ export function initAudio() {
     console.log('init audio');
     pubsub.subscribe(DROP_BOMB, () => sounds.jump.play());
     pubsub.subscribe(BOMB_EXPLODES, () => sounds.explosion.play());
-    pubsub.subscribe(INFECTED, () => sounds.mutate.play());
+    pubsub.subscribe(INFECTED, () => sounds.hitHurt.play());
     pubsub.subscribe(GAME_OVER, () => sounds.hitHurt.play());
+
+    /*
+  * try to safe space
+  * add some music
+  *
+  * */
 }
