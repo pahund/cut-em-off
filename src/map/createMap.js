@@ -39,11 +39,11 @@ export default async () => {
         {
             name: 'main',
             data: paddedMap
-        },
-        {
-            name: 'debug',
-            data: new Array(paddedMap.length).fill(0)
         }
+        // {
+        //     name: 'debug',
+        //     data: new Array(paddedMap.length).fill(0)
+        // }
         // {
         //     name: 'grid',
         //     data: new Array(paddedMap.length).fill(8)

@@ -19,7 +19,7 @@ export default ({ map, player, virus, users, bombs }) => {
                 moveCamera(map, player.direction);
             }
             users.update();
-            users.infect([virus]);
+            users.infect(virus);
             bombs.update();
         },
         render() {

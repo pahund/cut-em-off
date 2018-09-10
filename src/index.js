@@ -7,6 +7,8 @@ import { createPlayer } from './player/index.js';
 import { Users } from './user/index.js';
 import { createVirus } from './virus/index.js';
 import { Bombs } from './bomb/index.js';
+import { initPathfinder } from './pathfinder/index.js';
+import { pubsub, USERS_POSSIBLY_OFFLINE } from './pubsub/index.js';
 import { initAudio } from './audio/index.js';
 
 // will be removed by tree shaking
@@ -19,10 +21,12 @@ if (process.env.NODE_ENV === 'development') {
     createCanvas();
     kontra.init();
     const map = await createMap();
+    initPathfinder(map);
     const player = createPlayer(map);
     const virus = createVirus(map);
     const bombs = new Bombs(map);
     const users = new Users(map);
+    pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
     const loop = createLoop({ map, player, virus, users, bombs });
     initAudio();
     loop.start();
