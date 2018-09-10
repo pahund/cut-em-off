@@ -6,9 +6,9 @@ const aa = new ArcadeAudio();
 generateSounds(aa);
 
 export function initAudio() {
-    pubsub.subscribe(DROP_BOMB, () => aa.play('powerup'));
+    pubsub.subscribe(DROP_BOMB, () => aa.play('drop-bomb'));
     pubsub.subscribe(BOMB_EXPLODES, () => aa.play('damage'));
-    pubsub.subscribe(INFECTED, () => aa.play('damage'));
+    pubsub.subscribe(INFECTED, () => aa.play('infected'));
     // pubsub.subscribe(GAME_OVER, () => sounds.hitHurt.play()); // game over is published more than once
 
     /*
