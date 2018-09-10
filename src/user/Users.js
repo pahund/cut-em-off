@@ -1,18 +1,18 @@
 import { createUser, INFECTED } from './index.js';
-import { mapHeight, mapWidth, mapPaddingX, mapPaddingY } from '../config.js';
 import { multiCollides, calculateRowAndCol } from '../utils/index.js';
 import { allInfected } from './utils/index.js';
 import { pubsub, GAME_OVER } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { pathfinder } from '../pathfinder/index.js';
+import { mapPaddingX, mapPaddingY } from '../config.js';
 
 export default class {
     constructor(map) {
         this.map = map;
         this.users = [];
         this.gameOver = false;
-        for (let row = 1; row <= mapHeight + mapPaddingY * 2; row++) {
-            for (let col = 1; col <= mapWidth + mapPaddingX * 2; col++) {
+        for (let row = 1; row <= map.height; row++) {
+            for (let col = 1; col <= map.width; col++) {
                 const tile = map.tileAtLayer('main', { row, col });
                 if (tile >= 17 && tile <= 20) {
                     this.users.push(createUser({ map, row: row - mapPaddingY + 1, col: col - mapPaddingX + 1 }));
