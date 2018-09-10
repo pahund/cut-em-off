@@ -6,7 +6,8 @@ import { drawShrapnel } from '.';
 export default ({ x, y }) => {
     const dir = ri(0, 360);
     const speed = ri(5, 15);
-    return kontra.sprite({
+    return {
+        context: kontra.context,
         x,
         y,
         dx: Math.cos(deg2rad(dir)) * speed,
@@ -14,11 +15,12 @@ export default ({ x, y }) => {
         rotation: ri(0, 360),
         rotationDir: [ri(-10, -1), ri(1, 10)][ri(0, 1)],
         update() {
-            this.advance();
+            this.x += this.dx;
+            this.y += this.dy;
             this.rotation += this.rotationDir;
         },
         render() {
             drawShrapnel(this);
         }
-    });
+    };
 };

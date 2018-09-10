@@ -7,7 +7,8 @@ import { FUSE_BURNING } from '.';
 
 export default (map, { row, col }) => {
     const { x, y } = transformMapCoordinates(map, { row, col });
-    return kontra.sprite({
+    return {
+        context: kontra.context,
         x,
         y,
         collisionRadius,
@@ -32,5 +33,5 @@ export default (map, { row, col }) => {
         render() {
             drawBomb(this);
         }
-    });
+    };
 };

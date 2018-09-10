@@ -7,7 +7,8 @@ import { collides } from '../utils';
 import { messageBox } from '../messageBox';
 
 export default map => {
-    const player = kontra.sprite({
+    const player = {
+        context: kontra.context,
         x: canvasWidth / 2,
         y: canvasHeight / 2,
         collisionRadius,
@@ -45,7 +46,7 @@ export default map => {
                 }
             }
         }
-    });
+    };
 
     pubsub.subscribe(GAME_OVER, () => (player.gameOver = true));
     pubsub.subscribe(DROP_SHIP, () => (player.dropping = true));
