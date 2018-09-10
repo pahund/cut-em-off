@@ -198,42 +198,6 @@ export default (properties = {}) => {
         },
 
         /**
-         * Simple bounding box collision test for layer tiles.
-         * @memberof kontra.tileEngine
-         *
-         * @param {string} name - Name of the layer.
-         * @param {object} object - Object to check collision against.
-         * @param {number} object.x - X coordinate of the object.
-         * @param {number} object.y - Y coordinate of the object.
-         * @param {number} object.width - Width of the object.
-         * @param {number} object.height - Height of the object.
-         *
-         * @returns {boolean} True if the object collides with a tile, false otherwise.
-         */
-        layerCollidesWith: function layerCollidesWith(name, object) {
-            // calculate all tiles that the object can collide with
-            const row = tileEngine.getRow(object.y);
-            const col = tileEngine.getCol(object.x);
-
-            const endRow = tileEngine.getRow(object.y + object.height);
-            const endCol = tileEngine.getCol(object.x + object.width);
-
-            // check all tiles
-            let index;
-            for (let r = row; r <= endRow; r++) {
-                for (let c = col; c <= endCol; c++) {
-                    index = getIndex({ row: r, col: c });
-
-                    if (tileEngine.layers[name].data[index]) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        },
-
-        /**
          * Get the tile from the specified layer at x, y or row, col.
          * @memberof kontra.tileEngine
          *
@@ -372,12 +336,7 @@ export default (properties = {}) => {
 
         set sy(value) {
             _sy = Math.min(Math.max(0, value), syMax);
-        },
-
-        // expose properties for testing
-        // @if DEBUG
-        _layerOrder: layerOrder
-        // @endif
+        }
     };
 
     // set here so we use setter function
