@@ -1,5 +1,5 @@
-import { pathfinder } from '.';
-import { pubsub, MAP_CHANGED } from '../pubsub';
+import { pathfinder } from './index.js';
+import { pubsub, MAP_CHANGED } from '../pubsub/index.js';
 
 export default map => {
     pathfinder.setDataFromMap(map, 'main');

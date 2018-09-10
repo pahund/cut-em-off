@@ -1,4 +1,4 @@
-import { tileHeight as defaultTileHeight, tileWidth as defaultTileWidth } from '../config';
+import { tileHeight as defaultTileHeight, tileWidth as defaultTileWidth } from '../config.js';
 
 export default ({ sx, sy, tileWidth = defaultTileWidth, tileHeight = defaultTileHeight }) => ({
     col: Math.floor(sx / tileWidth) + 1,

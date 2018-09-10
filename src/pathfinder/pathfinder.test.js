@@ -1,4 +1,4 @@
-import { Pathfinder } from './pathfinder';
+import { Pathfinder } from './pathfinder.js';
 
 // prettier-ignore
 const simpleData = new Map([

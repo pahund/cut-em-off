@@ -1,4 +1,4 @@
-import { findPaths, extractShortest } from '.';
+import { findPaths, extractShortest } from './index.js';
 
 export default (data, nodes) => {
     let start = nodes.shift();

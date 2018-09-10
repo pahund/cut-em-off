@@ -1,5 +1,5 @@
-import { getNodeByCoords, initGraphAndAllowed } from '.';
-import { N, S, W, E } from '../../directions';
+import { getNodeByCoords, initGraphAndAllowed } from './index.js';
+import { N, S, W, E } from '../../directions/index.js';
 
 export default ({ width, layers }, layer) => {
     const { graph, allowed } = initGraphAndAllowed(layers[layer].data, width);

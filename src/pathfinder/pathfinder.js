@@ -1,4 +1,4 @@
-import { findShortestPath, convertMapToGraph, getNodeByCoords } from './utils';
+import { findShortestPath, convertMapToGraph, getNodeByCoords } from './utils/index.js';
 
 export class Pathfinder {
     constructor(graph = null) {

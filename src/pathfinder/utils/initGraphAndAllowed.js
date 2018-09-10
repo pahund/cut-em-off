@@ -1,5 +1,5 @@
-import { directionSwitchMap } from '../../directions';
-import { isValidTile } from '../../utils';
+import { directionSwitchMap } from '../../directions/index.js';
+import { isValidTile } from '../../utils/index.js';
 
 export default (layerData, width) => {
     const graph = new Map();

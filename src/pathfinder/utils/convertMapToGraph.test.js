@@ -1,4 +1,4 @@
-import convertMapToGraph from './convertMapToGraph';
+import convertMapToGraph from './convertMapToGraph.js';
 
 const map = {
     width: 4,
