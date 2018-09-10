@@ -295,6 +295,13 @@ export default (properties = {}) => {
             };
         },
 
+        getXAndY({ row, col, mapX, mapY }) {
+            return {
+                x: (col ? col * tileWidth : mapX) - tileEngine.sx + tileWidth / 2,
+                y: (row ? row * tileHeight : mapY) - tileEngine.sy + tileHeight / 2
+            };
+        },
+
         /**
          * Get the row from the y coordinate.
          * @memberof kontra.tileEngine

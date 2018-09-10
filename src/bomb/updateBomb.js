@@ -2,15 +2,13 @@
 
 import { FUSE_BURNING, EXPLODING, EXPLODED } from './index.js';
 import { createShrapnel } from './index.js';
-import { transformMapCoordinates } from '../utils/index.js';
-import { mapPadding } from '../config.js';
 import { pubsub, MAP_CHANGED, USERS_POSSIBLY_OFFLINE, BOMB_EXPLODES } from '../pubsub/index.js';
 
 export default sprite => {
     let { status, fuseLength, explosionDuration, x, y } = sprite;
     const { shrapnel, map, mapX, mapY, row, col } = sprite;
 
-    ({ x, y } = transformMapCoordinates(map, { x: mapX, y: mapY }));
+    ({ x, y } = map.getXAndY({ mapX, mapY }));
     switch (status) {
         case FUSE_BURNING:
             fuseLength -= 1;
@@ -20,8 +18,8 @@ export default sprite => {
                 for (let i = 0; i < 50; i++) {
                     shrapnel.push(createShrapnel({ x, y }));
                 }
-                const tile = map.tileAtLayer('main', { row: row + mapPadding - 1, col: col + mapPadding - 1 });
-                map.changeTile('main', { row: row + mapPadding - 1, col: col + mapPadding - 1 }, tile + 24);
+                const tile = map.tileAtLayer('main', { row, col });
+                map.changeTile('main', { row, col }, tile + 24);
                 pubsub.publish(MAP_CHANGED, map);
                 pubsub.publish(USERS_POSSIBLY_OFFLINE);
             }

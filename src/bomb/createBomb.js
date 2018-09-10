@@ -1,12 +1,11 @@
 /* global kontra */
 
 import { collisionRadius, tileHeight, tileWidth } from '../config.js';
-import { transformMapCoordinates } from '../utils/index.js';
 import { drawBomb, updateBomb } from './index.js';
 import { FUSE_BURNING } from './index.js';
 
 export default (map, { row, col }) => {
-    const { x, y } = transformMapCoordinates(map, { row, col });
+    const { x, y } = map.getXAndY({ row, col });
     return {
         context: kontra.context,
         x,
@@ -17,8 +16,8 @@ export default (map, { row, col }) => {
         shrapnel: [],
         explosionDuration: 0,
         map,
-        mapX: (col - 1) * tileWidth,
-        mapY: (row - 1) * tileHeight,
+        mapX: col * tileWidth,
+        mapY: row * tileHeight,
         row,
         col,
         update() {
