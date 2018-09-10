@@ -8,6 +8,9 @@
     "env": {
         "jest/globals": true
     },
+    "globals": {
+        "ENVIRONMENT": true
+    },
     "overrides": [
         // Special settings for jest tests
         {
