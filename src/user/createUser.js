@@ -7,7 +7,8 @@ import { ONLINE } from '.';
 
 export default ({ map, row, col }) => {
     const { x, y } = transformMapCoordinates(map, { row, col });
-    return kontra.sprite({
+    return {
+        context: kontra.context,
         x,
         y,
         collisionRadius,
@@ -25,5 +26,5 @@ export default ({ map, row, col }) => {
         infect() {
             this.status = INFECTED;
         }
-    });
+    };
 };

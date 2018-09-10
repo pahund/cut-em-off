@@ -7,7 +7,8 @@ import { drawVirus, updateVirus, Blips } from '.';
 export default map => {
     const { x, y } = transformMapCoordinates(map, { row: virusStartRow, col: virusStartCol });
     const blips = new Blips();
-    const virus = kontra.sprite({
+    const virus = {
+        context: kontra.context,
         x,
         y,
         collisionRadius,
@@ -24,7 +25,7 @@ export default map => {
             drawVirus(this);
             this.blips.render();
         }
-    });
+    };
     blips.start(virus);
 
     return virus;
