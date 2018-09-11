@@ -1,6 +1,6 @@
 /* eslint-disable no-sparse-arrays */
 export default function generateSounds(aa) {
-    aa.add('infected', 10, [
+    aa.add('infected', 3, [
         [2, , 0.2916, , 0.2587, 0.9356, 0.3909, -0.2493, , , , , , 0.3583, 0.1617, , , , 1, , , 0.1217, , 0.5]
     ]);
 
@@ -13,7 +13,5 @@ export default function generateSounds(aa) {
     aa.add('explode', 3, [
         [3, , 0.1606, 0.5988, 0.2957, 0.1157, , -0.3921, , , , , , , , , 0.3225, -0.2522, 1, , , , , 0.25]
     ]);
-
-    aa.add('explode-big', 1, [[3, , 0.4, 0.91, 0.25, 0.21, , -0.38, , , , , , , , , -0.0403, -0.186, 1, , , , , 0.5]]);
 }
 /* eslint-enable no-alert, no-console */

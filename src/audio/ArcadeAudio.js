@@ -1,7 +1,9 @@
 import jsfxr from '../../vendor/sfxr';
+import generateSounds from './sounds';
 
 export default function ArcadeAudio() {
     this.sounds = {};
+    generateSounds(this);
 }
 
 ArcadeAudio.prototype.add = function(key, count, settings) {
