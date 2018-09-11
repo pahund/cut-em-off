@@ -4,6 +4,7 @@ import { multiCollides } from '../utils/index.js';
 import { pubsub, GAME_OVER } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { pathfinder } from '../pathfinder/index.js';
+import { calculateScore } from '../scoreBoard/index.js';
 
 export default class {
     constructor(map) {
@@ -39,7 +40,12 @@ export default class {
         if (goneOffline > 0) {
             const { online, offline, infected } = this.getStats();
             if (online === 0) {
-                messageBox.show(`level completed<br>offline users: ${offline}<br>infected users: ${infected}`);
+                messageBox.show(`
+                  level completed<br>
+                  offline users: ${offline}<br>
+                  infected users: ${infected}<br>
+                  score: ${calculateScore({ online, offline, infected })}
+            `);
                 pubsub.publish(GAME_OVER);
             } else {
                 messageBox.flash(`${offline} users went offline<br>good job!`);
@@ -78,7 +84,12 @@ export default class {
         }
         const { online, offline, infected } = this.getStats();
         if (online === 0) {
-            messageBox.show(`level completed<br>offline users: ${offline}<br>infected users: ${infected}`);
+            messageBox.show(`
+              level completed<br>
+              offline users: ${offline}<br>
+              infected users: ${infected}<br>
+              score: ${calculateScore({ online, offline, infected })}
+            `);
             pubsub.publish(GAME_OVER);
             return;
         }

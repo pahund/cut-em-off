@@ -11,7 +11,6 @@ function addCss(element) {
     element.style.cssText = `
 background-color: rgba(0,0,0,0);
 font-size: 1.5em;
-font-weight: normal;
 color: rgba(255,255,255,1);
 pointer-events: none;
 text-transform: uppercase;

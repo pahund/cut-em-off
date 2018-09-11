@@ -1,30 +1,45 @@
 import createScoreBoard from './createScoreBoard.js';
-import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED } from '../pubsub/index.js';
+import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED, GAME_OVER } from '../pubsub/index.js';
 
 export default function initScoreBoard(props) {
     const scoreBoard = createScoreBoard();
-    renderScoreBoard(scoreBoard, props.users);
+    updateScoreBoard(scoreBoard, props.users);
     pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => {
-        setTimeout(() => renderScoreBoard(scoreBoard, props.users), 0);
+        // using setTimeout here because users are updated too late :(
+        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
     });
     pubsub.subscribe(INFECTED, () => {
-        setTimeout(() => renderScoreBoard(scoreBoard, props.users), 0);
+        // using setTimeout here because users are updated too late :(
+        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
+    });
+    pubsub.subscribe(GAME_OVER, () => {
+        // using setTimeout here because users are updated too late :(
+        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
     });
 }
 
-function renderScoreBoard(scoreBoard, users) {
+function updateScoreBoard(scoreBoard, users) {
+    const { gameOver } = users;
     const { infected, online, offline } = users.getStats();
 
-    scoreBoard.innerHTML = `${online} online |  ${offline} offline | ${infected} infected`;
+    const score = calculateScore({ infected, online, offline });
+
+    let highScore = localStorage.getItem('CUT_EM_ALL__HIGHSCORE') || 0;
+
+    if (gameOver) {
+        highScore = Math.max(score, highScore);
+        localStorage.setItem('CUT_EM_ALL__HIGHSCORE', highScore);
+    }
+
+    scoreBoard.innerHTML = `
+        ${online} online |  
+        ${offline} offline | 
+        ${infected} infected | 
+        Score: ${score} | 
+        Highscore: ${highScore}
+    `;
 }
 
-/*
- * TODO
- *
- * ☐ score points for events
- * ☐ listen to blast virus event
- * ☐ save highscore
- * ☐ display highscore
- * ☐ display score on game over
- *
- */
+export function calculateScore({ infected, online, offline }) {
+    return offline * 100 + (online === 0 && infected === 0 ? 300 : 0);
+}
