@@ -1,6 +1,6 @@
-import { tileHeight, tileWidth } from '../config.js';
+import { tileHeight, tileWidth, canvasWidth, canvasHeight } from '../config.js';
 
 export default ({ col, row }) => ({
-    sx: (col - 1) * tileWidth + tileWidth / 2,
-    sy: (row - 1) * tileHeight + tileHeight / 2
+    sx: col * tileWidth - canvasWidth / 2 + tileWidth / 2,
+    sy: row * tileHeight - canvasHeight / 2 + tileHeight / 2
 });

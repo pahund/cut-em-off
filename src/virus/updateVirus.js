@@ -5,23 +5,25 @@ import {
     getOppositeDirection,
     directionIsAllowed
 } from '../directions/index.js';
-import { transformMapCoordinates, getRandomInt } from '../utils/index.js';
+import { getRandomInt } from '../utils/index.js';
 import { isInTheMiddle, moveVirus, getBestDirection } from './utils/index.js';
-import { mapWidth, mapHeight, tileWidth, tileHeight } from '../config.js';
 
-const visits = Array(mapHeight)
-    .fill()
-    .map(() => Array(mapWidth).fill(0));
+let visits = null;
 
 export default sprite => {
-    let { direction, x, y } = sprite;
+    let { direction } = sprite;
     const { map } = sprite;
     const { mapX, mapY } = moveVirus(sprite);
+    const { x, y } = map.getXAndY({ mapX, mapY });
+    if (!visits) {
+        visits = Array(map.height)
+            .fill()
+            .map(() => Array(map.width).fill(0));
+    }
     if (isInTheMiddle({ mapX, mapY })) {
         const tile = map.tileAtLayer('main', { x, y });
-        const col = mapX / tileWidth + 1;
-        const row = mapY / tileHeight + 1;
-        visits[row - 1][col - 1] = visits[row - 1][col - 1] + 1;
+        const { col, row } = map.getRowAndCol({ x, y });
+        visits[row][col]++;
         if (isIntersection(tile)) {
             const { allowed } = directionSwitchMap[tile];
             const viable = allowed.filter(
@@ -33,7 +35,6 @@ export default sprite => {
             direction = switchDirection(map, { x, y }, direction);
         }
     }
-    ({ x, y } = transformMapCoordinates(map, { x: mapX, y: mapY }));
     return {
         direction,
         mapY,

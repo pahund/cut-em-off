@@ -1,4 +1,5 @@
-import { directionSwitchMap, getNextTile, isValidTile } from './index.js';
+import { directionSwitchMap, getNextTile } from './index.js';
+import { isValidTile } from '../utils/index.js';
 
 export default (map, { x, y }, direction) => {
     const tile = map.tileAtLayer('main', { x, y });

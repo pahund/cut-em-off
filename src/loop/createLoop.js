@@ -1,7 +1,6 @@
 /* global kontra */
 
 import { moveCamera } from './utils/index.js';
-import { calculateRowAndCol } from '../utils/index.js';
 import { pubsub, DROP_SHIP } from '../pubsub/index.js';
 
 export default ({ map, player, virus, users, bombs }) => {
@@ -19,7 +18,7 @@ export default ({ map, player, virus, users, bombs }) => {
                 moveCamera(map, player.direction);
             }
             users.update();
-            users.infect([virus]);
+            users.infect(virus);
             bombs.update();
         },
         render() {
@@ -35,7 +34,7 @@ export default ({ map, player, virus, users, bombs }) => {
                 }
                 times.push(now);
                 fps = times.length;
-                const { row, col } = calculateRowAndCol(map);
+                const { row, col } = map.getRowAndCol({ x: 400, y: 300 });
 
                 // eslint-disable-next-line no-param-reassign
                 window.devbox.innerHTML = `${fps} fps – sx=${map.sx}, sy=${map.sy}, row=${row}, col=${col}`;

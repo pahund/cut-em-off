@@ -1,5 +1,4 @@
 /* global kontra */
-import { flatIndex } from './utils/index.js';
 
 /**
  * A tile engine for rendering tilesets. Works well with the tile engine program Tiled.
@@ -17,12 +16,10 @@ import { flatIndex } from './utils/index.js';
  * @param {Context} [properties.context=kontra.context] - Provide a context for the tile engine to draw on.
  */
 export default (properties = {}) => {
-    // size of the map (in tiles)
-    // @if DEBUG
-    if (!properties.width || !properties.height) {
+    if (process.env.NODE_ENV === 'development' && (!properties.width || !properties.height)) {
         throw Error('You must provide width and height properties');
     }
-    // @endif
+
     const width = properties.width;
     const height = properties.height;
 
@@ -190,47 +187,11 @@ export default (properties = {}) => {
             preRenderImage();
         },
 
-        changeTile(layerId, { row, col }, tile) {
-            const dataIndex = flatIndex(row, col, width);
+        changeTile(layerId, position, tile) {
+            const dataIndex = getIndex(position);
             const layer = tileEngine.layers[layerId];
             layer.data[dataIndex] = tile;
             renderTile(layer, dataIndex, true);
-        },
-
-        /**
-         * Simple bounding box collision test for layer tiles.
-         * @memberof kontra.tileEngine
-         *
-         * @param {string} name - Name of the layer.
-         * @param {object} object - Object to check collision against.
-         * @param {number} object.x - X coordinate of the object.
-         * @param {number} object.y - Y coordinate of the object.
-         * @param {number} object.width - Width of the object.
-         * @param {number} object.height - Height of the object.
-         *
-         * @returns {boolean} True if the object collides with a tile, false otherwise.
-         */
-        layerCollidesWith: function layerCollidesWith(name, object) {
-            // calculate all tiles that the object can collide with
-            const row = tileEngine.getRow(object.y);
-            const col = tileEngine.getCol(object.x);
-
-            const endRow = tileEngine.getRow(object.y + object.height);
-            const endCol = tileEngine.getCol(object.x + object.width);
-
-            // check all tiles
-            let index;
-            for (let r = row; r <= endRow; r++) {
-                for (let c = col; c <= endCol; c++) {
-                    index = getIndex({ row: r, col: c });
-
-                    if (tileEngine.layers[name].data[index]) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         },
 
         /**
@@ -327,6 +288,20 @@ export default (properties = {}) => {
             }
         },
 
+        getRowAndCol({ x, y }) {
+            return {
+                row: this.getRow(y),
+                col: this.getCol(x)
+            };
+        },
+
+        getXAndY({ row, col, mapX, mapY }) {
+            return {
+                x: (col ? col * tileWidth : mapX) - tileEngine.sx + tileWidth / 2,
+                y: (row ? row * tileHeight : mapY) - tileEngine.sy + tileHeight / 2
+            };
+        },
+
         /**
          * Get the row from the y coordinate.
          * @memberof kontra.tileEngine
@@ -335,10 +310,7 @@ export default (properties = {}) => {
          *
          * @return {number}
          */
-        getRow(y) {
-            // eslint-disable-next-line no-param-reassign
-            y = y || 0;
-
+        getRow(y = 0) {
             return ((tileEngine.sy + y) / tileHeight) | 0;
         },
 
@@ -350,10 +322,7 @@ export default (properties = {}) => {
          *
          * @return {number}
          */
-        getCol(x) {
-            // eslint-disable-next-line no-param-reassign
-            x = x || 0;
-
+        getCol(x = 0) {
             return ((tileEngine.sx + x) / tileWidth) | 0;
         },
 
@@ -372,12 +341,7 @@ export default (properties = {}) => {
 
         set sy(value) {
             _sy = Math.min(Math.max(0, value), syMax);
-        },
-
-        // expose properties for testing
-        // @if DEBUG
-        _layerOrder: layerOrder
-        // @endif
+        }
     };
 
     // set here so we use setter function

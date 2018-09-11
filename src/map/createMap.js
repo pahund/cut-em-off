@@ -5,8 +5,7 @@ import {
     tileWidth,
     mapHeight as height,
     mapWidth as width,
-    mapPaddingX,
-    mapPaddingY,
+    mapPadding,
     playerStartCol,
     playerStartRow
 } from '../config.js';
@@ -24,14 +23,14 @@ export default async () => {
         tileHeight,
 
         // map size in tiles
-        width: width + mapPaddingX * 2,
-        height: height + mapPaddingY * 2,
+        width: width + mapPadding * 2,
+        height: height + mapPadding * 2,
 
         sx,
         sy
     });
 
-    const paddedMap = addPadding(mapData, width, height, mapPaddingX, mapPaddingY);
+    const paddedMap = addPadding(mapData, width, height, mapPadding);
     const image = await createTilesheet();
     map.addTilesets({ image });
     // map.addTilesets({ image: kontra.assets.images.tilesheet });
@@ -39,11 +38,11 @@ export default async () => {
         {
             name: 'main',
             data: paddedMap
-        },
-        {
-            name: 'debug',
-            data: new Array(paddedMap.length).fill(0)
         }
+        // {
+        //     name: 'debug',
+        //     data: new Array(paddedMap.length).fill(0)
+        // }
         // {
         //     name: 'grid',
         //     data: new Array(paddedMap.length).fill(8)

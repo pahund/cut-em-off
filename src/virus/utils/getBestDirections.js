@@ -7,16 +7,16 @@ export default ({ viable, visits, row, col }) => {
             let vis;
             switch (dir) {
                 case N:
-                    vis = visits[row - 2][col - 1];
-                    break;
-                case E:
                     vis = visits[row - 1][col];
                     break;
+                case E:
+                    vis = visits[row][col + 1];
+                    break;
                 case S:
-                    vis = visits[row][col - 1];
+                    vis = visits[row + 1][col];
                     break;
                 case W:
-                    vis = visits[row - 1][col - 2];
+                    vis = visits[row][col - 1];
                     break;
                 default:
             }
