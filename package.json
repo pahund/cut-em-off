@@ -5,11 +5,12 @@
     "main": "index.js",
     "scripts": {
         "start": "serve -d",
-        "build": "npm run rollup && npm run uglify && npm run clean",
+        "build": "npm run rollup && npm run uglify-js && npm run uglify-css && npm run clean",
         "clean": "rm -rf ./tmp",
         "rollup": "rollup -c -m --silent",
-        "uglify": "uglifyjs -m -c -o game.js --source-map=\"content='./tmp/bundle.js.map',url=game.js.map\" -- ./tmp/bundle.js",
-        "zip": "rm -f captain-katamov.zip && zip -9 -X captain-katamov.zip game.js index.html vendor/kontra.min.js",
+        "uglify-css": "uglifycss ./src/main.css > ./game.css",
+        "uglify-js": "uglifyjs -m -c -o game.js --source-map=\"content='./tmp/bundle.js.map',url=game.js.map\" -- ./tmp/bundle.js",
+        "zip": "rm -f captain-katamov.zip && zip -9 -X captain-katamov.zip game.js game.css index.html vendor/kontra.min.js",
         "test": "jest",
         "lint": "eslint --fix '**/*.js'",
         "format": "prettier --write '**/*.js'",
@@ -57,7 +58,8 @@
         "rollup": "^0.65.2",
         "rollup-plugin-replace": "^2.0.0",
         "serve": "^10.0.0",
-        "uglify-es": "github:mishoo/UglifyJS2#harmony"
+        "uglify-es": "github:mishoo/UglifyJS2#harmony",
+        "uglifycss": "0.0.29"
     },
     "dependencies": {}
 }
