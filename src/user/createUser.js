@@ -4,6 +4,7 @@ import { drawUser, INFECTED } from './index.js';
 import { tileWidth, tileHeight, collisionRadius } from '../config.js';
 import { transformMapCoordinates } from '../utils/index.js';
 import { ONLINE } from './index.js';
+import { pubsub, INFECTED as INFECTED_EVENT } from '../pubsub/index.js';
 
 export default ({ map, row, col }) => {
     const { x, y } = transformMapCoordinates(map, { row, col });
@@ -25,6 +26,7 @@ export default ({ map, row, col }) => {
         },
         infect() {
             this.status = INFECTED;
+            pubsub.publish(INFECTED_EVENT);
         }
     };
 };

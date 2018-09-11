@@ -7,6 +7,7 @@ import { createPlayer } from './player/index.js';
 import { Users } from './user/index.js';
 import { createVirus } from './virus/index.js';
 import { Bombs } from './bomb/index.js';
+import { initAudio } from './audio/index.js';
 
 // will be removed by tree shaking
 import createDevbox from './devbox/createDevbox.js';
@@ -23,5 +24,6 @@ if (process.env.NODE_ENV === 'development') {
     const bombs = new Bombs(map);
     const users = new Users(map);
     const loop = createLoop({ map, player, virus, users, bombs });
+    initAudio();
     loop.start();
 })();

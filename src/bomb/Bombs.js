@@ -1,4 +1,4 @@
-import { pubsub, DROP_BOMB } from '../pubsub/index.js';
+import { pubsub, DROP_BOMB, BOMB_EXPLODES } from '../pubsub/index.js';
 import { EXPLODED } from './constants.js';
 import { createBomb } from './index.js';
 
