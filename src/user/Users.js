@@ -5,6 +5,7 @@ import { pubsub, GAME_OVER } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { pathfinder } from '../pathfinder/index.js';
 import { calculateScore } from '../scoreBoard/index.js';
+import { viruses } from '../virus/index.js';
 
 export default class {
     constructor({ map }) {
@@ -22,8 +23,10 @@ export default class {
         pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
     }
 
-    updateOnlineStatus(...viruses) {
-        const virusesWithRowAndCol = viruses.map(virus => ({
+    updateOnlineStatus() {
+        const allViruses = viruses.getAll();
+
+        const virusesWithRowAndCol = allViruses.map(virus => ({
             ...virus,
             ...this.map.getRowAndCol({ x: virus.x, y: virus.y })
         }));
@@ -72,9 +75,10 @@ export default class {
         this.users.forEach(user => user.render());
     }
 
-    infect(...viruses) {
+    infect() {
+        const allViruses = viruses.getAll();
         const { users, gameOver } = this;
-        const userVirusCollisions = multiCollides(users, viruses).filter(([user]) => user.status !== INFECTED);
+        const userVirusCollisions = multiCollides(users, allViruses).filter(([user]) => user.status !== INFECTED);
         if (userVirusCollisions.length === 0) {
             return;
         }

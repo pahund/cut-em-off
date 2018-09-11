@@ -2,6 +2,7 @@ import { createServer } from './index.js';
 import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { GAME_OVER, pubsub } from '../pubsub/index.js';
+import { viruses } from '../virus/index.js';
 
 class Servers {
     constructor() {
@@ -13,7 +14,6 @@ class Servers {
     init(map, serverCoordinates = []) {
         this.map = map;
         serverCoordinates.forEach(({ col, row }) => this.servers.push(createServer({ map, row, col })));
-        return this;
     }
     update() {
         this.servers.forEach(server => server.update());
@@ -27,9 +27,10 @@ class Servers {
             server.broken = true;
         }
     }
-    infect(virus) {
+    infect() {
+        const allViruses = viruses.getAll();
         const availableServers = this.getAvailableServers();
-        const collisions = multiCollides(availableServers, [virus]);
+        const collisions = multiCollides(availableServers, allViruses);
 
         if (collisions.length === 0) {
             return;

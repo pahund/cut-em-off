@@ -3,8 +3,9 @@
 import { moveCamera } from './utils/index.js';
 import { pubsub, DROP_SHIP } from '../pubsub/index.js';
 import { servers } from '../server/index.js';
+import { viruses } from '../virus/index.js';
 
-export default ({ map, player, virus, users, bombs }) => {
+export default ({ map, player, users, bombs }) => {
     const times = [];
     let fps;
     let shipMoving = true;
@@ -12,18 +13,18 @@ export default ({ map, player, virus, users, bombs }) => {
 
     return kontra.gameLoop({
         update() {
-            virus.update();
+            viruses.update();
             player.update();
-            player.infect([...servers.getInfectedServers(), virus]);
+            player.infect([...servers.getInfectedServers(), ...viruses.getAll()]); // TODO
             player.teleport();
             if (shipMoving) {
                 moveCamera({ map, ...player });
             }
             users.update();
-            users.infect(virus);
+            users.infect();
             bombs.update();
             servers.update();
-            servers.infect(virus);
+            servers.infect();
         },
         render() {
             map.render();
@@ -31,7 +32,7 @@ export default ({ map, player, virus, users, bombs }) => {
             servers.render();
             bombs.render();
             player.render();
-            virus.render();
+            viruses.render();
             if (process.env.NODE_ENV === 'development') {
                 const now = performance.now();
                 while (times.length > 0 && times[0] <= now - 1000) {

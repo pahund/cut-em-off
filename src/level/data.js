@@ -8,14 +8,11 @@ export default [
             direction: S,
             speed: 5
         },
-        viruses: [
-            {
-                col: 8,
-                row: 7,
-                direction: E,
-                speed: 2.5
-            }
-        ],
+        virus: {
+            speed: 2.5,
+            max: 2,
+            interval: 10000
+        },
         servers: [{ row: 9, col: 8 }, { row: 9, col: 12 }, { row: 15, col: 15 }],
         map: {
             width: 20,
