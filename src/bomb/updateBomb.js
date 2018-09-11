@@ -3,7 +3,7 @@
 import { FUSE_BURNING, EXPLODING, EXPLODED } from './index.js';
 import { createShrapnel } from './index.js';
 import { pubsub, MAP_CHANGED, USERS_POSSIBLY_OFFLINE, BOMB_EXPLODES } from '../pubsub/index.js';
-import { Servers } from '../server/index.js';
+import { servers } from '../server/index.js';
 
 export default sprite => {
     let { status, fuseLength, explosionDuration, x, y } = sprite;
@@ -19,8 +19,8 @@ export default sprite => {
                 for (let i = 0; i < 50; i++) {
                     shrapnel.push(createShrapnel({ x, y }));
                 }
-                if (Servers.find({ row, col })) {
-                    Servers.destroy({ row, col });
+                if (servers.find({ row, col })) {
+                    servers.destroy({ row, col });
                 } else {
                     const tile = map.tileAtLayer('main', { row, col });
                     map.changeTile('main', { row, col }, tile + 24);

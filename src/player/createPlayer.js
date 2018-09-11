@@ -7,7 +7,7 @@ import { collides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { calculateCameraCoordinates } from '../utils/index.js';
 import { directionIsAllowed, switchDirection } from '../directions/index.js';
-import { Servers } from '../server/index.js';
+import { servers } from '../server/index.js';
 
 export default map => {
     const player = {
@@ -54,7 +54,7 @@ export default map => {
 
         teleport() {
             if (this.teleportToServer) {
-                const randomServer = Servers.getRandom();
+                const randomServer = servers.getRandom();
                 if (randomServer) {
                     ({ sx: this.map.sx, sy: this.map.sy } = calculateCameraCoordinates(randomServer));
                     if (!directionIsAllowed(this.map, { x: this.x, y: this.y }, this.direction)) {
