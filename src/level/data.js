@@ -3,6 +3,33 @@ import { N, W, S, E } from '../directions/index.js';
 export default [
     {
         player: {
+            col: 7,
+            row: 7,
+            direction: N,
+            speed: 5
+        },
+        virus: {
+            speed: 2.5,
+            max: 1,
+            interval: 3000
+        },
+        servers: [{ row: 7, col: 4 }, { row: 7, col: 10 }],
+        map: {
+            width: 7,
+            height: 7,
+            // prettier-ignore
+            data:
+                '   6   ' +
+                '   2 01' +
+                '0aac03c' +
+                '2 0b9 2' +
+                '4594aa9' +
+                '89 2   ' +
+                '   e   '
+        }
+    },
+    {
+        player: {
             col: 8,
             row: 9,
             direction: S,
