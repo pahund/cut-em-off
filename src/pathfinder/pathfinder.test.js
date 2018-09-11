@@ -109,7 +109,7 @@ describe('When I create a pathfinder without setting a graph using the construct
                         main: {
                             // prettier-ignore
                             data: [
-                                20,  6, 11,  2,
+                                16,  6, 11,  2,
                                  0,  3,  0,  3,
                                  1,  4,  6, 10,
                                  9, 11, 10,  0
@@ -153,8 +153,8 @@ describe('When I create a pathfinder without setting a graph using the construct
                         main: {
                             // prettier-ignore
                             data: [
-                                20,  6, 35,  2,
-                                 0, 27,  0,  3,
+                                16,  6, 27,  2,
+                                 0, 19,  0,  3,
                                  1,  4,  6, 10,
                                  9, 11, 10,  0
                             ]
