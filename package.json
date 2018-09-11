@@ -4,9 +4,12 @@
     "description": "Make your users go offline before the evil virus infects them!",
     "main": "index.js",
     "scripts": {
-        "start": "serve",
-        "build": "webpack",
-        "zip": "zip -9 cut-em-off-by-pahund.zip game.js index.html vendor/kontra.min.js",
+        "start": "serve -d",
+        "build": "npm run rollup && npm run uglify && npm run clean",
+        "clean": "rm -rf ./tmp",
+        "rollup": "rollup -c -m --silent",
+        "uglify": "uglifyjs -m -c -o game.js --source-map=\"content='./tmp/bundle.js.map',url=game.js.map\" -- ./tmp/bundle.js",
+        "zip": "rm -f cut-em-off-by-pahund.zip && zip -9 -X cut-em-off-by-pahund.zip game.js index.html vendor/kontra.min.js",
         "test": "jest",
         "lint": "eslint --fix '**/*.js'",
         "format": "prettier --write '**/*.js'",
@@ -41,7 +44,6 @@
         "babel-core": "^6.26.3",
         "babel-jest": "^23.4.2",
         "babel-preset-env": "^1.7.0",
-        "clean-webpack-plugin": "^0.1.19",
         "eslint": "^5.3.0",
         "eslint-config-motor-talk": "^5.0.0",
         "eslint-config-prettier": "^2.9.0",
@@ -52,9 +54,10 @@
         "jest": "^23.5.0",
         "lint-staged": "^7.2.2",
         "prettier": "^1.14.2",
-        "regenerator-runtime": "^0.12.1",
+        "rollup": "^0.65.2",
+        "rollup-plugin-replace": "^2.0.0",
         "serve": "^10.0.0",
-        "webpack": "^4.16.5",
-        "webpack-cli": "^3.1.0"
-    }
+        "uglify-es": "github:mishoo/UglifyJS2#harmony"
+    },
+    "dependencies": {}
 }
