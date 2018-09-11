@@ -1,7 +1,7 @@
 /* global kontra */
 
 import { createCanvas } from './canvas/index.js';
-import ScoreBoard from './scoreBoard/index.js';
+import initScoreBoard from './scoreBoard/index.js';
 import { createLoop } from './loop/index.js';
 import { createMap } from './map/index.js';
 import { createPlayer } from './player/index.js';
@@ -19,7 +19,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 (async () => {
-    const scoreBoard = new ScoreBoard();
     createCanvas();
     kontra.init();
     const map = await createMap();
@@ -28,6 +27,7 @@ if (process.env.NODE_ENV === 'development') {
     const virus = createVirus(map);
     const bombs = new Bombs(map);
     const users = new Users(map);
+    initScoreBoard({ users, map });
     pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
     const loop = createLoop({ map, player, virus, users, bombs });
     initAudio();
