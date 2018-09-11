@@ -14,7 +14,7 @@ export default map => {
         collisionRadius,
         map,
         infected: false,
-        gameOver: false,
+        gameOver: true,
         direction: playerStartDirection,
         nextDirection: null,
         dropBomb: false,
@@ -45,6 +45,10 @@ export default map => {
                     pubsub.publish(GAME_OVER);
                 }
             }
+        },
+
+        enableControls() {
+            this.gameOver = false;
         }
     };
 

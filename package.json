@@ -9,7 +9,7 @@
         "clean": "rm -rf ./tmp",
         "rollup": "rollup -c -m --silent",
         "uglify": "uglifyjs -m -c -o game.js --source-map=\"content='./tmp/bundle.js.map',url=game.js.map\" -- ./tmp/bundle.js",
-        "zip": "rm -f cut-em-off-by-pahund.zip && zip -9 -X cut-em-off-by-pahund.zip game.js index.html vendor/kontra.min.js",
+        "zip": "rm -f captain-katamov.zip && zip -9 -X captain-katamov.zip game.js index.html vendor/kontra.min.js",
         "test": "jest",
         "lint": "eslint --fix '**/*.js'",
         "format": "prettier --write '**/*.js'",
