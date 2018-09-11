@@ -1,4 +1,4 @@
-# Cut 'Em Off!
+# Captain Katamov
 
 **Make your users go offline before the evil virus infects them!**
 

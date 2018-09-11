@@ -1,12 +1,14 @@
 /* eslint-disable no-param-reassign */
-import { tileWidth, tileHeight, lightBlue } from '../../config.js';
-import { krakel } from './utils/index.js';
+import { darkBlue, lightBlue, darkRed, lightRed } from '../config.js';
+import { krakel } from '../map/tilesheet/utils/index.js';
 
-export default ({ ctx, row, col, broken }) => {
+export default sprite => {
+    const { context: ctx, x, y, broken, infected } = sprite;
     ctx.save();
-    ctx.translate((col - 1) * tileWidth + tileWidth / 2, (row - 1) * tileHeight + tileHeight / 2);
+    ctx.translate(x, y);
     ctx.lineWidth = 3;
-    ctx.strokeStyle = lightBlue;
+    ctx.strokeStyle = infected ? lightRed : lightBlue;
+    ctx.fillStyle = infected ? darkRed : darkBlue;
     ctx.beginPath();
     krakel(ctx, [
         [0, 30, -48],
@@ -19,6 +21,7 @@ export default ({ ctx, row, col, broken }) => {
         [1, -30, -48],
         [1, 30, -48]
     ]);
+    ctx.fill();
     ctx.stroke();
     if (broken) {
         ctx.lineWidth = 2;

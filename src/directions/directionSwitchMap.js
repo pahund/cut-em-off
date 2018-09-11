@@ -103,17 +103,5 @@ export default {
         change: {
             [W]: E
         }
-    },
-
-    /* FIXME: servers should be sprites */
-    // server
-    14: {
-        allowed: [N, S],
-        change: {}
-    },
-    // broken server
-    38: {
-        allowed: [N, S],
-        change: {}
     }
 };

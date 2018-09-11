@@ -2,6 +2,7 @@
 
 import { moveCamera } from './utils/index.js';
 import { pubsub, DROP_SHIP } from '../pubsub/index.js';
+import { servers } from '../server/index.js';
 
 export default ({ map, player, virus, users, bombs }) => {
     const times = [];
@@ -13,17 +14,21 @@ export default ({ map, player, virus, users, bombs }) => {
         update() {
             virus.update();
             player.update();
-            player.infect(virus);
+            player.infect([...servers.getInfectedServers(), virus]);
+            player.teleport();
             if (shipMoving) {
-                moveCamera(map, player.direction);
+                moveCamera({ map, ...player });
             }
             users.update();
             users.infect(virus);
             bombs.update();
+            servers.update();
+            servers.infect(virus);
         },
         render() {
             map.render();
             users.render();
+            servers.render();
             bombs.render();
             player.render();
             virus.render();

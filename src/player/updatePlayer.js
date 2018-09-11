@@ -5,7 +5,7 @@ import { messageBox } from '../messageBox/index.js';
 import { bombCooldown } from '../config.js';
 
 export default sprite => {
-    let { nextDirection, direction, dropBomb, scale, bombCoolingDown } = sprite;
+    let { nextDirection, direction, dropBomb, scale, bombCoolingDown, teleportToServer } = sprite;
     const { dropping, map, gameOver, x, y } = sprite;
     if (dropping) {
         if (scale > 0) {
@@ -14,16 +14,16 @@ export default sprite => {
             messageBox.show('You fell into the abyss<br>Game over');
             pubsub.publish(GAME_OVER);
         }
-        return { direction, nextDirection, dropBomb, scale, bombCoolingDown };
+        return { direction, nextDirection, dropBomb, scale, bombCoolingDown, teleportToServer };
     }
     if (!gameOver) {
-        ({ nextDirection, dropBomb } = getKey(sprite));
+        ({ nextDirection, dropBomb, teleportToServer } = getKey(sprite));
         if (bombCoolingDown) {
             dropBomb = false;
         }
     }
     if (!isInTheMiddle({ x: map.sx, y: map.sy })) {
-        return { direction, nextDirection, dropBomb, scale, bombCoolingDown };
+        return { direction, nextDirection, dropBomb, scale, bombCoolingDown, teleportToServer };
     }
     if (nextDirection && directionIsAllowed(map, { x, y }, nextDirection)) {
         direction = nextDirection;
@@ -46,5 +46,5 @@ export default sprite => {
             sprite.bombCoolingDown = false;
         }, bombCooldown);
     }
-    return { direction, nextDirection, dropBomb, scale, bombCoolingDown };
+    return { direction, nextDirection, dropBomb, scale, bombCoolingDown, teleportToServer };
 };

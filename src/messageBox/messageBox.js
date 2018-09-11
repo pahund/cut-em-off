@@ -3,13 +3,14 @@ class MessageBox {
         this.timeoutHandler = null;
         this.div = document.createElement('div');
         this.div.style.cssText = `
-background-color: rgba(0,0,0,0);
+background-color: rgba(0,0,0,0.3);
 font-size: 3em;
 font-weight: bold;
 align-items: center;
 justify-content: center;
 display: flex;
-color: rgba(255,255,255,0);
+color: white;
+opacity: 0;
 position: absolute;
 top: 0;
 left:0;
@@ -29,16 +30,21 @@ font-family: monospace;
         clearTimeout(this.timeoutHandler);
         this.div.style.transition = '3s';
         this.div.innerHTML = `<div>${message}</div>`;
-        this.div.style.backgroundColor = 'rgba(0,0,0,0.5)';
-        this.div.style.color = 'rgba(255,255,255,1)';
+        this.div.style.opacity = 1;
     }
 
     flash(message) {
         clearTimeout(this.timeoutHandler);
         this.div.style.transition = '0.5s';
         this.div.innerHTML = `<div>${message}</div>`;
-        this.div.style.color = 'rgba(255,255,255,1)';
-        this.timeoutHandler = setTimeout(() => (this.div.style.color = 'rgba(255,255,255,0)'), 500);
+        this.div.style.opacity = 1;
+        this.timeoutHandler = setTimeout(() => (this.div.style.opacity = 0), 500);
+    }
+
+    clear() {
+        clearTimeout(this.timeoutHandler);
+        this.div.style.transition = '0.5s';
+        this.div.style.opacity = 0;
     }
 }
 export default new MessageBox();
