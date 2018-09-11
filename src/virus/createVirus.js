@@ -1,27 +1,21 @@
 /* global kontra */
 
-import {
-    virusStartDirection,
-    virusStartCol,
-    virusStartRow,
-    tileWidth,
-    tileHeight,
-    collisionRadius
-} from '../config.js';
+import { tileWidth, tileHeight, collisionRadius } from '../config.js';
 import { drawVirus, updateVirus, Blips } from './index.js';
 
-export default map => {
-    const { x, y } = map.getXAndY({ row: virusStartRow, col: virusStartCol });
+export default ({ map, col, row, direction, speed }) => {
+    const { x, y } = map.getXAndY({ row, col });
     const blips = new Blips();
     const virus = {
         context: kontra.context,
         x,
         y,
+        speed,
         collisionRadius,
         map,
-        mapX: virusStartCol * tileWidth,
-        mapY: virusStartRow * tileHeight,
-        direction: virusStartDirection,
+        mapX: col * tileWidth,
+        mapY: row * tileHeight,
+        direction,
         blips,
         update() {
             ({ x: this.x, y: this.y, mapX: this.mapX, mapY: this.mapY, direction: this.direction } = updateVirus(this));

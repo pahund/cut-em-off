@@ -1,16 +1,15 @@
 import { N, E, S, W } from '../../directions/index.js';
-import { virusSpeed } from '../../config.js';
 
-export default ({ mapX, mapY, direction }) => {
+export default ({ mapX, mapY, direction, speed }) => {
     switch (direction) {
         case N:
-            return { mapX, mapY: mapY - virusSpeed };
+            return { mapX, mapY: mapY - speed };
         case E:
-            return { mapX: mapX + virusSpeed, mapY };
+            return { mapX: mapX + speed, mapY };
         case S:
-            return { mapX, mapY: mapY + virusSpeed };
+            return { mapX, mapY: mapY + speed };
         case W:
-            return { mapX: mapX - virusSpeed, mapY };
+            return { mapX: mapX - speed, mapY };
         default:
             return { mapX, mapY };
     }

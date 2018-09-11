@@ -1,13 +1,7 @@
 /* global kontra */
 
 import { drawPlayer, updatePlayer } from './index.js';
-import {
-    canvasHeight,
-    canvasWidth,
-    playerStartDirection,
-    collisionRadius,
-    teleportCooldownTimeout
-} from '../config.js';
+import { canvasHeight, canvasWidth, collisionRadius, teleportCooldownTimeout } from '../config.js';
 import { pubsub, GAME_OVER, DROP_SHIP } from '../pubsub/index.js';
 import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
@@ -15,16 +9,17 @@ import { calculateCameraCoordinates } from '../utils/index.js';
 import { directionIsAllowed, switchDirection } from '../directions/index.js';
 import { servers } from '../server/index.js';
 
-export default map => {
+export default ({ map, direction, speed }) => {
     const player = {
         context: kontra.context,
         x: canvasWidth / 2,
         y: canvasHeight / 2,
         collisionRadius,
         map,
+        speed,
         infected: false,
         gameOver: true,
-        direction: playerStartDirection,
+        direction,
         nextDirection: null,
         dropBomb: false,
         scale: 1,
