@@ -33,9 +33,9 @@ class GameManager {
         pathfinder.setDataFromMap(map, 'main');
         const users = new Users({ map, positions: level.users });
         servers.init(map, level.servers);
-        initScoreBoard({ users, map });
         this.loop = createLoop({ map, player: this.player, virus, users, bombs });
         pubsub.reset(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
+        initScoreBoard({ users, map });
 
         map.render();
         users.render();
