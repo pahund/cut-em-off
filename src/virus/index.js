@@ -1,3 +1,4 @@
+export { default as viruses } from './Viruses.js';
 export { default as createVirus } from './createVirus.js';
 export { default as updateVirus } from './updateVirus.js';
 export { default as drawVirus } from './drawVirus.js';

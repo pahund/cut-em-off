@@ -6,7 +6,7 @@ import { createLoop } from '../loop/index.js';
 import { createMap } from '../map/index.js';
 import { createPlayer } from '../player/index.js';
 import { Users } from '../user/index.js';
-import { createVirus } from '../virus/index.js';
+import { viruses } from '../virus/index.js';
 import { createCanvas } from '../canvas/index.js';
 import { initPathfinder, pathfinder } from '../pathfinder/index.js';
 import { pubsub, USERS_POSSIBLY_OFFLINE } from '../pubsub/index.js';
@@ -28,11 +28,11 @@ class GameManager {
         const map = await createMap({ ...level.map, col: level.player.col, row: level.player.row });
         this.player = createPlayer({ map, ...level.player });
         const bombs = new Bombs(map);
-        const virus = createVirus({ map, ...level.viruses[0] });
+        viruses.init(map, level.virus);
         pathfinder.setDataFromMap(map, 'main');
         const users = new Users({ map });
         servers.init(map, level.servers);
-        this.loop = createLoop({ map, player: this.player, virus, users, bombs });
+        this.loop = createLoop({ map, player: this.player, users, bombs });
         pubsub.reset(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
         initScoreBoard({ users, map });
 
@@ -41,7 +41,6 @@ class GameManager {
         servers.render();
         bombs.render();
         this.player.render();
-        virus.render();
     }
 
     showStartScreen() {
@@ -68,6 +67,7 @@ class GameManager {
 
     startLevel() {
         this.loop.start();
+        viruses.startSpawning();
     }
 }
 
