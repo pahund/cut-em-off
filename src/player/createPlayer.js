@@ -5,6 +5,9 @@ import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from
 import { pubsub, GAME_OVER, DROP_SHIP } from '../pubsub/index.js';
 import { collides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
+import { calculateCameraCoordinates } from '../utils/index.js';
+import { directionIsAllowed, switchDirection } from '../directions/index.js';
+import { servers } from '../server/index.js';
 
 export default map => {
     const player = {
@@ -21,6 +24,7 @@ export default map => {
         scale: 1,
         dropping: false,
         bombCoolingDown: false,
+        teleportToServer: false,
 
         update() {
             ({
@@ -28,7 +32,8 @@ export default map => {
                 direction: this.direction,
                 dropBomb: this.dropBomb,
                 scale: this.scale,
-                bombCoolingDown: this.bombCoolingDown
+                bombCoolingDown: this.bombCoolingDown,
+                teleportToServer: this.teleportToServer
             } = updatePlayer(this, pubsub, messageBox));
         },
 
@@ -44,6 +49,21 @@ export default map => {
                     messageBox.show('player infected<br>game over');
                     pubsub.publish(GAME_OVER);
                 }
+            }
+        },
+
+        teleport() {
+            if (this.teleportToServer) {
+                const randomServer = servers.getRandom();
+                if (randomServer) {
+                    ({ sx: this.map.sx, sy: this.map.sy } = calculateCameraCoordinates(randomServer));
+                    if (!directionIsAllowed(this.map, { x: this.x, y: this.y }, this.direction)) {
+                        this.direction = switchDirection(this.map, { x: this.x, y: this.y }, this.direction);
+                    }
+                } else {
+                    messageBox.flash('all servers are destroyed');
+                }
+                this.teleportToServer = false;
             }
         },
 

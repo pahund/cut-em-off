@@ -1,5 +1,5 @@
 import { tileHeight, tileWidth } from '../../config.js';
-import { drawCurve, drawStraight, drawTSection, drawCrossing, drawServer, drawTerminus } from './index.js';
+import { drawCurve, drawStraight, drawTSection, drawCrossing, drawTerminus } from './index.js';
 
 // will be removed by tree shaking
 import drawDebugGrid from './drawDebugGrid.js';
@@ -24,7 +24,6 @@ export default () => {
     drawTerminus({ ctx, row: 3, col: 2, deg: 90 });
     drawTerminus({ ctx, row: 3, col: 3, deg: 180 });
     drawTerminus({ ctx, row: 3, col: 4, deg: 270 });
-    drawServer({ ctx, row: 2, col: 6 });
     drawCurve({ ctx, row: 4, col: 1, deg: 0, broken: true });
     drawCurve({ ctx, row: 4, col: 2, deg: 90, broken: true });
     drawCurve({ ctx, row: 5, col: 1, deg: 270, broken: true });
@@ -40,7 +39,6 @@ export default () => {
     drawTerminus({ ctx, row: 6, col: 2, deg: 90, broken: true });
     drawTerminus({ ctx, row: 6, col: 3, deg: 180, broken: true });
     drawTerminus({ ctx, row: 6, col: 4, deg: 270, broken: true });
-    drawServer({ ctx, row: 5, col: 6, broken: true });
 
     if (process.env.NODE_ENV === 'development') {
         drawDebugGrid({ ctx, row: 1, col: 8 });
