@@ -17,7 +17,7 @@ export default ({ map, player, virus, users, bombs }) => {
             player.infect([...servers.getInfectedServers(), virus]);
             player.teleport();
             if (shipMoving) {
-                moveCamera(map, player.direction);
+                moveCamera({ map, ...player });
             }
             users.update();
             users.infect(virus);

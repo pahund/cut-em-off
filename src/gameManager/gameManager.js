@@ -8,29 +8,33 @@ import { createPlayer } from '../player/index.js';
 import { Users } from '../user/index.js';
 import { createVirus } from '../virus/index.js';
 import { createCanvas } from '../canvas/index.js';
-import { initPathfinder } from '../pathfinder/index.js';
+import { initPathfinder, pathfinder } from '../pathfinder/index.js';
 import { pubsub, USERS_POSSIBLY_OFFLINE } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { lightGreen } from '../config.js';
 import { servers } from '../server/index.js';
-
-const serverCoordinates = [{ row: 9, col: 8 }, { row: 9, col: 12 }, { row: 15, col: 15 }];
+import { levels } from '../level/index.js';
 
 class GameManager {
-    async init() {
+    constructor() {
         createCanvas();
         kontra.init();
-        const map = await createMap();
-        initPathfinder(map);
-        this.player = createPlayer(map);
-        const virus = createVirus(map);
-        const bombs = new Bombs(map);
-        const users = new Users(map);
-        servers.init(map, serverCoordinates);
-        pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
-        this.loop = createLoop({ map, player: this.player, virus, users, bombs });
-
+        initPathfinder();
         initAudio();
+    }
+
+    async initLevel(levelIndex) {
+        const level = levels.getLevel(levelIndex);
+        const map = await createMap({ ...level.map, col: level.player.col, row: level.player.row });
+        this.player = createPlayer({ map, ...level.player });
+        const bombs = new Bombs(map);
+        const virus = createVirus({ map, ...level.viruses[0] });
+        pathfinder.setDataFromMap(map, 'main');
+        const users = new Users({ map, positions: level.users });
+        servers.init(map, level.servers);
+        this.loop = createLoop({ map, player: this.player, virus, users, bombs });
+        pubsub.reset(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
+
         map.render();
         users.render();
         servers.render();

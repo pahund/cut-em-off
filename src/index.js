@@ -7,6 +7,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 (async () => {
-    await gameManager.init();
+    await gameManager.initLevel(0);
     gameManager.showStartScreen();
 })();
