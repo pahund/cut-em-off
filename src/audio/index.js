@@ -1,5 +1,5 @@
-import { pubsub, DROP_BOMB, BOMB_EXPLODES, INFECTED, DROP_SHIP } from '../pubsub';
-import ArcadeAudio from './ArcadeAudio';
+import { pubsub, DROP_BOMB, BOMB_EXPLODES, INFECTED, DROP_SHIP } from '../pubsub/index.js';
+import ArcadeAudio from './ArcadeAudio.js';
 
 const aa = new ArcadeAudio();
 

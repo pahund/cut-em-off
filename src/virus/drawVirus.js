@@ -1,5 +1,5 @@
-import { lightRed, darkRed } from '../config';
-import { getRandomInt as ri } from '../utils';
+import { lightRed, darkRed } from '../config.js';
+import { getRandomInt as ri } from '../utils/index.js';
 
 export default sprite => {
     const { context: ctx, x, y } = sprite;

@@ -1,5 +1,8 @@
-import { tileHeight, tileWidth } from '../../config';
-import { drawCurve, drawStraight, drawTSection, drawCrossing, drawServer, drawTerminus } from '.';
+import { tileHeight, tileWidth } from '../../config.js';
+import { drawCurve, drawStraight, drawTSection, drawCrossing, drawServer, drawTerminus } from './index.js';
+
+// will be removed by tree shaking
+import drawDebugGrid from './drawDebugGrid.js';
 
 export default () => {
     const canvas = document.createElement('canvas');
@@ -38,9 +41,11 @@ export default () => {
     drawTerminus({ ctx, row: 6, col: 3, deg: 180, broken: true });
     drawTerminus({ ctx, row: 6, col: 4, deg: 270, broken: true });
     drawServer({ ctx, row: 5, col: 6, broken: true });
+
     if (process.env.NODE_ENV === 'development') {
-        require('./drawDebugGrid').default({ ctx, row: 1, col: 8 });
+        drawDebugGrid({ ctx, row: 1, col: 8 });
     }
+
     const image = new Image();
     image.src = canvas.toDataURL('image/png');
     // document.getElementById('wrapper').appendChild(image);

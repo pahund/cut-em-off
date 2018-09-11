@@ -1,5 +1,5 @@
-import { EXPLODING, FUSE_BURNING } from './constants';
-import { drawBombWithFuse } from '.';
+import { EXPLODING, FUSE_BURNING } from './constants.js';
+import { drawBombWithFuse } from './index.js';
 
 export default sprite => {
     const { status, shrapnel } = sprite;

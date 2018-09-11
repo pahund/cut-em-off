@@ -1,5 +1,5 @@
-import jsfxr from '../../vendor/sfxr';
-import generateSounds from './sounds';
+import jsfxr from '../../vendor/sfxr.js';
+import generateSounds from './sounds.js';
 
 export default function ArcadeAudio() {
     this.sounds = {};

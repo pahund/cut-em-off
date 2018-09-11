@@ -1,4 +1,4 @@
-import { N, E, S, W } from '.';
+import { N, E, S, W } from './index.js';
 
 export default {
     // curve from S to E

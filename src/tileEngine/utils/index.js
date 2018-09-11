@@ -1,1 +1,1 @@
-export { default as flatIndex } from './flatIndex';
+export { default as flatIndex } from './flatIndex.js';

@@ -4,9 +4,8 @@
     "description": "Make your users go offline before the evil virus infects them!",
     "main": "index.js",
     "scripts": {
-        "start": "webpack-dev-server --config webpack.config.dev.js",
-        "build": "webpack --config webpack.config.prod.js",
-        "build-debug": "webpack --config webpack.config.debug.js",
+        "start": "serve",
+        "build": "webpack",
         "zip": "zip -9 cut-em-off-by-pahund.zip game.js index.html vendor/kontra.min.js",
         "test": "jest",
         "lint": "eslint --fix '**/*.js'",
@@ -49,9 +48,8 @@
         "lint-staged": "^7.2.2",
         "prettier": "^1.14.2",
         "regenerator-runtime": "^0.12.1",
+        "serve": "^10.0.0",
         "webpack": "^4.16.5",
-        "webpack-cli": "^3.1.0",
-        "webpack-dev-server": "^3.1.5",
-        "webpack-merge": "^4.1.4"
+        "webpack-cli": "^3.1.0"
     }
 }

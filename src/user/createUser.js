@@ -1,14 +1,15 @@
 /* global kontra */
 
-import { drawUser, INFECTED } from '.';
-import { tileWidth, tileHeight, collisionRadius } from '../config';
-import { pubsub, INFECTED as INFECTED_EVENT } from '../pubsub';
-import { transformMapCoordinates } from '../utils';
-import { ONLINE } from '.';
+import { drawUser, INFECTED } from './index.js';
+import { tileWidth, tileHeight, collisionRadius } from '../config.js';
+import { transformMapCoordinates } from '../utils/index.js';
+import { ONLINE } from './index.js';
+import { pubsub, INFECTED as INFECTED_EVENT } from '../pubsub/index.js';
 
 export default ({ map, row, col }) => {
     const { x, y } = transformMapCoordinates(map, { row, col });
-    return kontra.sprite({
+    return {
+        context: kontra.context,
         x,
         y,
         collisionRadius,
@@ -27,5 +28,5 @@ export default ({ map, row, col }) => {
             this.status = INFECTED;
             pubsub.publish(INFECTED_EVENT);
         }
-    });
+    };
 };

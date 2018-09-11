@@ -1,5 +1,5 @@
-import { lightGreen, darkGreen, lightRed, darkRed } from '../config';
-import { calculateRotation } from '../utils';
+import { lightGreen, darkGreen, lightRed, darkRed } from '../config.js';
+import { calculateRotation } from '../utils/index.js';
 
 export default sprite => {
     const { context: ctx, x, y, direction, infected, scale } = sprite;

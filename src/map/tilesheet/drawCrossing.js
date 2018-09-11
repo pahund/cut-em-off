@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { tileWidth, tileHeight, lightBlue } from '../../config';
-import { krakel } from './utils';
+import { tileWidth, tileHeight, lightBlue } from '../../config.js';
+import { krakel } from './utils/index.js';
 
 export default ({ ctx, row, col, broken = false }) => {
     ctx.save();

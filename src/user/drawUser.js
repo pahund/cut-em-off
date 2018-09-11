@@ -1,7 +1,7 @@
 /* global kontra */
-import { lightBlue, darkBlue, lightGreen, darkGreen, lightRed, darkRed } from '../config';
-import { ONLINE, OFFLINE, INFECTED } from './constants';
-import { degreesToRadians as deg2rad } from '../utils';
+import { lightBlue, darkBlue, lightGreen, darkGreen, lightRed, darkRed } from '../config.js';
+import { ONLINE, OFFLINE, INFECTED } from './constants.js';
+import { degreesToRadians as deg2rad } from '../utils/index.js';
 
 const spriteMapping = {
     [ONLINE]: { fg: lightBlue, bg: darkBlue },

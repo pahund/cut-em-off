@@ -1,5 +1,5 @@
 /* global kontra */
-import { flatIndex } from './utils';
+import { flatIndex } from './utils/index.js';
 
 /**
  * A tile engine for rendering tilesets. Works well with the tile engine program Tiled.

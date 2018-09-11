@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cut 'Em Off!</title>
+    <meta name="description" content="Make your users go offline before the evil virus infects them!">
+    <meta name="author" content="Patrick Hund">
+    <script>
+        const process = { env: { NODE_ENV: "development" }};
+    </script>
+    <style>
+        body {
+            background-color: #2b3653;
+            padding: 0;
+            overflow: hidden;
+        }
+        #wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper"></div>
+<script src="./vendor/kontra.min.js"></script>
+<script type="module" src="./src/index.js"></script>
+</body>
+</html>

@@ -1,8 +1,8 @@
-export * from './constants';
-export { default as directionIsAllowed } from './directionIsAllowed';
-export { default as switchDirection } from './switchDirection';
-export { default as directionSwitchMap } from './directionSwitchMap';
-export { default as isIntersection } from './isIntersection';
-export { default as getOppositeDirection } from './getOppositeDirection';
-export { default as getNextTile } from './getNextTile';
-export { default as isValidTile } from './isValidTile';
+export * from './constants.js';
+export { default as directionIsAllowed } from './directionIsAllowed.js';
+export { default as switchDirection } from './switchDirection.js';
+export { default as directionSwitchMap } from './directionSwitchMap.js';
+export { default as isIntersection } from './isIntersection.js';
+export { default as getOppositeDirection } from './getOppositeDirection.js';
+export { default as getNextTile } from './getNextTile.js';
+export { default as isValidTile } from './isValidTile.js';

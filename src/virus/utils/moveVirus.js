@@ -1,5 +1,5 @@
-import { N, E, S, W } from '../../directions';
-import { virusSpeed } from '../../config';
+import { N, E, S, W } from '../../directions/index.js';
+import { virusSpeed } from '../../config.js';
 
 export default ({ mapX, mapY, direction }) => {
     switch (direction) {

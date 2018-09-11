@@ -1,9 +1,9 @@
-import { directionIsAllowed, switchDirection } from '../directions';
-import { pubsub, DROP_BOMB, DROP_SHIP, GAME_OVER } from '../pubsub';
-import { getKey, isInTheMiddle } from './utils';
-import { calculateRowAndCol } from '../utils';
-import { messageBox } from '../messageBox';
-import { bombCooldown } from '../config';
+import { directionIsAllowed, switchDirection } from '../directions/index.js';
+import { pubsub, DROP_BOMB, DROP_SHIP, GAME_OVER } from '../pubsub/index.js';
+import { getKey, isInTheMiddle } from './utils/index.js';
+import { calculateRowAndCol } from '../utils/index.js';
+import { messageBox } from '../messageBox/index.js';
+import { bombCooldown } from '../config.js';
 
 export default sprite => {
     let { nextDirection, direction, dropBomb, scale, bombCoolingDown } = sprite;

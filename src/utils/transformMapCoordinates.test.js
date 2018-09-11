@@ -1,4 +1,4 @@
-import { tileWidth, tileHeight } from '../config';
+import { tileWidth, tileHeight } from '../config.js';
 import transformMapCoordinates from './transformMapCoordinates';
 
 test.each([

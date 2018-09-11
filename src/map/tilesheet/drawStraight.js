@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { tileWidth, tileHeight, lightBlue } from '../../config';
-import { degreesToRadians as deg2rad } from '../../utils';
-import { krakel } from './utils';
+import { tileWidth, tileHeight, lightBlue } from '../../config.js';
+import { degreesToRadians as deg2rad } from '../../utils/index.js';
+import { krakel } from './utils/index.js';
 
 export default ({ ctx, row, col, deg, broken = false }) => {
     ctx.save();
