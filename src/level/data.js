@@ -16,27 +16,6 @@ export default [
                 speed: 2.5
             }
         ],
-        users: [
-            { row: 4, col: 5 },
-            { row: 4, col: 9 },
-            { row: 4, col: 13 },
-            { row: 4, col: 17 },
-            { row: 4, col: 21 },
-            { row: 5, col: 4 },
-            { row: 8, col: 23 },
-            { row: 12, col: 23 },
-            { row: 14, col: 23 },
-            { row: 16, col: 23 },
-            { row: 17, col: 4 },
-            { row: 19, col: 23 },
-            { row: 21, col: 4 },
-            { row: 21, col: 23 },
-            { row: 23, col: 7 },
-            { row: 23, col: 9 },
-            { row: 23, col: 14 },
-            { row: 23, col: 17 },
-            { row: 23, col: 21 }
-        ],
         servers: [{ row: 9, col: 8 }, { row: 9, col: 12 }, { row: 15, col: 15 }],
         map: {
             width: 20,

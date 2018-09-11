@@ -30,7 +30,7 @@ class GameManager {
         const bombs = new Bombs(map);
         const virus = createVirus({ map, ...level.viruses[0] });
         pathfinder.setDataFromMap(map, 'main');
-        const users = new Users({ map, positions: level.users });
+        const users = new Users({ map });
         servers.init(map, level.servers);
         this.loop = createLoop({ map, player: this.player, virus, users, bombs });
         pubsub.reset(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));

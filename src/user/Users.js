@@ -7,12 +7,17 @@ import { pathfinder } from '../pathfinder/index.js';
 import { calculateScore } from '../scoreBoard/index.js';
 
 export default class {
-    constructor({ map, positions }) {
+    constructor({ map }) {
         this.map = map;
         this.users = [];
         this.gameOver = false;
-        for (const { row, col } of positions) {
-            this.users.push(createUser({ map, row, col }));
+        for (let row = 0; row < map.height; row++) {
+            for (let col = 0; col < map.width; col++) {
+                const tile = map.tileAtLayer('main', { row, col });
+                if (tile >= 17 && tile <= 20) {
+                    this.users.push(createUser({ map, row, col }));
+                }
+            }
         }
         pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
     }
