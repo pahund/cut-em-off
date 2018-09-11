@@ -1,9 +1,15 @@
 /* global kontra */
 
 import { drawPlayer, updatePlayer } from './index.js';
-import { canvasHeight, canvasWidth, playerStartDirection, collisionRadius } from '../config.js';
+import {
+    canvasHeight,
+    canvasWidth,
+    playerStartDirection,
+    collisionRadius,
+    teleportCooldownTimeout
+} from '../config.js';
 import { pubsub, GAME_OVER, DROP_SHIP } from '../pubsub/index.js';
-import { collides } from '../utils/index.js';
+import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { calculateCameraCoordinates } from '../utils/index.js';
 import { directionIsAllowed, switchDirection } from '../directions/index.js';
@@ -25,6 +31,7 @@ export default map => {
         dropping: false,
         bombCoolingDown: false,
         teleportToServer: false,
+        teleportCoolingDown: false,
 
         update() {
             ({
@@ -41,8 +48,10 @@ export default map => {
             drawPlayer(this);
         },
 
-        infect(virus) {
-            if (collides(virus, this)) {
+        infect(virusesOrServers) {
+            const collisions = multiCollides(virusesOrServers, [this]);
+
+            if (collisions.length > 0) {
                 // eslint-disable-next-line no-param-reassign
                 this.infected = true;
                 if (!this.gameOver) {
@@ -53,18 +62,24 @@ export default map => {
         },
 
         teleport() {
-            if (this.teleportToServer) {
-                const randomServer = servers.getRandom();
-                if (randomServer) {
-                    ({ sx: this.map.sx, sy: this.map.sy } = calculateCameraCoordinates(randomServer));
+            if (this.teleportToServer && !this.teleportCoolingDown) {
+                this.teleportCoolingDown = true;
+
+                const nextServer = servers.getNext();
+                if (nextServer) {
+                    ({ sx: this.map.sx, sy: this.map.sy } = calculateCameraCoordinates(nextServer));
                     if (!directionIsAllowed(this.map, { x: this.x, y: this.y }, this.direction)) {
                         this.direction = switchDirection(this.map, { x: this.x, y: this.y }, this.direction);
                     }
                 } else {
-                    messageBox.flash('all servers are destroyed');
+                    messageBox.flash('all servers are destroyed or infected');
                 }
-                this.teleportToServer = false;
+
+                setTimeout(() => {
+                    this.teleportCoolingDown = false;
+                }, teleportCooldownTimeout);
             }
+            this.teleportToServer = false;
         },
 
         enableControls() {

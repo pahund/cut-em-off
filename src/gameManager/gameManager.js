@@ -14,7 +14,7 @@ import { messageBox } from '../messageBox/index.js';
 import { lightGreen } from '../config.js';
 import { servers } from '../server/index.js';
 
-const serverCoordinates = [{ row: 9, col: 8 }, { row: 9, col: 12 }];
+const serverCoordinates = [{ row: 9, col: 8 }, { row: 9, col: 12 }, { row: 15, col: 15 }];
 
 class GameManager {
     async init() {

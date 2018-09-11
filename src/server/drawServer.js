@@ -1,14 +1,14 @@
 /* eslint-disable no-param-reassign */
-import { darkBlue, lightBlue } from '../config.js';
+import { darkBlue, lightBlue, darkRed, lightRed } from '../config.js';
 import { krakel } from '../map/tilesheet/utils/index.js';
 
 export default sprite => {
-    const { context: ctx, x, y, broken } = sprite;
+    const { context: ctx, x, y, broken, infected } = sprite;
     ctx.save();
     ctx.translate(x, y);
     ctx.lineWidth = 3;
-    ctx.strokeStyle = lightBlue;
-    ctx.fillStyle = darkBlue;
+    ctx.strokeStyle = infected ? lightRed : lightBlue;
+    ctx.fillStyle = infected ? darkRed : darkBlue;
     ctx.beginPath();
     krakel(ctx, [
         [0, 30, -48],

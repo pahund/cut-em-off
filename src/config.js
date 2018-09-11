@@ -1,4 +1,4 @@
-import { N, W } from './directions/index.js';
+import { S, E } from './directions/index.js';
 
 export const canvasWidth = 800;
 export const canvasHeight = 600;
@@ -13,13 +13,13 @@ export const mapPadding = 4;
 /* player */
 export const playerStartCol = 8;
 export const playerStartRow = 9;
-export const playerStartDirection = N;
+export const playerStartDirection = S;
 export const playerSpeed = 5;
 
 /* virus */
 export const virusStartCol = 8;
 export const virusStartRow = 7;
-export const virusStartDirection = W;
+export const virusStartDirection = E;
 export const virusSpeed = 2.5;
 export const virusBlipInterval = 1000;
 export const virusBlipTtl = 180;
@@ -34,3 +34,4 @@ export const darkRed = '#7a2431';
 
 export const collisionRadius = 30;
 export const bombCooldown = 100;
+export const teleportCooldownTimeout = 600;
