@@ -1,9 +1,6 @@
 import { tileHeight, tileWidth } from '../../config.js';
 import { drawCurve, drawStraight, drawTSection, drawCrossing, drawTerminus } from './index.js';
 
-// will be removed by tree shaking
-import drawDebugGrid from './drawDebugGrid.js';
-
 export default () => {
     const canvas = document.createElement('canvas');
     canvas.width = 8 * tileWidth;
@@ -40,12 +37,7 @@ export default () => {
     drawTerminus({ ctx, row: 4, col: 7, deg: 180, broken: true });
     drawTerminus({ ctx, row: 4, col: 8, deg: 270, broken: true });
 
-    if (process.env.NODE_ENV === 'development') {
-        drawDebugGrid({ ctx, row: 1, col: 8 });
-    }
-
     const image = new Image();
     image.src = canvas.toDataURL('image/png');
-    // document.getElementById('wrapper').appendChild(image);
     return new Promise(resolve => setTimeout(() => resolve(image), 100));
 };

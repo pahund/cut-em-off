@@ -12,7 +12,7 @@ import { initPathfinder, pathfinder } from '../pathfinder/index.js';
 import { pubsub, USERS_POSSIBLY_OFFLINE } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { servers } from '../server/index.js';
-import { levels } from '../level/index.js';
+import getLevel from '../level/getLevel.js';
 import initScoreBoard from '../scoreBoard/index.js';
 
 class GameManager {
@@ -24,7 +24,7 @@ class GameManager {
     }
 
     async initLevel(levelIndex) {
-        const level = levels.getLevel(levelIndex);
+        const level = getLevel(levelIndex);
         const map = await createMap({ ...level.map, col: level.player.col, row: level.player.row });
         this.player = createPlayer({ map, ...level.player });
         const bombs = new Bombs(map);
