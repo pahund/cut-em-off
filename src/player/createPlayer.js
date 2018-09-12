@@ -62,7 +62,7 @@ export default ({ map, direction, speed }) => {
                 // eslint-disable-next-line no-param-reassign
                 this.infected = true;
                 if (!this.gameInactive) {
-                    messageBox.show('player infected<br>game over');
+                    messageBox.show('player infected<br>game over<br><br>press any key to start again');
                     pubsub.publish(GAME_OVER);
                 }
             }

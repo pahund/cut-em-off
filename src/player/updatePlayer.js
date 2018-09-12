@@ -11,7 +11,7 @@ export default sprite => {
         if (scale > 0) {
             scale -= 0.01;
         } else {
-            messageBox.show('You fell into the abyss<br>Game over');
+            messageBox.show('You fell into the abyss<br>Game over<br><br>press any key to start again');
             pubsub.publish(GAME_OVER);
         }
         return { direction, nextDirection, dropBomb, scale, bombCoolingDown, teleportToServer };

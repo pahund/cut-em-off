@@ -67,7 +67,8 @@ class Users {
                 'level completed<br>' +
                     `offline users: ${offline}<br>` +
                     `infected users: ${infected}<br>` +
-                    `score: ${scoreBoard.score}`
+                    `score: ${scoreBoard.score}<br><br>` +
+                    'press any key to go to next level'
             );
             pubsub.publish(LEVEL_COMPLETED);
             return true;
@@ -76,7 +77,8 @@ class Users {
             'game over – too many infected users!<br>' +
                 `offline users: ${offline}<br>` +
                 `infected users: ${infected}<br>` +
-                `score: ${scoreBoard.score}`
+                `score: ${scoreBoard.score}<br><br>` +
+                'press any key to start again'
         );
         pubsub.publish(GAME_OVER);
         return true;
