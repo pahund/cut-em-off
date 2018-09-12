@@ -13,20 +13,8 @@ export class Pathfinder {
         return getNodeByCoords(this.graph, coords);
     }
 
-    findShortestPath(...args) {
-        if (process.env.NODE_ENV === 'development' && !this.graph) {
-            throw new Error('You forgot to set a graph for the pathfinder before trying to use it to find a path');
-        }
-        return findShortestPath(this.graph, args);
-    }
-
     isReachable(a, b) {
-        const shortestPath = this.findShortestPathByCoords(a, b);
-        return shortestPath !== null;
-    }
-
-    findShortestPathByCoords(...args) {
-        return this.findShortestPath(...args.map(coords => this.getNodeByCoords(coords)));
+        return findShortestPath(this.graph, [this.getNodeByCoords(a), this.getNodeByCoords(b)]) !== null;
     }
 }
 
