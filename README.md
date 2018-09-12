@@ -6,6 +6,10 @@ Entry for [js13kGames](http://js13kgames.com) competition 2018.
 
 # [Play it now!](https://pahund.github.io/cut-em-off/)
 
+[![Title / Screenshot](title.png)](https://pahund.github.io/cut-em-off/)
+
+## Dev Team
+
 Created by developers at [mobile.de](https://www.mobile.de)
 (part of the [eBay Classifieds Group](https://www.ebayclassifiedsgroup.com)):
 
