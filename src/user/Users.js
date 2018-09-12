@@ -68,7 +68,7 @@ class Users {
                     `offline users: ${offline}<br>` +
                     `infected users: ${infected}<br>` +
                     `score: ${scoreBoard.score}<br><br>` +
-                    'press any key to go to next level'
+                    'press any key'
             );
             pubsub.publish(LEVEL_COMPLETED);
             return true;

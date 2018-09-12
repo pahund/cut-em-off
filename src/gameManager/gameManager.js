@@ -13,9 +13,11 @@ import { pubsub, USERS_POSSIBLY_OFFLINE, LEVEL_COMPLETED, GAME_OVER } from '../p
 import { messageBox } from '../messageBox/index.js';
 import { servers } from '../server/index.js';
 import getLevel from '../level/getLevel.js';
+import levelData from '../level/data.js';
 import scoreBoard from '../scoreBoard/scoreBoard.js';
 import showStartScreen from './showStartScreen.js';
 import pressAnyKey from './pressAnyKey.js';
+import { canvasHeight, canvasWidth } from '../config.js';
 
 class GameManager {
     constructor() {
@@ -33,6 +35,10 @@ class GameManager {
         this.loop.stop();
         await pressAnyKey();
         messageBox.clear();
+        if (nextLevelIndex === levelData.length) {
+            await this.finishGame();
+            return;
+        }
         this.levelIndex = nextLevelIndex;
         await this.initLevel();
         if (nextLevelIndex === 0) {
@@ -40,7 +46,7 @@ class GameManager {
         } else {
             scoreBoard.initLevel();
         }
-        this.startLevel();
+        await this.startLevel();
     }
 
     async startGame() {
@@ -49,6 +55,14 @@ class GameManager {
         await this.initLevel();
         await showStartScreen();
         this.startLevel();
+    }
+
+    async finishGame() {
+        messageBox.show('All levels completed!<br>You are awesome!<br><br>Press any key to start again');
+        await pressAnyKey();
+        messageBox.clear();
+        kontra.context.clearRect(0, 0, canvasWidth, canvasHeight);
+        this.startGame();
     }
 
     async initLevel() {
