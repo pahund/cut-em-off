@@ -54,12 +54,12 @@ class Viruses {
     startSpawning() {
         const { interval, max } = this.virusConfig;
 
-        const id = setInterval(() => {
+        this.intervalId = setInterval(() => {
             if (this.viruses.length < max) {
                 this.spawn();
                 this.checkGameStatusWhenAllSpawned();
             } else {
-                clearInterval(id);
+                clearInterval(this.intervalId);
             }
         }, interval);
     }
@@ -68,6 +68,9 @@ class Viruses {
             // wait for virus to appear on the screen
             setTimeout(() => pubsub.publish(USERS_POSSIBLY_OFFLINE), 1000);
         }
+    }
+    reset() {
+        clearInterval(this.intervalId);
     }
 }
 

@@ -29,6 +29,7 @@ class GameManager {
 
     async break(nextLevelIndex) {
         pubsub.reset();
+        viruses.reset();
         this.loop.stop();
         await pressAnyKey();
         messageBox.clear();
