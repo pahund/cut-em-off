@@ -1,4 +1,4 @@
-import { N, W } from '../directions/index.js';
+import { N, W, S } from '../directions/index.js';
 
 export default [
     {
@@ -26,6 +26,34 @@ export default [
                 '4594aa9' +
                 '89 2   ' +
                 '   e   '
+        }
+    },
+    {
+        player: {
+            col: 6,
+            row: 8,
+            direction: S,
+            speed: 5
+        },
+        virus: {
+            speed: 2.5,
+            max: 1,
+            interval: 3000
+        },
+        servers: [{ row: 7, col: 4 }, { row: 7, col: 8 }, { row: 8, col: 6 }],
+        map: {
+            width: 5,
+            height: 8,
+            // prettier-ignore
+            data:
+                '  6  ' +
+                ' 626 ' +
+                '0b3b1' +
+                '22 22' +
+                '83b39' +
+                '05b51' +
+                '8b3b9' +
+                ' e e '
         }
     },
     {
@@ -66,7 +94,7 @@ export default [
         },
         virus: {
             speed: 2.5,
-            max: 2,
+            max: 3,
             interval: 3000
         },
         servers: [{ row: 5, col: 7 }, { row: 4, col: 12 }, { row: 7, col: 9 }, { row: 8, col: 15 }],
