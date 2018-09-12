@@ -9,12 +9,11 @@ import { users } from '../user/index.js';
 import { viruses } from '../virus/index.js';
 import { createCanvas } from '../canvas/index.js';
 import { initPathfinder, pathfinder } from '../pathfinder/index.js';
-import { pubsub, USERS_POSSIBLY_OFFLINE, LEVEL_COMPLETED } from '../pubsub/index.js';
+import { pubsub, USERS_POSSIBLY_OFFLINE, LEVEL_COMPLETED, GAME_OVER } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { servers } from '../server/index.js';
 import getLevel from '../level/getLevel.js';
-import createScoreBoard from '../scoreBoard/createScoreBoard.js';
-import initScoreBoard from '../scoreBoard/index.js';
+import scoreBoard from '../scoreBoard/scoreBoard.js';
 import showStartScreen from './showStartScreen.js';
 import pressAnyKey from './pressAnyKey.js';
 
@@ -24,23 +23,28 @@ class GameManager {
         kontra.init();
         initPathfinder();
         initAudio();
-        this.scoreBoard = createScoreBoard();
-        pubsub.subscribe(
-            LEVEL_COMPLETED,
-            async () => {
-                pubsub.reset();
-                this.loop.stop();
-                await pressAnyKey();
-                messageBox.clear();
-                this.levelIndex++;
-                await this.initLevel();
-                this.startLevel();
-            },
-            true
-        );
+        pubsub.subscribe(LEVEL_COMPLETED, () => this.break(this.levelIndex + 1), true);
+        pubsub.subscribe(GAME_OVER, async () => this.break(0), true);
     }
+
+    async break(nextLevelIndex) {
+        pubsub.reset();
+        this.loop.stop();
+        await pressAnyKey();
+        messageBox.clear();
+        this.levelIndex = nextLevelIndex;
+        await this.initLevel();
+        if (nextLevelIndex === 0) {
+            scoreBoard.startGame();
+        } else {
+            scoreBoard.initLevel();
+        }
+        this.startLevel();
+    }
+
     async startGame() {
         this.levelIndex = 0;
+        scoreBoard.startGame();
         await this.initLevel();
         await showStartScreen();
         this.startLevel();
@@ -57,7 +61,6 @@ class GameManager {
         servers.init(map, level.servers);
         this.loop = createLoop({ map, player: this.player, bombs });
         pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus());
-        initScoreBoard(this.scoreBoard);
 
         map.render();
         users.render();

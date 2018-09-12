@@ -1,10 +1,10 @@
 import { ONLINE, OFFLINE } from './index.js';
 import { createUser, INFECTED } from './index.js';
 import { multiCollides } from '../utils/index.js';
-import { pubsub, GAME_OVER, LEVEL_COMPLETED } from '../pubsub/index.js';
+import { pubsub, GAME_OVER, LEVEL_COMPLETED, SCORE } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { pathfinder } from '../pathfinder/index.js';
-import { calculateScore } from '../scoreBoard/index.js';
+import scoreBoard from '../scoreBoard/scoreBoard.js';
 import { viruses } from '../virus/index.js';
 
 class Users {
@@ -42,6 +42,7 @@ class Users {
             if (virusesWithRowAndCol.filter(virus => pathfinder.isReachable(user, virus)).length === 0) {
                 goneOffline++;
                 user.status = OFFLINE;
+                pubsub.publish(SCORE, 100);
             }
         }
         if (goneOffline > 0) {
@@ -57,13 +58,16 @@ class Users {
         if (online > 0) {
             return false;
         }
-        const score = calculateScore({ online, offline, infected });
         if (infected < offline) {
+            pubsub.publish(SCORE, offline * 200);
+            if (infected === 0) {
+                pubsub.publish(SCORE, 500);
+            }
             messageBox.show(
                 'level completed<br>' +
                     `offline users: ${offline}<br>` +
                     `infected users: ${infected}<br>` +
-                    `score: ${score}`
+                    `score: ${scoreBoard.score}`
             );
             pubsub.publish(LEVEL_COMPLETED);
             return true;
@@ -72,7 +76,7 @@ class Users {
             'game over – too many infected users!<br>' +
                 `offline users: ${offline}<br>` +
                 `infected users: ${infected}<br>` +
-                `score: ${score}`
+                `score: ${scoreBoard.score}`
         );
         pubsub.publish(GAME_OVER);
         return true;
