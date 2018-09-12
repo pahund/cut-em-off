@@ -30,7 +30,11 @@ class Viruses {
         this.viruses.forEach(virus => virus.render());
     }
     spawn() {
-        const { row, col } = servers.getRandom();
+        const server = servers.getRandom();
+        if (!server) {
+            return;
+        }
+        const { row, col } = server;
         const { speed, max } = this.virusConfig;
         if (this.viruses.length < max) {
             this.viruses.push(createVirus({ map: this.map, row, col, speed }));
