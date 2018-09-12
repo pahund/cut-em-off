@@ -3,6 +3,7 @@ import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { GAME_OVER, LEVEL_COMPLETED, SERVER_INFECTED, SERVER_DESTROYED, pubsub } from '../pubsub/index.js';
 import { viruses } from '../virus/index.js';
+import { switchDirection } from '../directions/index.js';
 
 class Servers {
     constructor() {
@@ -65,12 +66,26 @@ class Servers {
     getAvailableServers() {
         return this.servers.filter(server => !(server.broken || server.infected));
     }
-    getRandom() {
+    // get servers from where player or virus can still move
+    getAvailableServersForDirection() {
         const availableServers = this.getAvailableServers();
+
+        return availableServers.filter(server => {
+            // check if server location allows to set direction
+            try {
+                switchDirection(this.map, server, 'S');
+                return true;
+            } catch (error) {
+                return false;
+            }
+        });
+    }
+    getRandom() {
+        const availableServers = this.getAvailableServersForDirection();
         return availableServers[Math.floor(Math.random() * availableServers.length)];
     }
     getNext() {
-        const availableServers = this.getAvailableServers();
+        const availableServers = this.getAvailableServersForDirection();
         const isNextPointerInRange = this.nextServerPointer + 1 < availableServers.length;
         this.nextServerPointer = isNextPointerInRange ? this.nextServerPointer + 1 : 0;
         return availableServers[this.nextServerPointer];
