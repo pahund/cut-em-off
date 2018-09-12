@@ -3,23 +3,14 @@ import { users } from '../user/index.js';
 
 export default function initScoreBoard(scoreBoard) {
     updateScoreBoard(scoreBoard);
-    pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () =>
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard), 0)
-    );
-    pubsub.subscribe(INFECTED, () =>
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard), 0)
-    );
-    const cb = () =>
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard), 0);
-    pubsub.subscribe(GAME_OVER, cb);
-    pubsub.subscribe(LEVEL_COMPLETED, cb);
+    // permanent subscriptions OK here
+    pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => updateScoreBoard(scoreBoard), true);
+    pubsub.subscribe(INFECTED, () => updateScoreBoard(scoreBoard), true);
+    pubsub.subscribe(GAME_OVER, () => updateScoreBoard(scoreBoard, true), true);
+    pubsub.subscribe(LEVEL_COMPLETED, () => updateScoreBoard(scoreBoard), true);
 }
 
-function updateScoreBoard(scoreBoard) {
-    const { gameOver } = users;
+function updateScoreBoard(scoreBoard, gameOver = false) {
     const { infected, online, offline } = users.getStats();
 
     const score = calculateScore({ infected, online, offline });
