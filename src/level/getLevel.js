@@ -1,5 +1,6 @@
 import data from './data.js';
 import mapHex2Arr from './mapHex2Arr.js';
+import increaseSize from './increaseSize.js';
 
 export default levelIndex => {
     const level = data[levelIndex];
@@ -7,7 +8,7 @@ export default levelIndex => {
         ...level,
         map: {
             ...level.map,
-            data: mapHex2Arr(level.map.data)
+            data: increaseSize(mapHex2Arr(level.map.data))
         }
     };
 };
