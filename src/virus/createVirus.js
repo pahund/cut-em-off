@@ -13,6 +13,7 @@ export default ({ map, col, row, speed }) => {
         y,
         speed,
         collisionRadius,
+        dropped: false,
         map,
         mapX: col * tileWidth,
         mapY: row * tileHeight,
@@ -21,10 +22,12 @@ export default ({ map, col, row, speed }) => {
         update() {
             try {
                 updateVirus(this);
+                this.blips.update();
             } catch ({ message }) {
-                throw new Error(message);
+                if (message === 'dropped') {
+                    this.dropped = true;
+                }
             }
-            this.blips.update();
         },
         render() {
             drawVirus(this);

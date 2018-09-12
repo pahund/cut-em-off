@@ -16,18 +16,15 @@ class Viruses {
         this.virusConfig = virusConfig;
     }
     update() {
-        this.viruses = this.viruses.filter(virus => {
-            try {
-                virus.update();
-                return true;
-            } catch ({ message }) {
-                if (message === 'dropped') {
-                    setTimeout(this.spawn, 3000);
-                    messageBox.flash('Nice one! Virus dropped');
-                }
-            }
-            return false;
-        });
+        this.viruses.forEach(virus => virus.update());
+        const activeViruses = this.viruses.filter(virus => !virus.dropped);
+
+        // if virus was dropped, remove it and spawn a fresh one
+        if (activeViruses.length < this.viruses.length) {
+            setTimeout(() => this.spawn(), 3000);
+            messageBox.flash('Nice one! Virus dropped');
+            this.viruses = activeViruses;
+        }
     }
     render() {
         this.viruses.forEach(virus => virus.render());
