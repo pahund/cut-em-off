@@ -1,12 +1,14 @@
 import { createVirus } from './index.js';
 import { servers } from '../server/index.js';
-import { GAME_OVER, pubsub } from '../pubsub/index.js';
+import { GAME_OVER, LEVEL_COMPLETED, pubsub } from '../pubsub/index.js';
 
 class Viruses {
     constructor() {
         this.viruses = [];
-        this.gameOver = false;
-        pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
+        this.gameInactive = false;
+        const cb = () => (this.gameInactive = true);
+        pubsub.subscribe(GAME_OVER, cb, true);
+        pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
     init(map, virusConfig) {
         this.map = map;

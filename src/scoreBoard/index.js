@@ -1,20 +1,21 @@
-import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED, GAME_OVER } from '../pubsub/index.js';
+import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED, GAME_OVER, LEVEL_COMPLETED } from '../pubsub/index.js';
 import { users } from '../user/index.js';
 
 export default function initScoreBoard(scoreBoard) {
     updateScoreBoard(scoreBoard);
-    pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => {
+    pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () =>
+        // using setTimeout here because users are updated too late :(
+        setTimeout(() => updateScoreBoard(scoreBoard), 0)
+    );
+    pubsub.subscribe(INFECTED, () =>
+        // using setTimeout here because users are updated too late :(
+        setTimeout(() => updateScoreBoard(scoreBoard), 0)
+    );
+    const cb = () =>
         // using setTimeout here because users are updated too late :(
         setTimeout(() => updateScoreBoard(scoreBoard), 0);
-    });
-    pubsub.subscribe(INFECTED, () => {
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard), 0);
-    });
-    pubsub.subscribe(GAME_OVER, () => {
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard), 0);
-    });
+    pubsub.subscribe(GAME_OVER, cb);
+    pubsub.subscribe(LEVEL_COMPLETED, cb);
 }
 
 function updateScoreBoard(scoreBoard) {
