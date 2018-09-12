@@ -3,14 +3,11 @@ export class Pubsub {
     constructor() {
         this.subscribers = [];
     }
-    subscribe(message, callback) {
-        this.subscribers.push({ message, callback });
+    subscribe(message, callback, permanent = false) {
+        this.subscribers.push({ message, callback, permanent });
     }
-    reset(messageToBeReset, callback = null) {
-        this.subscribers = this.subscribers.filter(({ message }) => message !== messageToBeReset);
-        if (callback) {
-            this.subscribe(messageToBeReset, callback);
-        }
+    reset() {
+        this.subscribers = this.subscribers.filter(({ permanent }) => permanent);
     }
     publish(incomingMessage, payload) {
         this.subscribers.forEach(({ message, callback }) => message === incomingMessage && callback(payload));

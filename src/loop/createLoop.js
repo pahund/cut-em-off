@@ -4,8 +4,9 @@ import { moveCamera } from './utils/index.js';
 import { pubsub, DROP_SHIP } from '../pubsub/index.js';
 import { servers } from '../server/index.js';
 import { viruses } from '../virus/index.js';
+import { users } from '../user/index.js';
 
-export default ({ map, player, users, bombs }) => {
+export default ({ map, player, bombs }) => {
     const times = [];
     let fps;
     let shipMoving = true;

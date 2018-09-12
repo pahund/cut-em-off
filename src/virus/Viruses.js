@@ -1,13 +1,15 @@
 import { createVirus } from './index.js';
 import { servers } from '../server/index.js';
-import { GAME_OVER, pubsub } from '../pubsub/index.js';
+import { GAME_OVER, LEVEL_COMPLETED, pubsub } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 
 class Viruses {
     constructor() {
         this.viruses = [];
-        this.gameOver = false;
-        pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
+        this.gameInactive = false;
+        const cb = () => (this.gameInactive = true);
+        pubsub.subscribe(GAME_OVER, cb, true);
+        pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
     init(map, virusConfig) {
         this.map = map;
@@ -39,6 +41,12 @@ class Viruses {
     }
     getAll() {
         return this.viruses;
+    }
+    getAllWithRowAndCol() {
+        return this.viruses.map(virus => ({
+            ...virus,
+            ...this.map.getRowAndCol({ x: virus.x, y: virus.y })
+        }));
     }
     startSpawning() {
         const { interval, max } = this.virusConfig;

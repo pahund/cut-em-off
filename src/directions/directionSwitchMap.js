@@ -77,28 +77,28 @@ export default {
         }
     },
     // terminus S
-    17: {
+    7: {
         allowed: [S],
         change: {
             [N]: S
         }
     },
     // terminus W
-    18: {
+    8: {
         allowed: [W],
         change: {
             [E]: W
         }
     },
     // terminus N
-    19: {
+    15: {
         allowed: [N],
         change: {
             [S]: N
         }
     },
     // terminus E
-    20: {
+    16: {
         allowed: [E],
         change: {
             [W]: E

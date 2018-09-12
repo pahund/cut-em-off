@@ -6,7 +6,7 @@ import { bombCooldown } from '../config.js';
 
 export default sprite => {
     let { nextDirection, direction, dropBomb, scale, bombCoolingDown, teleportToServer } = sprite;
-    const { dropping, map, gameOver, x, y } = sprite;
+    const { dropping, map, gameInactive, x, y } = sprite;
     if (dropping) {
         if (scale > 0) {
             scale -= 0.01;
@@ -16,7 +16,7 @@ export default sprite => {
         }
         return { direction, nextDirection, dropBomb, scale, bombCoolingDown, teleportToServer };
     }
-    if (!gameOver) {
+    if (!gameInactive) {
         ({ nextDirection, dropBomb, teleportToServer } = getKey(sprite));
         if (bombCoolingDown) {
             dropBomb = false;

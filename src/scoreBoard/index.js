@@ -1,25 +1,16 @@
-import createScoreBoard from './createScoreBoard.js';
-import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED, GAME_OVER } from '../pubsub/index.js';
+import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED, GAME_OVER, LEVEL_COMPLETED } from '../pubsub/index.js';
+import { users } from '../user/index.js';
 
-export default function initScoreBoard(props) {
-    const scoreBoard = createScoreBoard();
-    updateScoreBoard(scoreBoard, props.users);
-    pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => {
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
-    });
-    pubsub.subscribe(INFECTED, () => {
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
-    });
-    pubsub.subscribe(GAME_OVER, () => {
-        // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
-    });
+export default function initScoreBoard(scoreBoard) {
+    updateScoreBoard(scoreBoard);
+    // permanent subscriptions OK here
+    pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => updateScoreBoard(scoreBoard), true);
+    pubsub.subscribe(INFECTED, () => updateScoreBoard(scoreBoard), true);
+    pubsub.subscribe(GAME_OVER, () => updateScoreBoard(scoreBoard, true), true);
+    pubsub.subscribe(LEVEL_COMPLETED, () => updateScoreBoard(scoreBoard), true);
 }
 
-function updateScoreBoard(scoreBoard, users) {
-    const { gameOver } = users;
+function updateScoreBoard(scoreBoard, gameOver = false) {
     const { infected, online, offline } = users.getStats();
 
     const score = calculateScore({ infected, online, offline });
@@ -31,6 +22,7 @@ function updateScoreBoard(scoreBoard, users) {
         localStorage.setItem('CUT_EM_ALL__HIGHSCORE', highScore);
     }
 
+    // eslint-disable-next-line no-param-reassign
     scoreBoard.innerHTML = `
         ${online} online |  
         ${offline} offline | 

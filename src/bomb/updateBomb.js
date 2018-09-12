@@ -23,7 +23,7 @@ export default sprite => {
                     servers.destroy({ row, col });
                 } else {
                     const tile = map.tileAtLayer('main', { row, col });
-                    map.changeTile('main', { row, col }, tile + 24);
+                    map.changeTile('main', { row, col }, tile + 16);
                     pubsub.publish(MAP_CHANGED, map);
                     pubsub.publish(USERS_POSSIBLY_OFFLINE);
                 }

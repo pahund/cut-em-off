@@ -1,18 +1,21 @@
 import { createServer } from './index.js';
 import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
-import { GAME_OVER, pubsub } from '../pubsub/index.js';
+import { GAME_OVER, LEVEL_COMPLETED, pubsub } from '../pubsub/index.js';
 import { viruses } from '../virus/index.js';
 
 class Servers {
     constructor() {
         this.servers = [];
-        this.nextServerPointer = 0;
-        this.gameOver = false;
-        pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
+        const cb = () => (this.gameInactive = true);
+        pubsub.subscribe(GAME_OVER, cb, true);
+        pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
+    /* called at the beginning of every level */
     init(map, serverCoordinates = []) {
         this.map = map;
+        this.gameInactive = false;
+        this.nextServerPointer = 0;
         serverCoordinates.forEach(({ col, row }) => this.servers.push(createServer({ map, row, col })));
     }
     update() {
@@ -41,7 +44,7 @@ class Servers {
             server.infected = true;
         });
 
-        if (this.gameOver) {
+        if (this.gameInactive) {
             return;
         }
 
