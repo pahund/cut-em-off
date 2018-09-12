@@ -6,7 +6,4 @@ if (process.env.NODE_ENV === 'development') {
     createDevbox();
 }
 
-(async () => {
-    await gameManager.initLevel(0);
-    gameManager.showStartScreen();
-})();
+gameManager.startGame();
