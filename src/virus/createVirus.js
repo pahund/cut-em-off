@@ -13,14 +13,23 @@ export default ({ map, col, row, speed }) => {
         y,
         speed,
         collisionRadius,
+        dropped: false,
         map,
         mapX: col * tileWidth,
         mapY: row * tileHeight,
         direction: switchDirection(map, { x, y }, 'S'),
         blips,
         update() {
-            ({ x: this.x, y: this.y, mapX: this.mapX, mapY: this.mapY, direction: this.direction } = updateVirus(this));
-            this.blips.update();
+            try {
+                ({ x: this.x, y: this.y, mapX: this.mapX, mapY: this.mapY, direction: this.direction } = updateVirus(
+                    this
+                ));
+                this.blips.update();
+            } catch ({ message }) {
+                if (message === 'dropped') {
+                    this.dropped = true;
+                }
+            }
         },
         render() {
             drawVirus(this);
