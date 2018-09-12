@@ -11,6 +11,7 @@ Created by developers at [mobile.de](https://www.mobile.de)
 * [Uwe Loydl](https://github.com/uwelo) (development)
 * [Frederik Leidloff](https://github.com/fleidloff) (development)
 * [Kris Urbas](https://github.com/krzysu) (development)
+* Mike Krüger (QA)
 
 ## Acknowledgements
 
