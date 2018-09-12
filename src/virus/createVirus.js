@@ -21,7 +21,9 @@ export default ({ map, col, row, speed }) => {
         blips,
         update() {
             try {
-                updateVirus(this);
+                ({ x: this.x, y: this.y, mapX: this.mapX, mapY: this.mapY, direction: this.direction } = updateVirus(
+                    this
+                ));
                 this.blips.update();
             } catch ({ message }) {
                 if (message === 'dropped') {
