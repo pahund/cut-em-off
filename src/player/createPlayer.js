@@ -2,12 +2,14 @@
 
 import { drawPlayer, updatePlayer } from './index.js';
 import { canvasHeight, canvasWidth, collisionRadius, teleportCooldownTimeout } from '../config.js';
-import { pubsub, GAME_OVER, DROP_SHIP } from '../pubsub/index.js';
+import { pubsub, GAME_OVER, DROP_SHIP, MAP_CHANGED } from '../pubsub/index.js';
 import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { calculateCameraCoordinates } from '../utils/index.js';
 import { directionIsAllowed, switchDirection } from '../directions/index.js';
 import { servers } from '../server/index.js';
+import { pathfinder } from '../pathfinder/index.js';
+import { viruses } from '../virus/index.js';
 
 export default ({ map, direction, speed }) => {
     const player = {
@@ -79,11 +81,46 @@ export default ({ map, direction, speed }) => {
 
         enableControls() {
             this.gameOver = false;
+        },
+
+        canReachVirus() {
+            // check if player can reach all viruses by path
+            const playerWithRowAndCol = {
+                ...this,
+                ...this.map.getRowAndCol(this)
+            };
+            const virusesWithRowAndCol = viruses.getAllWithRowAndCol();
+            const playerCannotReachTheseVirusesByPath = virusesWithRowAndCol.filter(
+                virus => !pathfinder.isReachable(playerWithRowAndCol, virus)
+            );
+
+            if (playerCannotReachTheseVirusesByPath.length === 0) {
+                return;
+            }
+
+            // check if viruses can be reached from servers
+            const availableServers = servers.getAvailableServers();
+            const playerCannotReachTheseVirusesAtAll = [];
+
+            availableServers.forEach(server => {
+                playerCannotReachTheseVirusesByPath.forEach(virus => {
+                    if (!pathfinder.isReachable(server, virus)) {
+                        playerCannotReachTheseVirusesAtAll.push(virus);
+                    }
+                });
+            });
+
+            if (playerCannotReachTheseVirusesAtAll.length === 0) {
+                return;
+            }
+
+            // if there are any viruses not reachable, then infect all users the virus can reach
         }
     };
 
     pubsub.subscribe(GAME_OVER, () => (player.gameOver = true));
     pubsub.subscribe(DROP_SHIP, () => (player.dropping = true));
+    pubsub.subscribe(MAP_CHANGED, () => player.canReachVirus());
 
     return player;
 };

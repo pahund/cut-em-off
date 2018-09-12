@@ -5,7 +5,7 @@ import { Bombs } from '../bomb/index.js';
 import { createLoop } from '../loop/index.js';
 import { createMap } from '../map/index.js';
 import { createPlayer } from '../player/index.js';
-import { Users } from '../user/index.js';
+import { users } from '../user/index.js';
 import { viruses } from '../virus/index.js';
 import { createCanvas } from '../canvas/index.js';
 import { initPathfinder, pathfinder } from '../pathfinder/index.js';
@@ -33,11 +33,11 @@ class GameManager {
         const bombs = new Bombs(map);
         viruses.init(map, level.virus);
         pathfinder.setDataFromMap(map, 'main');
-        const users = new Users({ map });
+        users.init(map);
         servers.init(map, level.servers);
-        this.loop = createLoop({ map, player: this.player, users, bombs });
+        this.loop = createLoop({ map, player: this.player, bombs });
         pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus());
-        initScoreBoard(this.scoreBoard, { users, map });
+        initScoreBoard(this.scoreBoard);
 
         map.render();
         users.render();

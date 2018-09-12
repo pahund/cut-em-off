@@ -7,11 +7,14 @@ import { pathfinder } from '../pathfinder/index.js';
 import { calculateScore } from '../scoreBoard/index.js';
 import { viruses } from '../virus/index.js';
 
-export default class {
-    constructor({ map }) {
-        this.map = map;
+class Users {
+    constructor() {
         this.users = [];
         this.gameOver = false;
+    }
+
+    init(map) {
+        this.map = map;
         for (let row = 0; row < map.height; row++) {
             for (let col = 0; col < map.width; col++) {
                 const tile = map.tileAtLayer('main', { row, col });
@@ -24,15 +27,11 @@ export default class {
     }
 
     updateOnlineStatus() {
-        const allViruses = viruses.getAll();
-        if (allViruses.length === 0) {
+        const virusesWithRowAndCol = viruses.getAllWithRowAndCol();
+        if (virusesWithRowAndCol.length === 0) {
             return;
         }
 
-        const virusesWithRowAndCol = allViruses.map(virus => ({
-            ...virus,
-            ...this.map.getRowAndCol({ x: virus.x, y: virus.y })
-        }));
         let goneOffline = 0;
         for (const user of this.users.filter(({ status }) => status === ONLINE)) {
             if (virusesWithRowAndCol.filter(virus => pathfinder.isReachable(user, virus)).length === 0) {
@@ -100,3 +99,5 @@ export default class {
         messageBox.flash('user infected!');
     }
 }
+
+export default new Users();

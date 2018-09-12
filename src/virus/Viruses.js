@@ -26,6 +26,12 @@ class Viruses {
     getAll() {
         return this.viruses;
     }
+    getAllWithRowAndCol() {
+        return this.viruses.map(virus => ({
+            ...virus,
+            ...this.map.getRowAndCol({ x: virus.x, y: virus.y })
+        }));
+    }
     startSpawning() {
         const { interval, max } = this.virusConfig;
 

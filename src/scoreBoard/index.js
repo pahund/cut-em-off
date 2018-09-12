@@ -1,22 +1,23 @@
 import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED, GAME_OVER } from '../pubsub/index.js';
+import { users } from '../user/index.js';
 
-export default function initScoreBoard(scoreBoard, props) {
-    updateScoreBoard(scoreBoard, props.users);
+export default function initScoreBoard(scoreBoard) {
+    updateScoreBoard(scoreBoard);
     pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => {
         // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
+        setTimeout(() => updateScoreBoard(scoreBoard), 0);
     });
     pubsub.subscribe(INFECTED, () => {
         // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
+        setTimeout(() => updateScoreBoard(scoreBoard), 0);
     });
     pubsub.subscribe(GAME_OVER, () => {
         // using setTimeout here because users are updated too late :(
-        setTimeout(() => updateScoreBoard(scoreBoard, props.users), 0);
+        setTimeout(() => updateScoreBoard(scoreBoard), 0);
     });
 }
 
-function updateScoreBoard(scoreBoard, users) {
+function updateScoreBoard(scoreBoard) {
     const { gameOver } = users;
     const { infected, online, offline } = users.getStats();
 
