@@ -1,6 +1,6 @@
 {
     "name": "cut-em-off",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Make your users go offline before the evil virus infects them!",
     "main": "index.js",
     "scripts": {
@@ -34,7 +34,8 @@
     "contributors": [
         "Uwe Loydl <uloydl@team.mobile.de>",
         "Frederik Leidloff <fleidloff@team.mobile.de>",
-        "Kris Urbas <kurbas@team.mobile.de>"
+        "Kris Urbas <kurbas@team.mobile.de>",
+        "Mike Krüger <mikkrueger@team.mobile.de>"
     ],
     "license": "MIT",
     "bugs": {
