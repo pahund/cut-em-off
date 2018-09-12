@@ -30,6 +30,35 @@ export default [
     },
     {
         player: {
+            col: 9,
+            row: 9,
+            direction: N,
+            speed: 5
+        },
+        virus: {
+            speed: 2.5,
+            max: 2,
+            interval: 3000
+        },
+        servers: [{ row: 6, col: 5 }, { row: 7, col: 9 }, { row: 7, col: 9 }, { row: 9, col: 9 }],
+        map: {
+            width: 9,
+            height: 9,
+            // prettier-ignore
+            data:
+            '  6 6    ' +
+            ' 03a31   ' +
+            ' 410a3a57' +
+            ' 228aaac ' +
+            'fc8aa1 2 ' +
+            ' 20aabac ' +
+            ' 49  2 47' +
+            'fc05aba9 ' +
+            ' 89e e   '
+        }
+    } /* ,
+    {
+        player: {
             col: 8,
             row: 9,
             direction: S,
@@ -67,5 +96,5 @@ export default [
                 '   2 2    4aa12 22  ' +
                 '   e e    e  e8a9e  '
         }
-    }
+    }*/
 ];
