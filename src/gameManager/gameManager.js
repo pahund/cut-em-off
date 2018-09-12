@@ -33,7 +33,7 @@ class GameManager {
         const users = new Users({ map });
         servers.init(map, level.servers);
         this.loop = createLoop({ map, player: this.player, users, bombs });
-        pubsub.reset(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus(virus));
+        pubsub.reset(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus());
         initScoreBoard({ users, map });
 
         map.render();
@@ -46,7 +46,7 @@ class GameManager {
     showStartScreen() {
         messageBox.show(
             'welcome, <span class="grn">captain katamov!</span><br><br>' +
-                'Your shift as chief network security officers is about to begin… all users are online and happy.' +
+                'Your shift as chief network security officers is about to begin… all users are online and happy. ' +
                 'in case of virus intrusion, <span class="grn">cut them off</span> from the network ' +
                 "to make sure they don't get infected!<br><br>" +
                 '<table><tr><td class="grn">arrow keys</td><td>…</td><td>change direction</td></tr>' +
