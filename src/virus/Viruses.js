@@ -5,15 +5,15 @@ import { messageBox } from '../messageBox/index.js';
 
 class Viruses {
     constructor() {
-        const cb = () => {
-            this.viruses = [];
-            this.gameInactive = true;
-        };
-        cb();
+        this.viruses = [];
+        this.gameInactive = true;
+        const cb = () => (this.gameInactive = true);
         pubsub.subscribe(GAME_OVER, cb, true);
         pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
     init(map, virusConfig) {
+        this.viruses = [];
+        this.gameInactive = false;
         this.map = map;
         this.virusConfig = virusConfig;
     }

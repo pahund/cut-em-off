@@ -6,18 +6,17 @@ import { viruses } from '../virus/index.js';
 
 class Servers {
     constructor() {
-        const cb = () => {
-            this.servers = [];
-            this.gameInactive = true;
-        };
-        cb();
+        this.servers = [];
+        this.gameInactive = true;
+        const cb = () => (this.gameInactive = true);
         pubsub.subscribe(GAME_OVER, cb, true);
         pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
     /* called at the beginning of every level */
     init(map, serverCoordinates = []) {
-        this.map = map;
+        this.servers = [];
         this.gameInactive = false;
+        this.map = map;
         this.nextServerPointer = 0;
         serverCoordinates.forEach(({ col, row }) => this.servers.push(createServer({ map, row, col })));
     }

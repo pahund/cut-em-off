@@ -9,16 +9,17 @@ import { viruses } from '../virus/index.js';
 
 class Users {
     constructor() {
-        const cb = () => {
-            this.gameInactive = true;
-            this.users = [];
-        };
-        cb();
+        this.users = [];
+        this.gameInactive = true;
+        const cb = () => (this.gameInactive = true);
         pubsub.subscribe(GAME_OVER, cb, true);
         pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
 
+    /* called at the beginning of every level */
     init(map) {
+        this.users = [];
+        this.gameInactive = false;
         this.map = map;
         for (let row = 0; row < map.height; row++) {
             for (let col = 0; col < map.width; col++) {

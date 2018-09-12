@@ -1,1 +1,2 @@
-export default () => new Promise(resolve => document.addEventListener('keydown', resolve, { once: true }));
+export default () =>
+    new Promise(resolve => setTimeout(() => document.addEventListener('keydown', resolve, { once: true }), 1000));
