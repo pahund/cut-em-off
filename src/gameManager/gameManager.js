@@ -9,10 +9,11 @@ import { Users } from '../user/index.js';
 import { viruses } from '../virus/index.js';
 import { createCanvas } from '../canvas/index.js';
 import { initPathfinder, pathfinder } from '../pathfinder/index.js';
-import { pubsub, USERS_POSSIBLY_OFFLINE } from '../pubsub/index.js';
+import { pubsub, USERS_POSSIBLY_OFFLINE, GAME_OVER } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 import { servers } from '../server/index.js';
 import getLevel from '../level/getLevel.js';
+import createScoreBoard from '../scoreBoard/createScoreBoard.js';
 import initScoreBoard from '../scoreBoard/index.js';
 
 class GameManager {
@@ -21,6 +22,8 @@ class GameManager {
         kontra.init();
         initPathfinder();
         initAudio();
+        this.scoreBoard = createScoreBoard();
+        pubsub.subscribe(GAME_OVER, () => pubsub.reset(), true);
     }
 
     async initLevel(levelIndex) {
@@ -33,8 +36,8 @@ class GameManager {
         const users = new Users({ map });
         servers.init(map, level.servers);
         this.loop = createLoop({ map, player: this.player, users, bombs });
-        pubsub.reset(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus());
-        initScoreBoard({ users, map });
+        pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => users.updateOnlineStatus());
+        initScoreBoard(this.scoreBoard, { users, map });
 
         map.render();
         users.render();

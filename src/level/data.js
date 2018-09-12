@@ -1,4 +1,4 @@
-import { N, W, S, E } from '../directions/index.js';
+import { N, S } from '../directions/index.js';
 
 export default [
     {
