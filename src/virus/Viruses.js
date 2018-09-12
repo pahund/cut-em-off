@@ -41,7 +41,6 @@ class Viruses {
         if (this.viruses.length < max) {
             this.viruses.push(createVirus({ map: this.map, row, col, speed }));
         }
-        pubsub.publish(USERS_POSSIBLY_OFFLINE);
     }
     getAll() {
         return this.viruses;
@@ -58,10 +57,17 @@ class Viruses {
         const id = setInterval(() => {
             if (this.viruses.length < max) {
                 this.spawn();
+                this.checkGameStatusWhenAllSpawned();
             } else {
                 clearInterval(id);
             }
         }, interval);
+    }
+    checkGameStatusWhenAllSpawned() {
+        if (this.viruses.length >= this.virusConfig.max) {
+            // wait for virus to appear on the screen
+            setTimeout(() => pubsub.publish(USERS_POSSIBLY_OFFLINE), 1000);
+        }
     }
 }
 
