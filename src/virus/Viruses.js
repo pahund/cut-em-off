@@ -21,7 +21,11 @@ class Viruses {
         this.viruses.forEach(virus => virus.render());
     }
     spawn() {
-        const { row, col } = servers.getRandom();
+        const server = servers.getRandom();
+        if (!server) {
+            return;
+        }
+        const { row, col } = server;
         const { speed } = this.virusConfig;
         this.viruses.push(createVirus({ map: this.map, row, col, speed }));
         pubsub.publish(USERS_POSSIBLY_OFFLINE);
