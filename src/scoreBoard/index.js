@@ -1,8 +1,6 @@
-import createScoreBoard from './createScoreBoard.js';
 import { pubsub, USERS_POSSIBLY_OFFLINE, INFECTED, GAME_OVER } from '../pubsub/index.js';
 
-export default function initScoreBoard(props) {
-    const scoreBoard = createScoreBoard();
+export default function initScoreBoard(scoreBoard, props) {
     updateScoreBoard(scoreBoard, props.users);
     pubsub.subscribe(USERS_POSSIBLY_OFFLINE, () => {
         // using setTimeout here because users are updated too late :(
@@ -31,6 +29,7 @@ function updateScoreBoard(scoreBoard, users) {
         localStorage.setItem('CUT_EM_ALL__HIGHSCORE', highScore);
     }
 
+    // eslint-disable-next-line no-param-reassign
     scoreBoard.innerHTML = `
         ${online} online |  
         ${offline} offline | 

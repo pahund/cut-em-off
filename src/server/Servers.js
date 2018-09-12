@@ -7,12 +7,14 @@ import { viruses } from '../virus/index.js';
 class Servers {
     constructor() {
         this.servers = [];
-        this.nextServerPointer = 0;
-        this.gameOver = false;
+        /* subscribing without origin is OK here, constructor alled only once */
         pubsub.subscribe(GAME_OVER, () => (this.gameOver = true));
     }
+    /* called at the beginning of every level */
     init(map, serverCoordinates = []) {
         this.map = map;
+        this.gameOver = false;
+        this.nextServerPointer = 0;
         serverCoordinates.forEach(({ col, row }) => this.servers.push(createServer({ map, row, col })));
     }
     update() {
