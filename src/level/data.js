@@ -1,4 +1,4 @@
-import { N, S } from '../directions/index.js';
+import { N, W } from '../directions/index.js';
 
 export default [
     {
@@ -46,17 +46,44 @@ export default [
             height: 9,
             // prettier-ignore
             data:
-            '  6 6    ' +
-            ' 03a31   ' +
-            ' 410a3a57' +
-            ' 228aaac ' +
-            'fc8aa1 2 ' +
-            ' 20aabac ' +
-            ' 49  2 47' +
-            'fc05aba9 ' +
-            ' 89e e   '
+                '  6 6    ' +
+                ' 03a31   ' +
+                ' 410a3a57' +
+                ' 228aaac ' +
+                'fc8aa1 2 ' +
+                ' 20aabac ' +
+                ' 49  2 47' +
+                'fc05aba9 ' +
+                ' 89e e   '
         }
-    } /* ,
+    },
+    {
+        player: {
+            col: 12,
+            row: 4,
+            direction: W,
+            speed: 5
+        },
+        virus: {
+            speed: 2.5,
+            max: 2,
+            interval: 3000
+        },
+        servers: [{ row: 5, col: 7 }, { row: 4, col: 12 }, { row: 7, col: 9 }, { row: 8, col: 15 }],
+        map: {
+            width: 13,
+            height: 6,
+            // prettier-ignore
+            data:
+                '  6    0a1   ' +
+                '  4aa1 2 2 6 ' +
+                'fabaaba353a31' +
+                '  47 2  2  fc' +
+                ' fbaa9  85aa9' +
+                '  e      e   '
+        }
+    }
+    /* ,
     {
         player: {
             col: 8,
