@@ -25,6 +25,9 @@ export default class {
 
     updateOnlineStatus() {
         const allViruses = viruses.getAll();
+        if (allViruses.length === 0) {
+            return;
+        }
 
         const virusesWithRowAndCol = allViruses.map(virus => ({
             ...virus,
@@ -32,12 +35,9 @@ export default class {
         }));
         let goneOffline = 0;
         for (const user of this.users.filter(({ status }) => status === ONLINE)) {
-            for (const virus of virusesWithRowAndCol) {
-                const isReachable = pathfinder.isReachable(user, virus);
-                if (!isReachable) {
-                    goneOffline++;
-                    user.status = OFFLINE;
-                }
+            if (virusesWithRowAndCol.filter(virus => pathfinder.isReachable(user, virus)).length === 0) {
+                goneOffline++;
+                user.status = OFFLINE;
             }
         }
         if (goneOffline > 0) {
