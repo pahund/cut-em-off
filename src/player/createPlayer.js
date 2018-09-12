@@ -9,7 +9,8 @@ import {
     DROP_SHIP,
     MAP_CHANGED,
     SERVER_INFECTED,
-    SERVER_DESTROYED
+    SERVER_DESTROYED,
+    PLAYER_TELEPORTED
 } from '../pubsub/index.js';
 import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
@@ -77,6 +78,7 @@ export default ({ map, direction, speed }) => {
                     if (!directionIsAllowed(this.map, { x: this.x, y: this.y }, this.direction)) {
                         this.direction = switchDirection(this.map, { x: this.x, y: this.y }, this.direction);
                     }
+                    pubsub.publish(PLAYER_TELEPORTED);
                 } else {
                     messageBox.flash('all servers are destroyed or infected');
                 }
@@ -143,6 +145,7 @@ export default ({ map, direction, speed }) => {
     pubsub.subscribe(MAP_CHANGED, () => player.canReachVirus());
     pubsub.subscribe(SERVER_INFECTED, () => player.canReachVirus());
     pubsub.subscribe(SERVER_DESTROYED, () => player.canReachVirus());
+    pubsub.subscribe(PLAYER_TELEPORTED, () => player.canReachVirus());
 
     return player;
 };

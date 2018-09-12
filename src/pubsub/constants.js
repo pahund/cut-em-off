@@ -8,3 +8,4 @@ export const INFECTED = 6;
 export const LEVEL_COMPLETED = 7;
 export const SERVER_INFECTED = 8;
 export const SERVER_DESTROYED = 9;
+export const PLAYER_TELEPORTED = 10;
