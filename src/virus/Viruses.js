@@ -1,6 +1,7 @@
 import { createVirus } from './index.js';
 import { servers } from '../server/index.js';
 import { GAME_OVER, pubsub } from '../pubsub/index.js';
+import { messageBox } from '../messageBox/index.js';
 
 class Viruses {
     constructor() {
@@ -13,15 +14,28 @@ class Viruses {
         this.virusConfig = virusConfig;
     }
     update() {
-        this.viruses.forEach(virus => virus.update());
+        this.viruses = this.viruses.filter(virus => {
+            try {
+                virus.update();
+                return true;
+            } catch ({ message }) {
+                if (message === 'dropped') {
+                    setTimeout(this.spawn, 3000);
+                    messageBox.flash('Nice one! Virus dropped');
+                }
+            }
+            return false;
+        });
     }
     render() {
         this.viruses.forEach(virus => virus.render());
     }
     spawn() {
         const { row, col } = servers.getRandom();
-        const { speed } = this.virusConfig;
-        this.viruses.push(createVirus({ map: this.map, row, col, speed }));
+        const { speed, max } = this.virusConfig;
+        if (this.viruses.length < max) {
+            this.viruses.push(createVirus({ map: this.map, row, col, speed }));
+        }
     }
     getAll() {
         return this.viruses;

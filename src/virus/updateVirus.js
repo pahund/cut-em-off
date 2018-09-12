@@ -32,7 +32,11 @@ export default sprite => {
             const bestDirections = getBestDirection({ viable, visits, row, col });
             direction = bestDirections[getRandomInt(0, bestDirections.length - 1)];
         } else {
-            direction = switchDirection(map, { x, y }, direction);
+            try {
+                direction = switchDirection(map, { x, y }, direction);
+            } catch ({ message }) {
+                throw new Error(message);
+            }
         }
     }
     return {

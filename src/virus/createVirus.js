@@ -19,7 +19,11 @@ export default ({ map, col, row, speed }) => {
         direction: switchDirection(map, { x, y }, 'S'),
         blips,
         update() {
-            ({ x: this.x, y: this.y, mapX: this.mapX, mapY: this.mapY, direction: this.direction } = updateVirus(this));
+            try {
+                updateVirus(this);
+            } catch ({ message }) {
+                throw new Error(message);
+            }
             this.blips.update();
         },
         render() {
