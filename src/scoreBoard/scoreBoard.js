@@ -1,5 +1,5 @@
 import { users } from '../user/index.js';
-import { pubsub, SCORE } from '../pubsub/index.js';
+import { pubsub, SCORE, INFECTED } from '../pubsub/index.js';
 
 const LSKEY = 'KATAMOV';
 class ScoreBoard {
@@ -11,6 +11,7 @@ class ScoreBoard {
         this.score = 0;
         this.highScore = localStorage.getItem(LSKEY) || 0;
         pubsub.subscribe(SCORE, points => this.winPoints(points), true);
+        pubsub.subscribe(INFECTED, () => this.render());
     }
 
     startGame() {
