@@ -8,18 +8,11 @@ import {
 import { getRandomInt } from '../utils/index.js';
 import { isInTheMiddle, moveVirus, getBestDirection } from './utils/index.js';
 
-let visits = null;
-
 export default sprite => {
     let { direction } = sprite;
-    const { map } = sprite;
+    const { map, visits } = sprite;
     const { mapX, mapY } = moveVirus(sprite);
     const { x, y } = map.getXAndY({ mapX, mapY });
-    if (!visits) {
-        visits = Array(map.height)
-            .fill()
-            .map(() => Array(map.width).fill(0));
-    }
     if (isInTheMiddle({ mapX, mapY })) {
         const tile = map.tileAtLayer('main', { x, y });
         const { col, row } = map.getRowAndCol({ x, y });

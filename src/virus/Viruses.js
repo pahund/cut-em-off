@@ -5,9 +5,11 @@ import { messageBox } from '../messageBox/index.js';
 
 class Viruses {
     constructor() {
-        this.viruses = [];
-        this.gameInactive = false;
-        const cb = () => (this.gameInactive = true);
+        const cb = () => {
+            this.viruses = [];
+            this.gameInactive = true;
+        };
+        cb();
         pubsub.subscribe(GAME_OVER, cb, true);
         pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }

@@ -9,8 +9,13 @@ import { viruses } from '../virus/index.js';
 
 class Users {
     constructor() {
-        this.users = [];
-        this.gameInactive = false;
+        const cb = () => {
+            this.gameInactive = true;
+            this.users = [];
+        };
+        cb();
+        pubsub.subscribe(GAME_OVER, cb, true);
+        pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
 
     init(map) {
@@ -23,8 +28,6 @@ class Users {
                 }
             }
         }
-        pubsub.subscribe(GAME_OVER, () => (this.gameInactive = true));
-        pubsub.subscribe(LEVEL_COMPLETED, () => (this.gameInactive = true));
     }
 
     updateOnlineStatus() {

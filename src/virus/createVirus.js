@@ -9,6 +9,9 @@ export default ({ map, col, row, speed }) => {
     const blips = new Blips();
     const virus = {
         context: kontra.context,
+        visits: Array(map.height)
+            .fill()
+            .map(() => Array(map.width).fill(0)),
         x,
         y,
         speed,

@@ -6,8 +6,11 @@ import { viruses } from '../virus/index.js';
 
 class Servers {
     constructor() {
-        this.servers = [];
-        const cb = () => (this.gameInactive = true);
+        const cb = () => {
+            this.servers = [];
+            this.gameInactive = true;
+        };
+        cb();
         pubsub.subscribe(GAME_OVER, cb, true);
         pubsub.subscribe(LEVEL_COMPLETED, cb, true);
     }
