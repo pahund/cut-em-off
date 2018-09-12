@@ -1,7 +1,7 @@
 import { createServer } from './index.js';
 import { multiCollides } from '../utils/index.js';
 import { messageBox } from '../messageBox/index.js';
-import { GAME_OVER, LEVEL_COMPLETED, pubsub } from '../pubsub/index.js';
+import { GAME_OVER, LEVEL_COMPLETED, SERVER_INFECTED, SERVER_DESTROYED, pubsub } from '../pubsub/index.js';
 import { viruses } from '../virus/index.js';
 
 class Servers {
@@ -28,6 +28,7 @@ class Servers {
         const server = this.find({ col, row });
         if (server) {
             server.broken = true;
+            pubsub.publish(SERVER_DESTROYED);
         }
     }
     infect() {
@@ -42,6 +43,7 @@ class Servers {
         collisions.forEach(([server]) => {
             /* eslint-disable no-param-reassign */
             server.infected = true;
+            pubsub.publish(SERVER_INFECTED);
         });
 
         if (this.gameInactive) {

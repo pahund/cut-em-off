@@ -34,7 +34,7 @@ class Users {
         }
 
         let goneOffline = 0;
-        for (const user of this.users.filter(({ status }) => status === ONLINE)) {
+        for (const user of this.getOnlineUsers()) {
             if (virusesWithRowAndCol.filter(virus => pathfinder.isReachable(user, virus)).length === 0) {
                 goneOffline++;
                 user.status = OFFLINE;
@@ -74,6 +74,10 @@ class Users {
         return true;
     }
 
+    getOnlineUsers() {
+        return this.users.filter(({ status }) => status === ONLINE);
+    }
+
     getStats() {
         return this.users.reduce(
             (acc, { status }) => ({
@@ -108,6 +112,24 @@ class Users {
         if (!ended) {
             messageBox.flash('user infected!');
         }
+    }
+
+    infectAllReachable(someViruses) {
+        if (someViruses.length === 0) {
+            return;
+        }
+
+        const allOnlineUsers = this.getOnlineUsers();
+
+        someViruses.forEach(virus => {
+            allOnlineUsers.forEach(user => {
+                if (pathfinder.isReachable(user, virus)) {
+                    user.infect();
+                }
+            });
+        });
+
+        this.endLevelOrGame();
     }
 }
 

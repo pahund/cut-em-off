@@ -1,6 +1,6 @@
 import { createVirus } from './index.js';
 import { servers } from '../server/index.js';
-import { GAME_OVER, LEVEL_COMPLETED, pubsub } from '../pubsub/index.js';
+import { GAME_OVER, LEVEL_COMPLETED, USERS_POSSIBLY_OFFLINE, pubsub } from '../pubsub/index.js';
 import { messageBox } from '../messageBox/index.js';
 
 class Viruses {
@@ -35,6 +35,7 @@ class Viruses {
         if (this.viruses.length < max) {
             this.viruses.push(createVirus({ map: this.map, row, col, speed }));
         }
+        pubsub.publish(USERS_POSSIBLY_OFFLINE);
     }
     getAll() {
         return this.viruses;
