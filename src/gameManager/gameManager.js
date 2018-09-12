@@ -50,7 +50,7 @@ class GameManager {
     }
 
     async startGame() {
-        this.levelIndex = 0;
+        this.levelIndex = 4;
         await this.initLevel();
         await showStartScreen();
         scoreBoard.startGame();

@@ -1,4 +1,4 @@
-import { N, W, S } from '../directions/index.js';
+import { N, W, S, E } from '../directions/index.js';
 
 export default [
     {
@@ -95,7 +95,7 @@ export default [
         virus: {
             speed: 2.5,
             max: 3,
-            interval: 3000
+            interval: 4000
         },
         servers: [{ row: 5, col: 7 }, { row: 4, col: 12 }, { row: 7, col: 9 }, { row: 8, col: 15 }],
         map: {
@@ -109,6 +109,47 @@ export default [
                 '  47 2  2  fc' +
                 ' fbaa9  85aa9' +
                 '  e      e   '
+        }
+    },
+    {
+        player: {
+            col: 8,
+            row: 8,
+            direction: E,
+            speed: 5
+        },
+        virus: {
+            speed: 2.5,
+            max: 4,
+            interval: 5000
+        },
+        servers: [
+            { row: 4, col: 7 },
+            { row: 4, col: 11 },
+            { row: 8, col: 8 },
+            { row: 8, col: 10 },
+            { row: 15, col: 7 },
+            { row: 15, col: 11 },
+            { row: 11, col: 8 },
+            { row: 11, col: 10 }
+        ],
+        map: {
+            width: 11,
+            height: 12,
+            // prettier-ignore
+            data:
+                '0aaaaaaaaa1' +
+                '8a5aaaaa5a9' +
+                ' fbaa5aab7 ' +
+                '  2  2  2  ' +
+                ' 0baabaab1 ' +
+                'fc47 2 fc47' +
+                'fc47 2 fc47' +
+                ' 8baabaab9 ' +
+                '  2  2  2  ' +
+                ' fbaa3aab7 ' +
+                '0a3aaaaa3a1' +
+                '8aaaaaaaaa9'
         }
     }
     /* ,
